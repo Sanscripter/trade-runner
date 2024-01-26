@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+// tailwind
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+// nescss
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+  font-family: 'Press Start 2P', cursive;
+  background-color: black;
+  color: white;
+}

@@ -1,0 +1,43 @@
+import { Routes } from '@angular/router';
+import { MainMenuComponent } from './menu/main-menu/main-menu.component';
+import { MapComponent } from './map/map.component';
+import { LoadMenuComponent } from './menu/load-menu/load-menu.component';
+import { LocationComponent } from './map/location/location.component';
+import { StartScreenComponent } from './story/start-screen/start-screen.component';
+import { EndScreenComponent } from './story/end-screen/end-screen.component';
+
+export const routes: Routes = [
+  {
+    path: 'menu',
+    component: MainMenuComponent,
+    children: [
+      {
+        path: 'load',
+        component: LoadMenuComponent
+      }
+    ]
+  },
+  {
+    path: 'start',
+    component: StartScreenComponent
+  },
+  {
+    path: 'map',
+    component: MapComponent,
+    children: [
+      {
+        path: 'location',
+        component: LocationComponent
+      }
+    ]
+  },
+  {
+    path: 'end',
+    component: EndScreenComponent
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'menu'
+  }
+];
