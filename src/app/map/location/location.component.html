@@ -1,1 +1,38 @@
-<p>location works!</p>
+<main class="flex flex-row w-full h-full">
+  <aside class="flex flex-col w-1/4 h-full nes-container is-dark p-2">
+    <app-player-stats [player]="gameService?.player!" [day]="gameService.getCurrentDay()" />
+    <app-inventory [inventory]="gameService?.player?.inventory" class="pt-10"/>
+  </aside>
+  <section class="flex w-full h-full text-center">
+    <div class=" w-full">
+      <p>{{location.name}}</p>
+
+      <div class="relative w-full h-full">
+        <img class="w-full h-full z-0 absolute" src="assets/bg0.png" alt="">
+
+        <div class="dialog flex flex-row justify-end">
+          <div class="message">
+            <!-- Balloon -->
+            <div class="nes-balloon from-right text-black text-left">
+              <!-- <p>If I didn't see your bag of money, I'd kill you.</p> -->
+              <!-- <p>We licked the eyes of God. What have you achieved?</p> -->
+              <p>Ignore the howling sounds from the basement.</p>
+
+            </div>
+          </div>
+          <img class="" src="assets/littleBoy.png" width="160" height="200" style="transform:scaleX(-1);">
+
+        </div>
+        <div class="w-full h-52 flex flex-col">
+          <button type="button" class="nes-btn bg-blue-500 text-3xl m-auto">Trade</button>
+          <button type="button" class="nes-btn bg-red-500 text-3xl m-auto">Steal</button>
+          <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto" (click)="handleGoBack()">Leave</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <aside class="flex flex-col w-1/4 h-full nes-container is-dark p-2">
+    <!-- <app-stats />app-player-stats -->
+    <app-inventory class="pt-10" />
+  </aside>
+</main>

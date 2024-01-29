@@ -1,0 +1,6 @@
+<div class="w-full h-full justify-between">
+  <p>Name: {{player.name}}</p>
+  <p>Day: {{day}}</p>
+  <app-health [health]="player.health" />
+  <p>{{player.money | currency:'USD'}}</p>
+</div>

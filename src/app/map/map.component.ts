@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import ICity from '../utils/ICity.interface';
+import { Router } from '@angular/router';
+import { GameService } from '../shared/game.service';
+import { Player } from '../game/Player';
 
 @Component({
   selector: 'app-map',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  player!: Player;
+
+  constructor(private router: Router,public gameService: GameService) { }
 
   ngOnInit() {
+    this.player = this.gameService.player;
+  }
+
+  handleTravelling(city: ICity) {
+    this.router.navigate([`location`], {
+      queryParams: {
+        id: city.id
+      }
+    });
   }
 
 }

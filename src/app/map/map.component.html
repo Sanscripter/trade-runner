@@ -1,3 +1,13 @@
-<p>
-  map works!
-</p>
+<main class="flex flex-row w-full h-full">
+  <aside class="flex flex-col w-1/4 h-full nes-container is-dark p-2 justify-between">
+    <app-player-stats [player]="player" [day]="gameService.getCurrentDay()"/>
+    <app-inventory [inventory]="player.inventory"/>
+    <app-eventlog/>
+  </aside>
+  <section class="flex w-full text-center">
+      <app-interactive-view
+        (travelledTo)="handleTravelling($event)"
+        [cities]="gameService.cities"
+      />
+  </section>
+</main>

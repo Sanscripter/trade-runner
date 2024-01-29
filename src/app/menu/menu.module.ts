@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NesModule } from 'ngx-nes-css';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    MainMenuComponent
+  ],
   imports: [
     CommonModule,
-    NesModule
   ]
 })
 export class MenuModule { }

@@ -10,4 +10,48 @@ html, body {
   font-family: 'Press Start 2P', cursive;
   background-color: black;
   color: white;
+  height: 100vh;
+  width: 100vw;
+}
+
+//canvas
+canvas {
+  // border: solid red 2px;
+  height: 100%;
+  width: 100%;
+}
+
+.canvas-container {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+//scrollbar
+/* Hide scrollbar by default */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Show scrollbar on hover */
+::-webkit-scrollbar {
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar {
+  transition: width 0.3s, height 0.3s;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* Change color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }

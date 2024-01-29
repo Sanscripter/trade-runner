@@ -24,12 +24,10 @@ export const routes: Routes = [
   {
     path: 'map',
     component: MapComponent,
-    children: [
-      {
-        path: 'location',
-        component: LocationComponent
-      }
-    ]
+  },
+  {
+    path: 'location',
+    component: LocationComponent
   },
   {
     path: 'end',

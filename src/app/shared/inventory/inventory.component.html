@@ -1,0 +1,22 @@
+<div class="w-full">
+  <p>Inventory:</p>
+  <div class="nes-table-responsiven">
+    <table class="nes-table is-dark">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Cost</th>
+          <th>Qty.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of inventory?.items">
+          <td>{{item.name}}</td>
+          <td class="whitespace-nowrap text-right">{{item.cost | currency:'USD'}}</td>
+          <td class="text-right">{{item.quantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
