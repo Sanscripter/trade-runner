@@ -3,6 +3,7 @@ import { Game } from '../game/Game';
 import { Player } from '../game/Player';
 import { Item } from '../game/Item';
 import ICity from '../utils/ICity.interface';
+import { Inventory } from '../game/Inventory';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,14 @@ export class GameService {
   player!: Player;
   day: number = 1;
   cities: ICity[] = [
-    { id: 1, x: 50,  y: 50,  size: 1, name: "Corey's \nHouse" },
-    { id: 2, x: 750, y: 400, size: 20, name: "Viana's \nGrange" },
-    { id: 3, x: 500, y: 100, size: 30, name: "BUY USED TV \nSETS NOW!1!!" },
-    { id: 4, x: 800, y: 500, size: 100, name: "Fort Lieber" },
-    { id: 5, x: 250, y: 400, size: 40, name: "Paradize" },
-    { id: 6, x: 350, y: 100, size: 40, name: "Wind Autunm" },
-    { id: 7, x: 600, y: 450, size: 40, name: "Unknown" },
-    { id: 8, x: 450, y: 300, size: 40, name: "El Asco" },
+    { id: 1, x: 50,  y: 50,  size: 1, name: "Corey's \nHouse", money: 200},
+    { id: 2, x: 750, y: 400, size: 20, name: "Viana's \nGrange", money: 8000},
+    { id: 3, x: 500, y: 100, size: 30, name: "BUY USED TV \nSETS NOW!1!!", money: 10000},
+    { id: 4, x: 800, y: 500, size: 100, name: "Fort Lieber", money: 500000},
+    { id: 5, x: 250, y: 400, size: 40, name: "Paradize", money: 40000},
+    { id: 6, x: 350, y: 100, size: 40, name: "Wind Autunm", money: 5000},
+    { id: 7, x: 600, y: 450, size: 40, name: "Unknown", money: 20000},
+    { id: 8, x: 450, y: 300, size: 40, name: "El Asco", money: 10000 },
   ];
 
   startGame(playerName: string) {
@@ -28,13 +29,25 @@ export class GameService {
     const bread = new Item('Bread', 5, 'A loaf of bread', 10);
     const tent = new Item('Tent', 1000, 'A warm, blood-soaked tent');
     const spear = new Item('Spear', 500, 'A sharp, pointy stick');
-    const car = new Item('Car', 10000, 'A great means of transportation');
+    const car = new Item('Personal Car', 10000, 'A great means of transportation');
     this.player.inventory.addItem(bread);
     this.player.inventory.addItem(tent);
     this.player.inventory.addItem(spear);
     this.player.inventory.addItem(car);
+    this.cities.forEach((city) => {
+      city.inventory = new Inventory();
+      city.inventory.addItem(new Item('Smugleaf', 5, 'Looks edible', 10));
+      city.inventory.addItem(new Item('Ploshad', 8000, 'A horse, only more so', 1));
+      city.inventory.addItem(new Item('Pistol', 4000, '"Freedom" tool', 1));
+    });
     this.game = new Game(this.player);
   };
+
+  // trade(item: Item, city: ICity) {
+  //   this.player.inventory.removeItem(item);
+  //   this.player.inventory.addItem(city.inventory.items[0]);
+  //   city.inventory.removeItem(city.inventory.items[0]);
+  // };
 
   getCurrentDay() {
     return this.day;
