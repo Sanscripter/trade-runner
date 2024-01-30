@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GameService } from '../../shared/game.service';
+import packageJson from '../../../../package.json';
 
 @Component({
   selector: 'app-main-menu',
@@ -12,6 +12,8 @@ export class MainMenuComponent {
   MENU_OPTIONS: Record<string,any> = {
     'start': () => this.handleStart(),
   };
+
+  version = packageJson.version;
 
   constructor(private router: Router){}
 
