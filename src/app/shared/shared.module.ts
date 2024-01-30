@@ -4,8 +4,9 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { EventlogComponent } from './eventlog/eventlog.component';
 import { StatsComponent } from './stats/stats.component';
 import { GameService } from './game.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HealthComponent } from './health/health.component';
+import { ItemAmountInputComponent } from './item-amount-input/item-amount-input.component';
 
 
 
@@ -14,7 +15,8 @@ import { HealthComponent } from './health/health.component';
     InventoryComponent,
     EventlogComponent,
     StatsComponent,
-    HealthComponent
+    HealthComponent,
+    ItemAmountInputComponent
   ],
   providers: [
     GameService,
@@ -22,10 +24,13 @@ import { HealthComponent } from './health/health.component';
   exports: [
     InventoryComponent,
     EventlogComponent,
-    StatsComponent
+    StatsComponent,
+    ItemAmountInputComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class SharedModule { }
