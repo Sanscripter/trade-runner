@@ -68,7 +68,6 @@ export class InteractiveViewComponent implements AfterViewInit {
 
       rect.on('mousedown', () => {
         this.travelledTo.emit(city);
-        console.log('clicky', city.name)
       });
       this.fabricCanvas.add(rect, name);
     });
