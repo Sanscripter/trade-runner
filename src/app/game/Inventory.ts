@@ -7,6 +7,11 @@ export class Inventory {
     this.items = [];
   }
 
+  // Calculate total value of the inventory
+  get totalValue() {
+    return this.items.reduce((acc, item) => acc + (item.cost * item.quantity!), 0);
+  };
+
   // Add an item to the inventory, if it already exists, increase the quantity
   addItem(item: Item) {
     let existingItem = this.items.find(i => i.name === item.name);
@@ -25,6 +30,21 @@ export class Inventory {
       if (existingItem.quantity! <= 0) {
         this.items = this.items.filter(i => i.name !== item.name);
       }
+    }
+  };
+
+  //Update item in inventory
+  updateItem(item: Item) {
+    const existingItem = this.items.find(i => i.name === item.name);
+    const qty = item.quantity;
+    if (existingItem) {
+      if (qty === 0) {
+        this.items = this.items.filter(i => i.name !== item.name);
+      } else {
+        existingItem.quantity = item.quantity;
+      }
+    } else {
+      this.items.push(item);
     }
   };
 
