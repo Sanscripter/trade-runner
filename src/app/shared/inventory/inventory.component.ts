@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { Inventory } from '../../game/Inventory';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Item } from '../../game/Item';

@@ -16,6 +16,7 @@ export class LocationComponent implements OnInit {
   locationId!: number;
   playerSells = new Inventory();
   traderSells = new Inventory();
+  tradeMode = false;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
@@ -33,6 +34,14 @@ export class LocationComponent implements OnInit {
     return this.gameService.cities.find(c => c.id == this.locationId)!;
   };
 
+  get playerInventory() {
+    return Object.assign({},this.player.inventory);
+  }
+
+  get traderInventory() {
+    return Object.assign({},this.trader.inventory);
+  }
+
   handleGoBack() {
     this.gameService.advanceDay();
     this.router.navigate(['map']);
@@ -44,6 +53,10 @@ export class LocationComponent implements OnInit {
 
   handleTraderSell(event: any) {
     this.traderSells.updateItem(event);
+  }
+
+  startTrade() {
+    this.tradeMode = true;
   }
 
   handleTrade() {
@@ -70,6 +83,7 @@ export class LocationComponent implements OnInit {
     // this.trader.inventory!.items = [...this.trader.inventory!.items];
     // console.log(this.player.inventory.items);
     // console.log(this.trader.inventory!.items);
+    this.tradeMode = false;
   }
 
   transferMoney(from: Player | ICity, to: Player | ICity, amount: number) {
