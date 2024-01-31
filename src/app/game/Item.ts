@@ -9,7 +9,7 @@ export class Item {
     this.name = name;
     this.cost = cost;
     this.description = description;
-    this.quantity = quantity ? quantity : 1;
+    this.quantity = quantity || 0;
   }
 
 }
