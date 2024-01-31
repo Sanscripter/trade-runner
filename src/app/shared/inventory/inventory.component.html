@@ -1,7 +1,7 @@
 <div class="w-full" style="font-size: x-small;">
   <p>Inventory:</p>
   <div class="nes-table-responsiven">
-    <form [formGroup]="inventoryForm">
+    <form [formGroup]="inventoryForm!">
       <table formArrayName="items" class="nes-table is-dark">
         <thead>
           <tr>
@@ -12,14 +12,18 @@
         </thead>
         <tbody *ngFor="let itemForm of items.controls; let i = index">
           <tr [formGroup]="itemForm">
-            <td>{{inventory!.items[i]!.name!}}</td>
-            <td class="whitespace-nowrap text-right">{{inventory!.items[i]!.cost | currency:'USD'}}</td>
+            <td>{{itemForm.value.name!}}</td>
+            <td class="whitespace-nowrap text-right">{{itemForm.value.cost | currency:'USD'}}</td>
             <td class="text-right whitespace-nowrap flex justify-end content-center items-center">
+
               @if (displayHandlers) {
-              <app-item-amount-input class="w-full" formControlName="quantity"></app-item-amount-input>
+              <app-item-amount-input (change)="changedAmount($event,i)" [currentMax]="itemForm.value.currentMax!" class="w-full"
+                formControlName="quantity"></app-item-amount-input>
               } @else {
-              <p>{{inventory!.items[i]!.quantity!}}</p>
+              <p>{{itemForm.value.quantity!}}</p>
               }
+
+
             </td>
           </tr>
         </tbody>

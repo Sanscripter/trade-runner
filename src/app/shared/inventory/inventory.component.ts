@@ -1,52 +1,56 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
 import { Inventory } from '../../game/Inventory';
-import { Item } from '../../game/Item';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Item } from '../../game/Item';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.scss'
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent {
 
   @Input() inventory?: Inventory | undefined;
   @Input() mode: 'agent' | 'overworld' = 'overworld';
-  @Output() addedItem = new EventEmitter();
-  @Output() removedItem = new EventEmitter();
+  @Output() change = new EventEmitter<Inventory>();
 
-  inventoryForm = this.fb.group({
-    items: this.fb.array([])
-  });
+  inventoryForm: FormGroup | undefined;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.inventoryForm = this.fb.group({
+      items: this.fb.array([])
+    });
     this.inventory?.items.forEach(item => {
-      (this.inventoryForm.controls['items'] as FormArray).push(
+      (this.inventoryForm!.controls['items'] as FormArray)!.push(
         this.fb.group({
-          quantity: this.fb.control(item.quantity)
+          ...item,
+          quantity: this.fb.control(item.quantity),
+          currentMax: item.quantity
         })
       );
     });
+
   }
 
   get items() {
-    return this.inventoryForm.get('items') as FormArray<FormGroup>;
+    return this.inventoryForm!.get('items') as FormArray<FormGroup>;
   }
 
   get displayHandlers() {
     return this.mode === 'agent';
   }
 
-  handleAddItem(item: Item) {
-    this.addedItem.emit(item);
+  changedAmount(currentAmount: number, index: number) {
+    const selected  = this.inventory?.items[index];
+    const changedAmount = selected!.quantity! - currentAmount;
+    const changed = new Item(selected!.name, selected!.cost, selected!.description, changedAmount);
+    this.emitChange(changed);
   }
 
-  handleRemoveItem(item: Item) {
-    this.removedItem.emit(item);
+  emitChange(item: any) {
+    this.change.emit(item);
   }
-
-
 
 }
