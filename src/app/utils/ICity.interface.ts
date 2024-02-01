@@ -9,4 +9,8 @@ export default interface ICity {
   inventory?: Inventory;
   money?: number;
   health?: number;
+  traderMugshot?: string;
+  background?: string;
+  description?: string;
+  barks?: string[];
 }
