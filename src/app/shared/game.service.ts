@@ -13,6 +13,7 @@ export class GameService {
   game!: Game;
   player!: Player;
   day: number = 1;
+  daysLimit: number = 30;
   cities: ICity[] = [
     { id: 1,
       x: 50,
@@ -118,5 +119,9 @@ export class GameService {
   advanceDay() {
     this.day++;
   };
+
+  timesUp() {
+    return this.day <= this.daysLimit;
+  }
 
 }

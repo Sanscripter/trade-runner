@@ -17,6 +17,9 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.player = this.gameService.player;
+    if (!this.gameService.timesUp()) {
+      this.router.navigate(['end']);
+    }
   }
 
   handleTravelling(city: ICity) {
