@@ -12,8 +12,16 @@
       <div class=" w-full">
         <div class="flex flex-col h-full justify-between">
           <div class="dialog flex flex-row p-1 justify-end nes-container is-dark !bg-black">
-            <div class="text-left p-10">
+            <div class="text-left content-end flex p-10">
+              @if (notEnoughMoney) {
+              <p class="is-waring">You don't have enough money.</p>
+              }
+              @else if (lackOfFunds) {
+              <p class="is-waring">We can trade but that's all I have. ({{trader.money! | currency: 'USD'}})</p>
+              <button class="nes-btn is-warning" (click)="enableTrade()">Ok</button>
+              } @else {
               <p>{{trader?.barks?.[0] || "you..."}}</p>
+              }
             </div>
             <img class="trader-icon" [src]="trader?.traderMugshot">
 
@@ -53,11 +61,15 @@
 
           <div class="mx-auto mb-12 w-1/2 pb-0 flex flex-row flex-wrap">
             <button type="button" (click)="tradeMode ? handleTrade() : startTrade()"
-              class="nes-btn bg-blue-500 text-3xl m-auto mb-3">Trade</button>
-            <button type="button" class="nes-btn bg-white text-3xl m-auto mb-3">Speak</button>
-            <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mt-3">Steal</button>
-            <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mt-3"
-              (click)="handleGoBack()">Leave</button>
+              class="nes-btn bg-blue-500 text-3xl m-auto mb-3" [disabled]="!tradeEnabled"
+              [ngClass]="{'is-disabled':!tradeEnabled}">Trade</button>
+            <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mb-3" (click)="cancelMode()"
+              [hidden]="!tradeMode">Cancel</button>
+            <button type="button" class="nes-btn bg-white text-3xl m-auto mb-3" [hidden]="tradeMode">Speak</button>
+            <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mt-3" [hidden]="tradeMode">Steal</button>
+            <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mt-3" (click)="handleGoBack()"
+              [hidden]="tradeMode">Leave</button>
+
           </div>
         </div>
       </div>

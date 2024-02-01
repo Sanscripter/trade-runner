@@ -17,6 +17,9 @@ export class LocationComponent implements OnInit {
   playerSells = new Inventory();
   traderSells = new Inventory();
   tradeMode = false;
+  notEnoughMoney = false;
+  tradeEnabled = true;
+  lackOfFunds = false;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
@@ -49,10 +52,30 @@ export class LocationComponent implements OnInit {
 
   handlePlayerSell(event: any) {
     this.playerSells.updateItem(event);
+    this.checkTrade();
   }
 
   handleTraderSell(event: any) {
     this.traderSells.updateItem(event);
+    this.checkTrade();
+  }
+
+  checkTrade() {
+    this.tradeEnabled = true;
+    this.notEnoughMoney = false;
+    this.lackOfFunds = false;
+    const playerValue = this.playerSells.totalValue;
+    const traderValue = this.traderSells.totalValue;
+    if (playerValue > (this.trader.money! + traderValue)) {
+      this.lackOfFunds = true;
+      this.tradeEnabled = false;
+      return;
+    }
+    if (traderValue > (this.player.money! + playerValue)) {
+      this.notEnoughMoney = true;
+      this.tradeEnabled = false;
+      return;
+    }
   }
 
   startTrade() {
@@ -77,18 +100,26 @@ export class LocationComponent implements OnInit {
     this.traderSells.items = [];
     this.player.inventory.items = this.player.inventory.items.slice(0);
     this.trader.inventory!.items = this.trader.inventory!.items.slice(0);
-    // this.player.inventory = Object.assign({}, this.player.inventory);
-    // this.trader.inventory = Object.assign({}, this.trader.inventory);
-    // this.player.inventory.items = [...this.player.inventory.items];
-    // this.trader.inventory!.items = [...this.trader.inventory!.items];
-    // console.log(this.player.inventory.items);
-    // console.log(this.trader.inventory!.items);
     this.tradeMode = false;
   }
 
   transferMoney(from: Player | ICity, to: Player | ICity, amount: number) {
-    from.money! -= amount;
-    to.money! += amount;
+    const contrainedValue = Math.min(from.money!, amount);
+    from.money! -= contrainedValue;
+    to.money! += contrainedValue;
+  }
+
+  cancelMode() {
+    this.tradeMode = false;
+    this.notEnoughMoney = false;
+    this.enableTrade();
+    this.playerSells.items = [];
+    this.traderSells.items = [];
+  }
+
+  enableTrade() {
+    this.tradeEnabled = true;
+    this.lackOfFunds = false;
   }
 
 }
