@@ -1,0 +1,114 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Car",
+      "description": "A useful vehicle for transportation",
+      "value": 100000,
+      "effects": [
+        {
+          "name": "transport",
+          "description": "Increased inventory by 2 slots. Visit 2 cities per day. Incurs variable fuel and maintenance costs"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Pistol",
+      "description": "A small firearm for self-defense and more...",
+      "value": 5000,
+      "effects": [
+        {
+          "name": "shooting",
+          "level": 1,
+          "description": "Gives the option to shoot under certain circunstances for small damage. Incurs variable ammo costs."
+        },
+        {
+          "name": "intimidation",
+          "level": 2,
+          "description": "Gives the option to intimidate under certain circunstances. Increases the chance of stealing from traders. Deccreases the chance of being jumped."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Rifle",
+      "description": "A long firearm for hunting and more...",
+      "value": 10000,
+      "effects": [
+        {
+          "name": "shooting",
+          "level": 2,
+          "description": "Gives the option to shoot under certain circunstances for medium damage. Incurs variable ammo costs."
+        },
+        {
+          "name": "intimidation",
+          "level": 3,
+          "description": "Gives the option to intimidate under certain circunstances. Increases the chance of stealing from traders. Deccreases the chance of being jumped."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Knife",
+      "description": "A small blade for survival.",
+      "value": 1000,
+      "effects": [
+        {
+          "name": "cutting",
+          "level": 1,
+          "description": "Gives the option to cut under certain circunstances for small damage."
+        },
+        {
+          "name": "intimidation",
+          "level": 1,
+          "description": "Gives the option to intimidate under certain circunstances. Increases the chance of stealing from traders. Deccreases the chance of being jumped."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Backpack",
+      "description": "A useful item for carrying more stuff.",
+      "value": 1000,
+      "effects": [
+        {
+          "name": "inventory",
+          "level": 1,
+          "description": "Increases inventory by 2 stacks."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Tent",
+      "description": "A useful item for resting.",
+      "value": 1000,
+      "effects": [
+        {
+          "name": "rest",
+          "level": 1,
+          "description": "Restores 50% of the player's health."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Bread",
+      "description": "The quintessential baked good.",
+      "value": 10,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    }
+  ]
+}

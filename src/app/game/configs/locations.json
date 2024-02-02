@@ -1,0 +1,125 @@
+{
+  "locations":[
+    { "id": 1,
+      "x": 50,
+      "y": 50,
+      "size": 1,
+      "name": "Corey's \nHouse",
+      "money": 200,
+      "inventory":{
+        "items":[
+          {"id":4, "quantity":3},
+          {"id":2, "quantity":1}
+        ]
+      },
+      "traderMugshot": "assets/mugs/corey.png",
+      "background": "assets/backgrounds/coreys_house.png",
+      "description": "A rundown suburban family home, crumbling drywall and broken windows spread around a boy with a deadly smile.",
+      "barks": ["I liked it better underground, when the corpses were just burned."]
+    },
+    { "id": 2,
+      "x": 750,
+      "y": 400,
+      "size": 20,
+      "name": "Viana's \nGrange",
+      "money": 8000,
+      "inventory":{
+        "items":[
+          {"id":2, "quantity":3},
+          {"id":4, "quantity":10}
+        ]
+      },
+      "background": "assets/backgrounds/vianas_grange.png"
+    },
+    { "id": 3,
+      "x": 500,
+      "y": 100,
+      "size": 30,
+      "name": "BUY USED TV \nSETS NOW!1!!",
+      "money": 10000,
+      "inventory":{
+        "items":[
+          {"id":2, "quantity":6},
+          {"id":3, "quantity":5}
+        ]
+      }
+    },
+    { "id": 4,
+      "x": 800,
+      "y": 500,
+      "size": 100,
+      "name": "Fort Lieber",
+      "money": 500000,
+      "inventory":{
+        "items":[
+          {"id":1, "quantity":6},
+          {"id":2, "quantity":2},
+          {"id":3, "quantity":3},
+          {"id":4, "quantity":3},
+          {"id":5, "quantity":5},
+          {"id":6, "quantity":7},
+          {"id":7, "quantity":2}
+        ]
+      },
+      "traderMugshot": "assets/mugs/cpt_measly.png",
+      "background": "assets/backgrounds/fort_lieber.png",
+      "barks": ["I'm watching you, trader scum."]
+    },
+    { "id": 5,
+      "x": 250,
+      "y": 400,
+      "size": 40,
+      "name": "Paradize",
+      "money": 40000,
+      "inventory":{
+        "items":[
+          {"id":3, "quantity":1},
+          {"id":5, "quantity":1},
+          {"id":6, "quantity":1}
+        ]
+      },
+      "traderMugshot": "assets/mugs/dullard_cult.png",
+      "background": "assets/backgrounds/paradize.png",
+      "barks": ["We'll ~massage~ the brain out of your skull, if you like. "]
+    },
+    { "id": 6,
+      "x": 350,
+      "y": 100,
+      "size": 40,
+      "name": "Wind Autunm",
+      "money": 5000,
+      "inventory":{
+        "items":[
+          {"id":4, "quantity":2},
+          {"id":2, "quantity":1},
+          {"id":3, "quantity":1}
+        ]
+      },
+      "barks": ["I can't believe we missed all this for so long. It's like a dream."]
+    },
+    { "id": 7,
+      "x": 600,
+      "y": 450,
+      "size": 40,
+      "name": "Gas Station",
+      "money": 20000
+    },
+    { "id": 8,
+      "x": 450,
+      "y": 300,
+      "size": 40,
+      "name": "El Asco",
+      "money": 10000,
+      "inventory":{
+        "items":[
+          {"id":5, "quantity":3},
+          {"id":6, "quantity":1},
+          {"id":7, "quantity":1}
+        ]
+      },
+      "traderMugshot": "assets/mugs/pablo_pueblo.png",
+      "background": "assets/backgrounds/el_asco.png",
+      "barks": ["Hola, trader. Pick your poison. Mine is being alive."]
+    }
+  ]
+}

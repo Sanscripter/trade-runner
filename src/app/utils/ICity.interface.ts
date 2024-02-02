@@ -6,7 +6,7 @@ export default interface ICity {
   y:number;
   name: string;
   size: number;
-  inventory?: Inventory;
+  inventory?: Inventory | any;
   money?: number;
   health?: number;
   traderMugshot?: string;
