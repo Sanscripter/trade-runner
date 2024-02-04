@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { StartScreenComponent } from './start-screen/start-screen.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { EndScreenComponent } from './end-screen/end-screen.component';
 
 
 @NgModule({
-  declarations: [
-    StartScreenComponent
-  ],
   imports: [
-    CommonModule,
     SharedModule,
-  ]
+    CommonModule,
+  ],
+  declarations: [
+    EndScreenComponent
+  ],
 })
 export class StoryModule { }

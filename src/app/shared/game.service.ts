@@ -6,6 +6,7 @@ import ICity from '../utils/ICity.interface';
 import { Inventory } from '../game/Inventory';
 import * as LocationsConfig from '../game/configs/locations.json';
 import * as ItemsConfig from '../game/configs/items.json';
+import { ENDINGS } from '../game/Endings.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class GameService {
   day: number = 1;
   daysLimit: number = 30;
   cities: ICity[] = LocationsConfig.locations;
+
 
   startGame(playerName: string) {
     this.player = new Player(playerName, 1000);
@@ -39,11 +41,18 @@ export class GameService {
     this.game = new Game(this.player);
   };
 
-  // trade(item: Item, city: ICity) {
-  //   this.player.inventory.removeItem(item);
-  //   this.player.inventory.addItem(city.inventory.items[0]);
-  //   city.inventory.removeItem(city.inventory.items[0]);
-  // };
+  get ending() {
+    if (this.player.health <= 0) {
+      return ENDINGS.DIED;
+    }
+    if (this.player.money <= 1000000) {
+      return ENDINGS.RICH;
+    }
+    if (this.player.money < 100000) {
+      return ENDINGS.PAID;
+    }
+    return ENDINGS.INSOLVENT;
+  };
 
   getCurrentDay() {
     return this.day;
@@ -54,9 +63,12 @@ export class GameService {
   };
 
   isGameOver() {
-    return this.day <= this.daysLimit;
-  }
+    return this.player.health <= 0|| this.day <= this.daysLimit;
+  };
 
-
+  resetGame() {
+    this.player = new Player('', 0);
+    this.day = 0;
+  };
 
 }

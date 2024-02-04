@@ -23,29 +23,33 @@ export class LocationComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((qp:any) => {
+    this.route.queryParams.subscribe((qp: any) => {
       this.locationId = qp['id'];
     });
   }
 
-  get player (){
+  get player() {
     return this.gameService.player;
   };
 
-  get trader (){
+  get trader() {
     return this.gameService.cities.find(c => c.id == this.locationId)!;
   };
 
   get playerInventory() {
-    return Object.assign({},this.player.inventory);
+    return Object.assign({}, this.player.inventory);
   }
 
   get traderInventory() {
-    return Object.assign({},this.trader.inventory);
+    return Object.assign({}, this.trader.inventory);
   }
 
   handleGoBack() {
     this.gameService.advanceDay();
+    if (this.gameService.isGameOver()) {
+      this.router.navigate(['end']);
+      return;
+    }
     this.router.navigate(['map']);
   }
 
