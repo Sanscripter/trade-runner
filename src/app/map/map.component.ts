@@ -17,7 +17,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.player = this.gameService.player;
-    if (!this.gameService.isGameOver()) {
+    if (this.gameService.isGameOver()) {
       this.router.navigate(['end']);
     }
   }

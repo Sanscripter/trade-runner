@@ -65,11 +65,9 @@
               [ngClass]="{'is-disabled':!tradeEnabled}">Trade</button>
             <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mb-3" (click)="cancelMode()"
               [hidden]="!tradeMode">Cancel</button>
-            <button type="button" class="nes-btn bg-white text-3xl m-auto mb-3" [hidden]="tradeMode">Speak</button>
             <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mt-3" [hidden]="tradeMode">Steal</button>
             <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mt-3" (click)="handleGoBack()"
               [hidden]="tradeMode">Leave</button>
-
           </div>
         </div>
       </div>

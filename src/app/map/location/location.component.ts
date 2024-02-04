@@ -26,6 +26,7 @@ export class LocationComponent implements OnInit {
     this.route.queryParams.subscribe((qp: any) => {
       this.locationId = qp['id'];
     });
+    this.trader = this.gameService.getCurrentLocalEconomy(this.trader);
   }
 
   get player() {
@@ -34,6 +35,10 @@ export class LocationComponent implements OnInit {
 
   get trader() {
     return this.gameService.cities.find(c => c.id == this.locationId)!;
+  };
+
+  set trader(trader: ICity) {
+    this.gameService.cities = this.gameService.cities.map(c => c.id === trader.id ? trader : c);
   };
 
   get playerInventory() {
