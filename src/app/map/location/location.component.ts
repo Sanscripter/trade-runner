@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../../shared/game.service';
 import ICity from '../../utils/ICity.interface';
-import { Item } from '../../game/Item';
 import { Inventory } from '../../game/Inventory';
 import { Player } from '../../game/Player';
 
@@ -24,7 +23,7 @@ export class LocationComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(qp => {
+    this.route.queryParams.subscribe((qp:any) => {
       this.locationId = qp['id'];
     });
   }

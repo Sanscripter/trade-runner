@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/trading-grounds",
+    "public": "dist/trading-grounds/browser/",
     "ignore": [
       "firebase.json",
       "**/.*",
