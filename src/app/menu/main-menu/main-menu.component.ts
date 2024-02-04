@@ -11,6 +11,7 @@ export class MainMenuComponent {
 
   MENU_OPTIONS: Record<string,any> = {
     'start': () => this.handleStart(),
+    'credits': () => this.router.navigate(['credits']),
   };
 
   version = packageJson.version;

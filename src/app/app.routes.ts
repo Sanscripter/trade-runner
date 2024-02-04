@@ -5,6 +5,7 @@ import { LoadMenuComponent } from './menu/load-menu/load-menu.component';
 import { LocationComponent } from './map/location/location.component';
 import { StartScreenComponent } from './story/start-screen/start-screen.component';
 import { EndScreenComponent } from './story/end-screen/end-screen.component';
+import { CreditsComponent } from './story/credits/credits.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'end',
     component: EndScreenComponent
+  },
+  {
+    path: 'credits',
+    component: CreditsComponent
   },
   {
     path: '',
