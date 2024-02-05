@@ -9,7 +9,7 @@ export class Inventory {
 
   // Calculate total value of the inventory
   get totalValue() {
-    return this.items.reduce((acc, item) => acc + (item.cost * item.quantity!), 0);
+    return this.items.reduce((acc, item) => acc + (item.cost! * item.quantity!), 0);
   };
 
   // Add an item to the inventory, if it already exists, increase the quantity

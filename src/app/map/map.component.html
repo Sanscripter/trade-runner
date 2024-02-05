@@ -2,7 +2,7 @@
   <aside class="flex flex-col w-1/4 h-full nes-container is-dark p-2 justify-between">
     <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()"/>
     <app-inventory [inventory]="player.inventory"/>
-    <app-eventlog/>
+    <app-eventlog [eventLog]="gameService.eventLog" [day]="gameService.getCurrentDay()"/>
   </aside>
   <section class="flex w-full text-center">
       <app-interactive-view

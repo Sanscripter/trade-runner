@@ -1,7 +1,7 @@
 export class Item {
   id?: number;
   name: string;
-  cost: number;
+  cost?: number;
   value: number;
   description: string;
   icon?: string;

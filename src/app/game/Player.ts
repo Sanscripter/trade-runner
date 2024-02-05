@@ -1,6 +1,7 @@
 import { Inventory } from "./Inventory";
 
 export class Player {
+  id = 0;
   name: string;
   inventory: Inventory = new Inventory();
   money: number;

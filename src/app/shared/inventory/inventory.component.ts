@@ -45,7 +45,7 @@ export class InventoryComponent {
   changedAmount(currentAmount: number, index: number) {
     const selected  = this.inventory?.items[index];
     const changedAmount = selected!.quantity! - currentAmount;
-    const changed = new Item(selected!.name, selected!.cost, selected!.description, changedAmount);
+    const changed = new Item(selected!.name, selected!.cost!, selected!.description, changedAmount);
     this.emitChange(changed);
   }
 
