@@ -80,7 +80,11 @@ export class GameService {
 
   advanceDay() {
     this.day++;
-    this.generateEvents();
+    try {
+      this.generateEvents();
+    } catch (e) {
+      console.error('Error generating events', e);
+    }
   };
 
   generateEvents() {

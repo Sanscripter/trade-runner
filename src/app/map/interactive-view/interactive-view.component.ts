@@ -25,6 +25,9 @@ export class InteractiveViewComponent implements AfterViewInit {
       selection: false,
       preserveObjectStacking: true,
     });
+    this.fabricCanvas.setWidth(window.innerWidth);
+    this.fabricCanvas.setHeight(window.innerHeight);
+    this.fabricCanvas.setBackgroundImage('assets/map.png', ()=> {this.fabricCanvas.renderAll()});
     this.renderCities();
   }
 
