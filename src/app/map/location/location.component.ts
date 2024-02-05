@@ -4,6 +4,7 @@ import { GameService } from '../../shared/game.service';
 import ICity from '../../utils/ICity.interface';
 import { Inventory } from '../../game/Inventory';
 import { Player } from '../../game/Player';
+import { Item } from '../../game/Item';
 
 @Component({
   selector: 'app-location',
@@ -19,6 +20,9 @@ export class LocationComponent implements OnInit {
   notEnoughMoney = false;
   tradeEnabled = true;
   lackOfFunds = false;
+  stealSucces = false;
+  stealFailed = false;
+  stealMode = false;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
@@ -90,6 +94,33 @@ export class LocationComponent implements OnInit {
     this.tradeMode = true;
   }
 
+  startStealing() {
+    this.stealMode = true;
+  }
+
+  handleStealing() {
+    this.stealMode = true;
+    if (true){
+      const randomItem = this.trader.inventory!.items[Math.ceil(Math.random() * this.trader.inventory!.items.length-1)] as Item;
+      console.log('random',randomItem);
+      const randomQty = Math.ceil(randomItem.quantity! * Math.random());
+      console.log('randomQty',randomQty);
+      randomItem.quantity = randomQty;
+      const stolenItem = new Item(randomItem.name, randomItem?.cost!, randomItem.description, randomQty);
+      this.player.inventory.addItem(stolenItem);
+      this.trader.inventory!.removeItem(stolenItem);
+      this.stealSucces = true;
+      this.stealMode = false;
+    } else {
+      this.player.takeDamage(Math.ceil(this.trader.size! * Math.random()/2));
+      this.stealFailed = true;
+      if (this.player.health <= 0) {
+        this.router.navigate(['end']);
+      }
+    }
+
+  }
+
   handleTrade() {
     //If it's positive add to player wallet and remove from trader wallet
     //If it's negative do the opposite
@@ -120,6 +151,9 @@ export class LocationComponent implements OnInit {
   cancelMode() {
     this.tradeMode = false;
     this.notEnoughMoney = false;
+    this.stealMode = false;
+    this.stealSucces = false;
+    this.stealFailed = false;
     this.enableTrade();
     this.playerSells.items = [];
     this.traderSells.items = [];

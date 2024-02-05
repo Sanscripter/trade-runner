@@ -4,7 +4,7 @@
     <img class="w-full h-full z-0 absolute" [src]="trader.background" style="transform:scaleX(-1);" alt="">
     <aside class="flex flex-col w-1/4 nes-container is-dark p-2 !mb-auto">
       <app-agent-stats [stats]="gameService.player!" [day]="gameService.getCurrentDay()" />
-      @if (tradeMode) {
+      @if (tradeMode || stealMode) {
       <app-inventory [inventory]="playerInventory" (change)="handlePlayerSell($event)" mode="agent" class="pt-10" />
       }
     </aside>
@@ -15,6 +15,12 @@
             <div class="text-left content-end flex p-10">
               @if (notEnoughMoney) {
               <p class="is-waring">You don't have enough money.</p>
+              }
+              @else if (stealSucces) {
+              <p class="is-success">Uh? What was that?</p>
+              }
+              @else if (stealFailed) {
+              <p class="is-success">Hey give that back! I'll kill you!</p>
               }
               @else if (lackOfFunds) {
               <p class="is-waring">We can trade but that's all I have. ({{trader.money! | currency: 'USD'}})</p>
@@ -29,7 +35,7 @@
 
           <div *ngIf="tradeMode" class="nes-container !bg-black is-dark flex flex-row justify-between h-1/2 !mb-auto">
             <div class="flex flex-col w-5/6">
-              <p class="text-white !mb-10">You offer</p>
+              <p class="text-white !mb-10">Your offer</p>
               <div class="flex flex-row overflow-y-scroll !mb-10">
                 <div class="text-left w-full">
                   <div *ngFor="let item of playerSells.items" class="my-5 w-full">
@@ -60,14 +66,15 @@
           </div>
 
           <div class="mx-auto mb-12 w-1/2 pb-0 flex flex-row flex-wrap">
-            <button type="button" (click)="tradeMode ? handleTrade() : startTrade()"
+            <button type="button" (click)="tradeMode ? handleTrade() : startTrade()" [hidden]="stealMode"
               class="nes-btn bg-blue-500 text-3xl m-auto mb-3" [disabled]="!tradeEnabled"
               [ngClass]="{'is-disabled':!tradeEnabled}">Trade</button>
             <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mb-3" (click)="cancelMode()"
-              [hidden]="!tradeMode">Cancel</button>
-            <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mt-3" [hidden]="tradeMode">Steal</button>
+              [hidden]="!tradeMode && !stealMode">Cancel</button>
+            <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mt-3"
+              (click)="stealMode ? handleStealing() : startStealing()" [hidden]="tradeMode">Steal</button>
             <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mt-3" (click)="handleGoBack()"
-              [hidden]="tradeMode">Leave</button>
+              [hidden]="tradeMode || stealMode">Leave</button>
           </div>
         </div>
       </div>
@@ -75,7 +82,7 @@
     </section>
     <aside class="flex flex-col w-1/4 nes-container is-dark p-2 !mb-auto">
       <app-agent-stats [stats]="trader" />
-      @if (tradeMode) {
+      @if (tradeMode || stealMode) {
       <app-inventory [inventory]="traderInventory" (change)="handleTraderSell($event)" mode="agent" class="pt-10" />
       }
     </aside>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../shared/game.service';
 import { ENDINGS } from '../../game/Endings.enum';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './end-screen.component.html',
   styleUrl: './end-screen.component.scss'
 })
-export class EndScreenComponent {
+export class EndScreenComponent implements OnInit {
 
   constructor(private router: Router, public gameService: GameService) { }
 
@@ -16,7 +16,7 @@ export class EndScreenComponent {
 
   ending: number = ENDINGS.INSOLVENT;
 
-  onInit() {
+  ngOnInit() {
     this.ending = this.gameService.ending;
   }
 

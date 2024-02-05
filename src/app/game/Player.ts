@@ -12,6 +12,10 @@ export class Player {
     this.money = money ? money : 0;
   }
 
+  get stealingChance() {
+    return 0.5;
+  }
+
   setInventory(inventory: Inventory) {
     this.inventory = inventory;
   };
