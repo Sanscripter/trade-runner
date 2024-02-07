@@ -28,6 +28,7 @@ export class GameService {
 
   startGame(playerName: string) {
     this.eraseSave();
+    this.day = 1;
     this.setupPlayer(playerName);
     this.setupCities();
     this.game = new Game(this.player);

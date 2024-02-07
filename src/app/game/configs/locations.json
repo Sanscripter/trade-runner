@@ -15,7 +15,11 @@
       "traderMugshot": "assets/mugs/corey.png",
       "background": "assets/backgrounds/coreys_house.png",
       "description": "A rundown suburban family home, crumbling drywall and broken windows spread around a boy with a deadly smile.",
-      "barks": ["I liked it better underground, when the corpses were just burned."]
+      "barks": [
+        "I liked it better underground, when the corpses were just burned.",
+        "It's lonely out here.",
+        "Do you wanna play ball? I have just the thing..."
+      ]
     },
     { "id": 2,
       "x": 750,
@@ -29,7 +33,14 @@
           {"id":4, "quantity":10}
         ]
       },
-      "background": "assets/backgrounds/vianas_grange.png"
+      "background": "assets/backgrounds/vianas_grange.png",
+      "traderMugshot": "assets/mugs/viana.png",
+      "barks": [
+        "Don't  you sass my cows, trader. God knows I have enough of that around here already.",
+        "It's rainning now, but it will stop raining some day. Good thing we are preppers.",
+        "I'm about to start a revolution!",
+        "It's a commune,  trader! Ha a commune..."
+      ]
     },
     { "id": 3,
       "x": 800,
@@ -42,7 +53,14 @@
           {"id":2, "quantity":6},
           {"id":3, "quantity":5}
         ]
-      }
+      },
+      "traderMugshot": "assets/mugs/tv_gods.png",
+      "barks":[
+        "These are not our heads, trader, it's just our corporate-mandated uniform. It's both a marketing stunt AND a metaphor.",
+        "We are hungry.",
+        "Say can I interest you in a modern, state-of-the-art, used TV set? It's a steal! On that note, please don't steal from us.",
+        "You'd have thought that technological progress would have stopped when we went underground, but BOY were you wrong! Have you heard of the Beat a Maxx? I'm telling you the guys in Paradize are all over this trinket!"
+      ]
     },
     { "id": 4,
       "x": 800,
@@ -63,7 +81,12 @@
       },
       "traderMugshot": "assets/mugs/cpt_measly.png",
       "background": "assets/backgrounds/fort_lieber.png",
-      "barks": ["I'm watching you, trader scum."]
+      "barks": [
+        "Captain Measly reporting for duty!",
+        "Finest goods in Happy Valley, hand selected by the troops. What's left of us, anyway.",
+        "Had shootout with Los Treze last week. They're getting bolder. You stay away from them, trader.",
+        "I'll ram you with my whole fleet if you try to steal from us."
+      ]
     },
     { "id": 5,
       "x": 250,
@@ -80,13 +103,19 @@
       },
       "traderMugshot": "assets/mugs/dullard_cult.png",
       "background": "assets/backgrounds/paradize.png",
-      "barks": ["We'll ~massage~ the brain out of your skull, if you like. "]
+      "barks": [
+        "We'll ~massage~ the brain out of your skull, if you like.",
+        "I have a ~liver~ recipe I've been wanting to try.",
+        "Our tribe has ~licked~ the eyes of God. We ate his sight, now we are ~blessed~.",
+        "There's a herectic in van up North. His due to face ~baptism~ by the Fire Tongue.",
+        "You are welcome to sleep here tonight, traveller, free of charge."
+      ]
     },
     { "id": 6,
       "x": 350,
       "y": 100,
       "size": 40,
-      "name": "Wind Autunm",
+      "name": "Wind Autumn",
       "money": 5000,
       "inventory":{
         "items":[
@@ -95,14 +124,39 @@
           {"id":3, "quantity":1}
         ]
       },
-      "barks": ["I can't believe we missed all this for so long. It's like a dream."]
+      "traderMugshot": "assets/mugs/wind_autumn.png",
+      "background": "assets/backgrounds/wind_autumn.png",
+      "barks": [
+        "I can't believe we missed all this for so long. It's like a dream.",
+        "I remember the world from before. Maybe we were due for a reset.",
+        "I'm not sure what to do with all this freedom. But I know I want to stay here now.",
+        "Love is the strongest currency, child! And I'm rich!"
+      ]
     },
     { "id": 7,
       "x": 600,
       "y": 450,
       "size": 40,
       "name": "Gas Station",
-      "money": 20000
+      "money": 20000,
+      "inventory":{
+        "items":[
+          {"id":1, "quantity":1},
+          {"id":2, "quantity":1},
+          {"id":3, "quantity":1},
+          {"id":4, "quantity":1},
+          {"id":5, "quantity":1},
+          {"id":6, "quantity":1},
+          {"id":7, "quantity":1}
+        ]
+      },
+      "traderMugshot": "assets/mugs/carlos_treze.png",
+      "background": "assets/backgrounds/gas_station.png",
+      "barks": [
+        "Have my money yet?",
+        "You know, your dad was a little bitch.",
+        "You do not cross Carlos Treze!"
+      ]
     },
     { "id": 8,
       "x": 450,
@@ -119,7 +173,12 @@
       },
       "traderMugshot": "assets/mugs/pablo_pueblo.png",
       "background": "assets/backgrounds/el_asco.png",
-      "barks": ["Hola, trader. Pick your poison. Mine is being alive."]
+      "barks": [
+        "Hola, trader. Pick your poison. Mine is being alive.",
+        "No trouble, trader, por favor",
+        "No doi más, I'm done with this heat.",
+        "May you find a good destiny after all, trader."
+      ]
     }
   ]
 }

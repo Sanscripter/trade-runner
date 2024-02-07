@@ -26,7 +26,7 @@
               <p class="is-waring">We can trade but that's all I have. ({{trader.money! | currency: 'USD'}})</p>
               <button class="nes-btn is-warning" (click)="enableTrade()">Ok</button>
               } @else {
-              <p>{{trader.barks?.[0] || "you..."}}</p>
+              <p>{{bark || "I'm out of words today"}}</p>
               }
             </div>
             <img class="trader-icon" [src]="trader.traderMugshot">

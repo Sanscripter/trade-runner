@@ -46,6 +46,10 @@ export class LocationComponent implements OnInit {
     this.gameService.cities = this.gameService.cities.map(c => c.id === trader.id ? trader : c);
   };
 
+  get bark() {
+    return this.trader.barks![Math.floor(Math.random() * this.trader.barks!.length)];
+  }
+
   get playerInventory() {
     return Object.assign({}, this.player.inventory);
   }
