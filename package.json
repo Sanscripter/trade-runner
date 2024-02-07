@@ -1,6 +1,6 @@
 {
-  "name": "Trade Runner",
-  "version": "0.10.0",
+  "name": "trade_runner",
+  "version": "0.11.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

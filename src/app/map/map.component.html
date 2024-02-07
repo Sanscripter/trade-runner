@@ -1,13 +1,17 @@
 <main class="flex flex-row w-full h-full">
-  <aside class="flex flex-col w-1/4 h-full nes-container is-dark p-2 justify-between">
-    <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()"/>
-    <app-inventory [inventory]="player.inventory"/>
-    <app-eventlog [eventLog]="gameService.eventLog" [day]="gameService.getCurrentDay()"/>
-  </aside>
+    <aside class="flex flex-col w-1/4 nes-container is-dark p-2 justify-between">
+      <div class="upper-aside-layout flex flex-col">
+        <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()" />
+        <app-eventlog class="eventlog-layout" [eventLog]="gameService.eventLog" [day]="gameService.getCurrentDay()" />
+      </div>
+      <button class="nes-btn is-warning" (click)="toggleInventory()">Inventory</button>
+    </aside>
   <section class="flex w-full text-center">
-      <app-interactive-view
-        (travelledTo)="handleTravelling($event)"
-        [cities]="gameService.cities"
-      />
+    @if (inventoryOpen) {
+    <div class="nes-container is-dark h-full">
+      <app-inventory [inventory]="player.inventory" />
+    </div>
+    }
+    <app-interactive-view (travelledTo)="handleTravelling($event)" [cities]="gameService.cities" />
   </section>
 </main>

@@ -1,22 +1,24 @@
-import { EventEffect } from "./EventEffect";
-
 export class GameEvents {
-  _description!: string;
+  description!: string;
   day!: number;
-  effects: EventEffect[] = [];
+  effect: any;
 
-  constructor(day: number, effects?: EventEffect[]) {
+  constructor(eventConfig: any, day: number) {
     this.day = day;
-    if (effects) {
-      this.effects = effects;
+    this.description = eventConfig.description;
+    console.log('eventConfig', eventConfig);
+    this.effect = eventConfig.effect;
+  }
+
+  setEffect(effect: any) {
+    this.effect = effect;
+    const subject = this.effect.subject;
+    const target = this.effect.target;
+    if(effect.type === 'CITY_BUYING_X' || effect.type === 'CITY_SELLING_X') {
+      console.log('effect', effect);
+      console.log('subject', subject);
+      console.log('target', target);
     }
-  }
-
-  get description() {
-    return this._description.replace(/{{subject}}/g, this.effects[0].subject?.name).replace(/{{target}}/g, this.effects[0].target?.name || '');
-  }
-
-  addEffect(effect: EventEffect) {
-    this.effects.push(effect);
+    this.description = this.description.replace(/{{subject}}/g, subject.name).replace(/{{target}}/g, target?.name);
   }
 }

@@ -1,4 +1,4 @@
-<main class="flex flex-col h-full justify-between m-auto p-10 w-full">
+<main class="flex flex-col h-full justify-between m-auto p-10 w-full overflow-y-scroll">
   <section>
     <h1 class="text-4xl p-5 text-center">Game Over</h1>
     <div class="p-5">
@@ -23,10 +23,17 @@
         and are all well armed. You are in no position to refuse, because of the implication. You shake hands, they
         leave setting dust off in the air. You sit on the ground, near your father's grave and spend the night awake
         looking at the horizon. That line, that perimiter where the sky clashed with the edge of Happy Valley, that line
-        became the fence around the rest of your life. You watch the sun rise but it feels indistinguishable from a cell now. </p>
+        became the fence around the rest of your life. You watch the sun rise but it feels indistinguishable from a cell
+        now. </p>
       }
       @else if (ending === endings.RICH) {
-      <p>RICH</p>
+      <p>The day has come. You set up a meeting with the leader of Los Treze in the same place your father was once
+        burried. He arrives early. You never do. Instead, using your newly accumulated wealth, you hire 7 mercenaries as
+        a welcome comitee. You never learn just quite what happened that day, only that the Los Treze dissolved shortly
+        after and the mercenaries assured you nobody would be messing with you anymore. With the remaining wealth you
+        are able to recruit some survivors from around Happy Valley and found a settlement of your own. Over the years,
+        as civilisation regrows, it becomes the capital of the first democratic proto-state of the New World and your
+        natural ability as a trader becomes instrumental in bringing abundance and prosperity to the region.</p>
       }
       @else if (ending === endings.INSOLVENT) {
       <p>Days go by and before you realize the sun sets on the 30th day. You know you are short and you consider
@@ -45,7 +52,7 @@
     <p class="title">Stats</p>
     <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()"></app-agent-stats>
   </section>
-  <section class="flex flex-row w-full">
+  <section class="flex flex-row w-full mt-5">
     <button class="nes-btn is-danger m-auto" (click)="handleExit()">Exit</button>
   </section>
 </main>

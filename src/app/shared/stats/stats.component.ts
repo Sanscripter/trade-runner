@@ -16,4 +16,8 @@ export class StatsComponent {
     return this.stats instanceof Player;
   }
 
+  get playerHealth(): number {
+    return this.stats instanceof Player ? this.stats.health : 0;
+  }
+
 }

@@ -2,7 +2,7 @@
   <p>Name: {{stats.name}}</p>
   @if (isPlayer) {
     <p>Day: {{day}}</p>
-    <app-health [health]="stats.health!"/>
+    <app-health [health]="playerHealth"/>
   }
   <p>{{stats.money | currency:'USD'}}</p>
 </div>

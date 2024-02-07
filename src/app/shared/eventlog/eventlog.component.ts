@@ -1,10 +1,11 @@
-import { Component, Input, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core';
 import { GameEvents } from '../../game/GameEvents';
 
 @Component({
   selector: 'app-eventlog',
   templateUrl: './eventlog.component.html',
-  styleUrl: './eventlog.component.scss'
+  styleUrl: './eventlog.component.scss',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class EventlogComponent {
 

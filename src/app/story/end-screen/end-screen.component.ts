@@ -17,6 +17,7 @@ export class EndScreenComponent implements OnInit {
   ending: number = ENDINGS.INSOLVENT;
 
   ngOnInit() {
+    this.gameService.loadGame();
     this.ending = this.gameService.ending;
   }
 

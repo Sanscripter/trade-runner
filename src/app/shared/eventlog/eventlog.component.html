@@ -1,11 +1,12 @@
-<div class="flex flex-col relative justify-between w-full h-full scroll-pt-5">
+<div class="flex flex-col w-full h-full">
   @if (eventLog.length > 0) {
   <p>Events: {{eventLog.length}}</p>
-  <div class="flex flex-col relative overflow-y-scroll max-h-52 pt-2">
+  <div class="flex flex-col h-full overflow-y-scroll pt-2">
     @for (event of eventLog; track $index) {
-    <span class="nes-text" [ngClass]="getHeat(event)">{{event.description}} on day {{event.day}}</span>
+    <span class="nes-text" [ngClass]="getHeat(event)">{{event.description}} - day {{event.day}}</span>
     <hr class="w-full">
     }
   </div>
   }
 </div>
+

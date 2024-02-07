@@ -27,6 +27,7 @@ export class LocationComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
   ngOnInit() {
+    this.gameService.loadGame();
     this.route.queryParams.subscribe((qp: any) => {
       this.locationId = qp['id'];
     });

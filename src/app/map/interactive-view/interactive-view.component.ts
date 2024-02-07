@@ -31,18 +31,8 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.renderCities();
   }
 
-  initializeCanvas() {
-    this.canvas = document.getElementById('interactiveViewCanvas') as HTMLCanvasElement;
-    this.canvasCtx = this.canvas?.getContext('2d') || null;
-    if (!this.canvasCtx) {
-      console.error('Error initializing canvas');
-      return;
-    }
-  }
-
   renderCities() {
     if (!this.fabricCanvas) return;
-
 
     this.cities.forEach((city) => {
       const rect = new fabric.Rect({

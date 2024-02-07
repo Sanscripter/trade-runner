@@ -2,35 +2,61 @@
   "events": [
     {
       "description": "{{subject}} is now flooding the market. Prices are dropping.",
-      "effects": [0]
+      "effect": {
+        "type": "EXCESS",
+        "subjectType": "ITEM"
+      }
     },
     {
       "description": "{{subject}} is now hard to find. Prices are rising.",
-      "effects": [1]
+      "effect": {
+        "type": "SCARCITY",
+        "subjectType": "ITEM"
+      }
     },
     {
-      "description":"{{subject}} is in dire need of {{target}}.",
-      "effects": [2]
+      "description": "{{subject}} is in dire need of {{target}}.",
+      "effect": {
+        "type": "CITY_BUYING_X",
+        "subjectType": "CITY",
+        "targetType": "ITEM"
+      }
     },
     {
-      "description":"{{subject}} overstocked on {{target}}.",
-      "effects": [3]
+      "description": "{{subject}} overstocked on {{target}}.",
+      "effect": {
+        "type": "CITY_BUYING_X",
+        "subjectType": "CITY",
+        "targetType": "ITEM"
+      }
     },
     {
-      "description":"{{subject}} was hazed in an attack. Spoils are selling for cheap.",
-      "effects": [4]
+      "description": "{{subject}} was hazed in an attack. Spoils are selling for cheap.",
+      "effect": {
+        "type": "POVERTY",
+        "subjectType": "CITY"
+      }
     },
     {
-      "description":"{{subject}} was struck by sickness and facing poverty.",
-      "effects": [5]
+      "description": "{{subject}} was struck by sickness and facing poverty.",
+      "effect": {
+        "type": "POVERTY",
+        "subjectType": "CITY"
+      }
     },
     {
-      "description":"{{subject}} has become a hub for traders. Prices are rising.",
-      "effects": [6]
+      "description": "{{subject}} has become a hub for traders. Prices are rising.",
+      "effect": {
+        "type": "ABUNDANCE",
+        "subjectType": "CITY"
+      }
     },
     {
-      "description":"{{subject}} has become successful and well managed. Their goods are trading at a premium.",
-      "effects": [7]
+      "description": "{{subject}} has become successful and well managed. Their goods are trading at a premium.",
+      "effect": {
+        "type": "ABUNDANCE",
+        "subjectType": "CITY"
+      }
     }
   ]
 }
