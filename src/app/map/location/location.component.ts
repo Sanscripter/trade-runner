@@ -20,9 +20,10 @@ export class LocationComponent implements OnInit {
   notEnoughMoney = false;
   tradeEnabled = true;
   lackOfFunds = false;
-  stealSucces = false;
+  stealSuccess = false;
   stealFailed = false;
   stealMode = false;
+  stolenItem?: Item;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
 
@@ -105,23 +106,17 @@ export class LocationComponent implements OnInit {
 
   handleStealing() {
     this.stealMode = true;
-    if (true){
-      const randomItem = this.trader.inventory!.items[Math.ceil(Math.random() * this.trader.inventory!.items.length-1)] as Item;
+    if (Math.random() > this.player.stealingChance!){
+      const randomItem = this.trader.inventory!.items[Math.floor(Math.random() * this.trader.inventory!.items.length)] as Item;
       console.log('random',randomItem);
-      const randomQty = Math.ceil(randomItem.quantity! * Math.random());
-      console.log('randomQty',randomQty);
-      randomItem.quantity = randomQty;
-      const stolenItem = new Item(randomItem.name, randomItem?.cost!, randomItem.description, randomQty);
-      this.player.inventory.addItem(stolenItem);
-      this.trader.inventory!.removeItem(stolenItem);
-      this.stealSucces = true;
-      this.stealMode = false;
+      const randomQty = 1; //In the future we can add a random quantity
+      this.stolenItem = new Item(randomItem.name, randomItem?.cost!, randomItem.description, randomQty);
+      this.player.inventory.addItem(this.stolenItem);
+      this.trader.inventory!.removeItem(this.stolenItem);
+      this.stealSuccess = true;
     } else {
       this.player.takeDamage(Math.ceil(this.trader.size! * Math.random()/2));
       this.stealFailed = true;
-      if (this.player.health <= 0) {
-        this.router.navigate(['end']);
-      }
     }
 
   }
@@ -133,12 +128,12 @@ export class LocationComponent implements OnInit {
     netTrasactionValue > 0 ? this.transferMoney(this.trader, this.player, netTrasactionValue) : this.transferMoney(this.player, this.trader, -netTrasactionValue);
     // trasfer items
     this.playerSells.items.forEach(item => {
-      this.player.inventory.removeItem(item);
+      this.player.inventory!.removeItem(item);
       this.trader.inventory!.addItem(item);
     });
     this.traderSells.items.forEach(item => {
       this.trader.inventory!.removeItem(item);
-      this.player.inventory.addItem(item);
+      this.player.inventory!.addItem(item);
     });
     this.playerSells.items = [];
     this.traderSells.items = [];
@@ -157,7 +152,7 @@ export class LocationComponent implements OnInit {
     this.tradeMode = false;
     this.notEnoughMoney = false;
     this.stealMode = false;
-    this.stealSucces = false;
+    this.stealSuccess = false;
     this.stealFailed = false;
     this.enableTrade();
     this.playerSells.items = [];

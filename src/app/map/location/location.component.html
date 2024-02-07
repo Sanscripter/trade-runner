@@ -16,7 +16,7 @@
               @if (notEnoughMoney) {
               <p class="is-waring">You don't have enough money.</p>
               }
-              @else if (stealSucces) {
+              @else if (stealSuccess) {
               <p class="is-success">Uh? What was that?</p>
               }
               @else if (stealFailed) {
@@ -33,7 +33,28 @@
 
           </div>
 
-          <div *ngIf="tradeMode" class="nes-container !bg-black is-dark flex flex-row justify-between h-1/2 !mb-auto">
+          @if (stealMode) {
+          <div class="nes-container !bg-black is-dark flex flex-col justify-between h-1/2 !mb-auto">
+            <p class="text-white !mb-10">You wait until the trader looks away. You might have a chance to steal and get
+              away with it...</p>
+
+            @if (stealSuccess) {
+            <p class="text-white !mb-10">You stole:</p>
+            <div class="my-5 w-full">
+              <p class="text-lg">{{stolenItem!.name}} x{{stolenItem!.quantity}}</p>
+              <p class="text-xs">{{stolenItem!.description}}</p>
+              <hr class="w-full">
+            </div>
+            <button class="nes-btn is-warning w-1/3" (click)="cancelMode()">Ok</button>
+            }
+            @if (stealFailed) {
+            <p class="text-white !mb-10">You were caught stealing. The trader will attack you.</p>
+            <button class="nes-btn is-warning w-1/3" (click)="handleGoBack()">Ok</button>
+            }
+          </div>
+          }
+          @if (tradeMode) {
+          <div class="nes-container !bg-black is-dark flex flex-row justify-between h-1/2 !mb-auto">
             <div class="flex flex-col w-5/6">
               <p class="text-white !mb-10">Your offer</p>
               <div class="flex flex-row overflow-y-scroll !mb-10">
@@ -64,15 +85,15 @@
               <p class="text-xl text-right">{{traderSells.totalValue | currency: 'USD'}}</p>
             </div>
           </div>
-
+          }
           <div class="mx-auto mb-12 w-1/2 pb-0 flex flex-row flex-wrap">
             <button type="button" (click)="tradeMode ? handleTrade() : startTrade()" [hidden]="stealMode"
               class="nes-btn bg-blue-500 text-3xl m-auto mb-3" [disabled]="!tradeEnabled"
               [ngClass]="{'is-disabled':!tradeEnabled}">Trade</button>
+            <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mb-3"
+              (click)="stealMode ? handleStealing() : startStealing()" [hidden]="tradeMode || stealSuccess || stealFailed">Steal</button>
             <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mb-3" (click)="cancelMode()"
-              [hidden]="!tradeMode && !stealMode">Cancel</button>
-            <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mt-3"
-              (click)="stealMode ? handleStealing() : startStealing()" [hidden]="tradeMode">Steal</button>
+              [hidden]="!tradeMode && !stealMode || stealSuccess || stealFailed">Cancel</button>
             <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mt-3" (click)="handleGoBack()"
               [hidden]="tradeMode || stealMode">Leave</button>
           </div>

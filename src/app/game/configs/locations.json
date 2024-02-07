@@ -55,6 +55,7 @@
         ]
       },
       "traderMugshot": "assets/mugs/tv_gods.png",
+      "background": "assets/backgrounds/buy_used_tv_sets.png",
       "barks":[
         "These are not our heads, trader, it's just our corporate-mandated uniform. It's both a marketing stunt AND a metaphor.",
         "We are hungry.",

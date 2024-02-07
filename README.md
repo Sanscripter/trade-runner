@@ -1,27 +1,20 @@
-# TradingGrounds
+# Trade Runners
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
+## Original concept
+This is the initial prototype for a game idea I had for some time. It is somewhat based on drugwars and
+the more modern interpretation, dopewars.
 
-## Development server
+Play as Trade Runner: a wandering trader in an alternate timeline where escalating global conflicts
+make people live underground for decades and just now reemerge.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Trade to pay a family debt with a local gang. Rake profits from strategic commerce. Or just steal and see
+if you can get away with it.
 
-## Code scaffolding
+## Development
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### History
+The game is implemented as an Angular 17 application, although, I'll admit it doesn't fully use all of it's features, neither does it use the features that it does consistently. The original version of this
+was implemented in Vue, Vanilla JS and, more recently, older versions of Angular. This version is a revision of a mashup of the last 2-4 versions plus the core game classes that were implemented for a text-only initial prototype, which turned out way too complex to realistically become a game. I plan to refactor and write some proper unit tests in the future.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Running
+To run the development server simply `npm i` and `npm run start`. `http://localhost:4200` will have the game. Start screen is the simple, hopefully self-explanatory main menu at `/menu`.
