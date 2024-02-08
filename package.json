@@ -1,6 +1,6 @@
 {
   "name": "trade_runner",
-  "version": "0.16.0",
+  "version": "Public Alpha - 0.17.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

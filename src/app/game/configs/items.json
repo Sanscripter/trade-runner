@@ -453,7 +453,7 @@
       "value": 2000
     },
     {
-      "id": 43,
+      "id": 58,
       "name": "Marijuana",
       "description": "Who are you gonna tell, narc?",
       "value": 800
@@ -547,6 +547,18 @@
       "name": "Bicycle",
       "description": "Like a worse motorbike.",
       "value": 50000
+    },
+    {
+      "id": 59,
+      "name": "Beer",
+      "description": "Buffman Brewery est. 1989",
+      "value": 20
+    },
+    {
+      "id": 60,
+      "name": "Water Bottle",
+      "description": "Bottle cap doubles as money among idiots.",
+      "value": 20
     }
   ]
 }
