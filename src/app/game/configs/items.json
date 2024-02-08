@@ -109,6 +109,444 @@
           "description": "Replenishes hunger."
         }
       ]
+    },
+    {
+      "id": 8,
+      "name": "Sweetroll",
+      "description": "From a baker who used to be a trader like you.",
+      "value": 20,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Pizza Slice",
+      "description": "Healthy carbs for the martial teen!",
+      "value": 25,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Meat Jerky",
+      "description": "Probably from before the apocalypse.",
+      "value": 40,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Soylent Brown",
+      "description": "Number 2 soylent in the market!",
+      "value": 60,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Wine",
+      "description": "... and dine!",
+      "value": 75,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Milk",
+      "description": "What do you want me to say? It's cow juice.",
+      "value": 10,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Cow Juice",
+      "description": "This got weird.",
+      "value": 5,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Salad",
+      "description": "For the calorie-concious trader!",
+      "value": 10,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Chocolate Bar",
+      "description": "Better (choco)late than never!",
+      "value": 500,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Marshmallow",
+      "description": "It makes no sense that they even have this. Or batteries, for that matter. Taste's good though!",
+      "value": 50,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Batteries",
+      "description": "Powering the apocalypse!",
+      "value": 40
+    },
+    {
+      "id": 19,
+      "name": "Hammer",
+      "description": "Useful, even without nails.",
+      "value": 60
+    },
+    {
+      "id": 20,
+      "name": "Hand Saw",
+      "description": "Do you wanna play a game?",
+      "value": 150
+    },
+    {
+      "id": 21,
+      "name": "Shirt",
+      "description": "Probably better than the one you're wearing.",
+      "value": 50
+    },
+    {
+      "id": 22,
+      "name": "Jean Shorts",
+      "description": "They got it ON A FIRE... sale.",
+      "value": 60
+    },
+    {
+      "id": 23,
+      "name": "Shoes",
+      "description": "Definitely made for walking.",
+      "value": 200
+    },
+    {
+      "id": 24,
+      "name": "Sunglasses",
+      "description": "Never give away that your sleeping again.",
+      "value": 500
+    },
+    {
+      "id": 25,
+      "name": "Taser",
+      "description": "I barely know her!",
+      "value": 800
+    },
+    {
+      "id": 26,
+      "name": "Box",
+      "description": "Up to two mysteries inside!",
+      "value": 20
+    },
+    {
+      "id": 27,
+      "name": "Pocket Watch",
+      "description": "Gold-colored, broken. Nostalgic, somehow.",
+      "value": 300
+    },
+    {
+      "id": 28,
+      "name": "Human Arm",
+      "description": "We agreed it's technically a weapon, too.",
+      "value": 100
+    },
+    {
+      "id": 29,
+      "name": "Human Leg",
+      "description": "Wait 'till I tell you the price...",
+      "value": 200
+    },
+    {
+      "id": 30,
+      "name": "Supcious Meat",
+      "description": "Edible(?)",
+      "value": 400
+    },
+    {
+      "id": 31,
+      "name": "Steak",
+      "description": "Aged to perfection.",
+      "value": 1500,
+      "effects": [
+        {
+          "name": "heal",
+          "level": 1,
+          "description": "Replenishes some health."
+        },
+        {
+          "name": "feed",
+          "level": 1,
+          "description": "Replenishes hunger."
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Fuel",
+      "description": "Makes cars go vroom vroom vroom! Also: global warming.",
+      "value": 4000
+    },
+    {
+      "id": 33,
+      "name": "Bible",
+      "description": "Some pages are conveniently missing.",
+      "value": 60
+    },
+    {
+      "id": 34,
+      "name": "Gas Mask",
+      "description": "Mandatory in Paradize",
+      "value": 700
+    },
+    {
+      "id": 35,
+      "name": "Iron Cross",
+      "description": "A symbol of the old world. And the closest I'll give you to throwing stars.",
+      "value": 300
+    },
+    {
+      "id": 36,
+      "name": "Broad Sword",
+      "description": "IT'S. A. SWOOOOOOORD!",
+      "value": 8000
+    },
+    {
+      "id": 37,
+      "name": "Shield",
+      "description": "Sword not included.",
+      "value": 4000
+    },
+    {
+      "id": 38,
+      "name": "Gametoy",
+      "description": "Oh so this is what the batteries are for!",
+      "value": 15000
+    },
+    {
+      "id": 39,
+      "name": "Gametoy Cartridge Red",
+      "description": "Completely different from the blue one.",
+      "value": 10000
+    },
+    {
+      "id": 40,
+      "name": "Gametoy Cartridge Blue",
+      "description": "Gotta play 'em all!",
+      "value": 15000
+    },
+    {
+      "id": 41,
+      "name": "Used TV Set",
+      "description": "In great condition. Just a little bit of blood.",
+      "value": 8000
+    },
+    {
+      "id": 42,
+      "name": "Baseball Bat",
+      "description": "No ball in sight, though.",
+      "value": 2000
+    },
+    {
+      "id": 43,
+      "name": "Marijuana",
+      "description": "Who are you gonna tell, narc?",
+      "value": 800
+    },
+    {
+      "id": 43,
+      "name": "Shrooms",
+      "description": "Surprisingly terapeutic.",
+      "value": 200
+    },
+    {
+      "id": 44,
+      "name": "LSD",
+      "description": "I can taste the music of the apocalypse!",
+      "value": 600
+    },
+    {
+      "id": 45,
+      "name": "Tank",
+      "description": "All-terrain armored massacre-maker!",
+      "value": 600000
+    },
+    {
+      "id": 46,
+      "name": "Nuclear Warhead",
+      "description": "And remember: No Proliferation!",
+      "value": 900000
+    },
+    {
+      "id": 47,
+      "name": "Cigarettes",
+      "description": "The entry-level smoke stick for cancer fans.",
+      "value": 45
+    },
+    {
+      "id": 48,
+      "name": "Cigar",
+      "description": "The premium smoke product for the cancer *enjoyer*",
+      "value": 750
+    },
+    {
+      "id": 49,
+      "name": "Electric Limo",
+      "description": "Not very practical but you clearly don't care",
+      "value": 60000
+    },
+    {
+      "id": 50,
+      "name": "Energy Drink",
+      "description": "The only thing keeping you awake in this godforsaken world.",
+      "value": 20
+    },
+    {
+      "id": 51,
+      "name": "Hero Miniature",
+      "description": "How did this survive?",
+      "value": 120
+    },
+    {
+      "id": 52,
+      "name": "Cat",
+      "description": "As in the opposite of a dog.",
+      "value": 1000
+    },
+    {
+      "id": 53,
+      "name": "Dog",
+      "description": "Who's a good mass market product?",
+      "value": 1200
+    },
+    {
+      "id": 54,
+      "name": "Human Skull",
+      "description": "A tad dramatic.",
+      "value": 500
+    },
+    {
+      "id": 55,
+      "name": "Goblin Trading Card",
+      "description": "Mint-condition, first edition, one of a kind (of a print run of 9000000).",
+      "value": 50000
+    },
+    {
+      "id": 56,
+      "name": "Motorbike",
+      "description": "Like a better bicycle.",
+      "value": 50000
+    },
+    {
+      "id": 57,
+      "name": "Bicycle",
+      "description": "Like a worse motorbike.",
+      "value": 50000
     }
   ]
 }

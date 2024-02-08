@@ -1,0 +1,3 @@
+<button class="nes-btn" (click)="handleMusicButton()" [ngClass]="{'is-warning': isMusicPlaying, 'is-error': !isMusicPlaying}">
+  Music {{ isMusicPlaying ? 'On' : 'Off'}}
+</button>

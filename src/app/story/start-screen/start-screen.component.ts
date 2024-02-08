@@ -14,6 +14,7 @@ export class StartScreenComponent {
 
   currentSlide: number = 0;
   public nameForm!: FormGroup;
+  public triggerWarningConsent = false;
 
   constructor(private gameService: GameService, private fb: FormBuilder, private router: Router) {
     this.nameForm = this.fb.group({
@@ -34,6 +35,14 @@ export class StartScreenComponent {
     const playerName = this.nameForm.get('playerName')?.value;
     this.gameService.startGame(playerName!);
     this.router.navigate(['map']);
+  }
+
+  handleWarningConsent() {
+    this.triggerWarningConsent = true;
+  }
+
+  handleWarningDenial() {
+    window.close();
   }
 
 }

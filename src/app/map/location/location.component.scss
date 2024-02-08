@@ -3,3 +3,9 @@
   width: 175px;
   transform:scaleX(-1);
 }
+
+.trade-container {
+  max-height: 100%;
+  overflow-y: scroll;
+  min-width: 23%;
+}

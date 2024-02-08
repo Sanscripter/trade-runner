@@ -7,6 +7,8 @@ import { GameService } from './game.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HealthComponent } from './health/health.component';
 import { ItemAmountInputComponent } from './item-amount-input/item-amount-input.component';
+import { MusicService } from './music.service';
+import { MusicButtonComponent } from './music-button/music-button.component';
 
 
 
@@ -16,16 +18,19 @@ import { ItemAmountInputComponent } from './item-amount-input/item-amount-input.
     EventlogComponent,
     StatsComponent,
     HealthComponent,
-    ItemAmountInputComponent
+    ItemAmountInputComponent,
+    MusicButtonComponent
   ],
   providers: [
     GameService,
+    MusicService
   ],
   exports: [
     InventoryComponent,
     EventlogComponent,
     StatsComponent,
-    ItemAmountInputComponent
+    ItemAmountInputComponent,
+    MusicButtonComponent
   ],
   imports: [
     CommonModule,

@@ -22,13 +22,22 @@ export class GameService {
   day: number = 1;
   daysLimit: number = 30;
   dailyEventLimit: number = 5;
-  cities: ICity[] = LocationsConfig.locations;
+  cities: ICity[] = [];
   activeEvents: GameEvent[] = [];
   _eventLog: GameEvent[] = [];
+ configs: any = {};
 
   startGame(playerName: string) {
+    this.configs = {
+      ItemsConfig: {...ItemsConfig},
+      LocationsConfig: {...LocationsConfig},
+      GameEventsConfig: {...GameEventsConfig},
+   }
+
     this.eraseSave();
     this.day = 1;
+    this.activeEvents = [];
+    this._eventLog = [];
     this.setupPlayer(playerName);
     this.setupCities();
     this.game = new Game(this.player);
@@ -71,14 +80,6 @@ export class GameService {
     });
     this.activeEvents = saveDoc.activeEvents;
     this._eventLog = saveDoc.eventLog;
-    // saveDoc.activeEvents.forEach((event: any) => {
-    //   const loadedEvent = new GameEvent(event.effect, event.day);
-    //   this.activeEvents.push(loadedEvent);
-    // });
-    // saveDoc.eventLog.forEach((event: any) => {
-    //   const loadedEvent = new GameEvent(event.effect, event.day);
-    //   this._eventLog.push(loadedEvent);
-    // });
     this.game = saveDoc.game;
   }
 
@@ -105,13 +106,16 @@ export class GameService {
   };
 
   setupCities() {
-    this.cities.forEach((city) => {
-      const inventory = new Inventory();
-      city?.inventory?.items?.forEach((itemRef: any) => {
-        const item = ItemsConfig.items.find((i: any) => i.id === itemRef.id)!;
-        inventory.addItem(new Item(item.name, item.value, item.description, itemRef.quantity));
+    this.cities = this.configs.LocationsConfig?.locations.map((location: ICity) => {
+      const newLocation = {
+        ...location,
+        inventory: new Inventory()
+      };
+      location.inventory?.items?.forEach((itemRef: any) => {
+        const item = this.configs.ItemsConfig?.items.find((i: any) => i.id === itemRef.id)!;
+        newLocation.inventory.addItem(new Item(item.name, item.value, item.description, itemRef.quantity));
       });
-      city.inventory = inventory;
+      return newLocation;
     });
   };
 
@@ -131,9 +135,21 @@ export class GameService {
     return this.day;
   };
 
+  produceMoreItems() {
+    this.cities.forEach((city) => {
+      const amountOfNewItems = Math.floor(Math.random() * 10);
+      for (let i = 0; i < amountOfNewItems; i++) {
+        const item = ItemsConfig.items[Math.floor(Math.random() * ItemsConfig.items.length)];
+        const newItem = new Item(item.name, item.value, item.description, Math.ceil(Math.random() * 10));
+        city.inventory.addItem(newItem);
+      }
+    });
+  }
+
   advanceDay() {
     this.day++;
     try {
+      this.produceMoreItems();
       this.generateEvents();
     } catch (e) {
       console.error('Error generating events', e);
@@ -147,7 +163,7 @@ export class GameService {
       this.activeEvents.splice(this.activeEvents.length - 1, 1);
     }
     for (let i = 0; i < todayEventCount; i++) {
-      let eventConfig = GameEventsConfig.events[Math.floor(Math.random() * GameEventsConfig.events.length)];
+      let eventConfig = this.configs.GameEventsConfig?.events[Math.floor(Math.random() * this.configs?.GameEventsConfig.events.length)];
       let event = new GameEvent(eventConfig, this.day);
       this.proccessEventEffect(event);
       this._eventLog.push(event);
