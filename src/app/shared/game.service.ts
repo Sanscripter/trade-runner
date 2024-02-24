@@ -25,7 +25,7 @@ export class GameService {
   cities: ICity[] = [];
   activeEvents: GameEvent[] = [];
   _eventLog: GameEvent[] = [];
- configs: any = {};
+  configs: any = {};
 
   startGame(playerName: string) {
     this.configs = {
@@ -86,7 +86,6 @@ export class GameService {
   eraseSave() {
     localStorage.removeItem('saveDoc');
   }
-
 
   get eventLog() {
     return this._eventLog.reverse();

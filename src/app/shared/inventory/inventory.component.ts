@@ -10,8 +10,8 @@ import { Item } from '../../game/Item';
 })
 export class InventoryComponent {
 
-  @Input() inventory?: Inventory | undefined;
-  @Input() mode: 'agent' | 'overworld' = 'overworld';
+  @Input() inventory?: Inventory;
+  @Input() mode: 'agent' | 'overworld' = 'overworld'; //ignore this
   @Output() change = new EventEmitter<Inventory>();
 
   inventoryForm: FormGroup | undefined;
