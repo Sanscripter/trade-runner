@@ -13,14 +13,14 @@ export class MusicService {
 
   playMusic() {
     if (!this.currentMusic) {
-      this.currentMusic = new Howl({
-        src: ['../assets/music/' + 'main' + '.mp3'],
-        autoplay: true,
-        loop: true,
-        volume: 0.3,
-      });
+      // this.currentMusic = new Howl({
+      //   src: ['../assets/music/' + 'main' + '.mp3'],
+      //   autoplay: true,
+      //   loop: true,
+      //   volume: 0.3,
+      // });
     }
-    this.currentMusic.play();
+    // this.currentMusic.play();
   }
 
   pauseMusic() {
