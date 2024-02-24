@@ -8,7 +8,6 @@ export class Location implements ICity {
   x!: number;
   y!: number;
   size!: number;
-  money!: number;
 
   constructor(id: number, name: string, x: number, y: number, size: number) {
     this.id = id;
@@ -18,12 +17,6 @@ export class Location implements ICity {
     this.size = size;
   }
 
-  setInventory(inventory: Inventory) {
-    this.inventory = inventory;
-  };
 
-  setMoney(money: number) {
-    this.money = money;
-  };
 
 }
