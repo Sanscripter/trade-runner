@@ -87,6 +87,11 @@ export class GameService {
     localStorage.removeItem('saveDoc');
   }
 
+
+  playerMoved(position: { x: number, y: number }) {
+    this.player.position = position;
+  }
+
   get eventLog() {
     return this._eventLog.reverse();
   }

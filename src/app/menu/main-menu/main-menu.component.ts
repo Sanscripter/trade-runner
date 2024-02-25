@@ -20,7 +20,7 @@ export class MainMenuComponent {
   constructor(private router: Router, private musicService: MusicService){}
 
   ngOnInit() {
-    this.musicService.playMusic();
+    // this.musicService.playMusic();
   }
 
   handleMenuOption(option: string) {

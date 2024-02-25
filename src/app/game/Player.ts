@@ -6,6 +6,7 @@ export class Player {
   inventory: Inventory = new Inventory();
   money: number;
   health: number = 3;
+  position: { x: number, y: number } = { x: 70, y: 70 };
 
   constructor(name: string, money?: number) {
     this.name = name;

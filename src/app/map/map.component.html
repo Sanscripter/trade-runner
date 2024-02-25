@@ -12,6 +12,6 @@
       <app-inventory [inventory]="player.inventory" />
     </div>
     }
-    <app-interactive-view (travelledTo)="handleTravelling($event)" [cities]="gameService.cities" />
+    <app-interactive-view (travelledTo)="handleTravelling($event)" [cities]="gameService.cities" [player]="gameService.player" />
   </section>
 </main>
