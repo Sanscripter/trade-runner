@@ -42,27 +42,34 @@ export class InteractiveViewComponent implements AfterViewInit {
       console.log(e.pointer, 'dblclick');
 
 
-      this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
       // this.playerMarker!.top = e.pointer!.y;
       // this.playerMarker!.left = e.pointer!.x;
-      this.playerMarker?.animate('top', e.pointer!.y, {
-        duration: (this.player!.position.y - e.pointer!.y)/0.0000001,
-        easing: fabric.util.ease.easeOutCirc,
+      this.playerMarker?.animate('top', this.transformTop(e.pointer!.y), {
+        duration: this.travelDuration(e.pointer!.y, this.player!.position.y),
+        easing: fabric.util.ease.easeOutCubic,
         onChange: () => {
           this.fabricCanvas.renderAll();
+        },
+        onComplete: () => {
+          // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
+
+          this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
         }
       });
 
-      this.playerMarker?.animate('left', e.pointer!.x, {
-        duration: (this.player!.position.x - e.pointer!.x)/0.00000001,
-        easing: fabric.util.ease.easeOutCirc,
+      this.playerMarker?.animate('left', this.transformLeft(e.pointer!.x), {
+        duration: this.travelDuration(e.pointer!.x, this.player!.position.x),
+        easing: fabric.util.ease.easeOutCubic,
         onChange: () => {
           this.fabricCanvas.renderAll();
+        },
+        onComplete: () => {
+          // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
+          this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
         }
       });
 
     });
-
 
 
     this.fabricCanvas.on('mouse:move', (e) => {
@@ -81,7 +88,7 @@ export class InteractiveViewComponent implements AfterViewInit {
     });
 
     // this.fabricCanvas.absolutePan()
-    this.fabricCanvas.setWidth(window.innerWidth* 2);
+    this.fabricCanvas.setWidth(window.innerWidth * 2);
     this.fabricCanvas.setHeight(window.innerHeight * 2);
     // this.fabricCanvas.setBackgroundImage('assets/map.png', ()=> {this.fabricCanvas.renderAll()});
 
@@ -90,6 +97,22 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.renderCities();
 
   }
+
+  travelDuration(to: number, from: number): number {
+    const baseDuration = 5000;
+    const distance = Math.abs(to - from);
+    return baseDuration * (distance / 100);
+  }
+
+  transformTop(top: number): number {
+    return this.fabricCanvas.vptCoords!.tl.y + top;
+  }
+
+  transformLeft(left: number): number {
+    return this.fabricCanvas.vptCoords!.tl.x + left;
+  }
+
+  // easeLinear(t: number, b: number, c: number, d: number) { return (c/2)+(-c + ((c/d)*t)); }
 
   renderPlayer() {
     if (!this.fabricCanvas) return;
@@ -118,11 +141,11 @@ export class InteractiveViewComponent implements AfterViewInit {
         width: city.size * .6 + 10,
         height: city.size * .7 + 10,
         fill: 'black',
-        stroke : 'white',
+        stroke: 'white',
         borderColor: 'white',
         selectable: false,
         hasBorders: false,
-        hoverCursor:'pointer'
+        hoverCursor: 'pointer'
       });
 
       const name = new fabric.Text(city.name, {
