@@ -1,8 +1,11 @@
 @if (!triggerWarningConsent) {
-<main class="flex flex-col mt-20">
+<main class="flex flex-col mt-20 p-10">
   <div class="nes-container is-dark with-title">
     <p class="title">Warning</p>
-    <p class="!mb-10"> This game contains <span class="nes-text is-error">strong language</span>, <span
+    <p class="!mb-10">
+      Mature content ahead.
+    </p>
+    <!-- <p class="!mb-10"> This game contains <span class="nes-text is-error">strong language</span>, <span
         class="nes-text is-warning">mild violence</span>, and <span class="nes-text is-success">drug use</span>. It also
       contains mentions of <span class="nes-text is-primary">torture</span>, <span class="nes-text is-primary">
         psychological distress</span>, and <span class="nes-text is-primary">suicide</span>. This content may be
@@ -15,7 +18,7 @@
       Please do not play this game if you are under 18 years old, or if you are currently experiencing psychological
       distress, depression, or suicidal thoughts. This game contains mild-political commentary.
       Again, player discretion is advised.
-    </p>
+    </p> -->
     <div class="flex flex-row justify-between m-auto w-1/2">
       <button type="button" class="nes-btn m-auto is-error text-2xl" (click)="handleWarningConsent()">I'm 18 and over and I understand.</button>
       <button type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleWarningDenial()">I'm not 18 or I don't understand</button>
