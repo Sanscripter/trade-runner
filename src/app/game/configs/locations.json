@@ -161,13 +161,16 @@
       "traderMugshot": "assets/mugs/dullard_cult.png",
       "background": "assets/backgrounds/paradize.png",
       "barks": [
-        "We'll ~massage~ the brain out of your skull, if you like.",
+        "We can ~stroke~ the brain out of your skull, trader.",
         "I have a ~liver~ recipe I've been wanting to try.",
-        "Our tribe has ~licked~ the eyes of God. We ate his sight, now we are ~blessed~.",
-        "There's a herectic in van up North. His due to face ~baptism~ by the Fire Tongue.",
+        "Our tribe has ~licked~ the eyes of God. We ate his sight, now we can see.",
+        "There's a herectic in van up North. He's due to face ~baptism~ by the Fire Tongue.",
         "You are welcome to sleep here tonight, traveller, free of charge.",
         "The Dullard Cult welcomes your goods, trader!",
-        "Do you want to hear with your ~skin~, traveller? We can arrange that."
+        "Do you want to hear with tips of your ~skin~, traveller?",
+        "Wear your mask at all times in Paradize. Tis the Sight's Law.",
+        "Not every trader is friendly. Some are ~starving~ for a soul.",
+        "One day we might not let you leave."
       ]
     },
     { "id": 6,
@@ -214,7 +217,7 @@
       "barks": [
         "Have my money yet?",
         "You know, your dad was a little bitch.",
-        "You do not cross Carlos Treze!"
+        "Do not cross Carlos Treze!"
       ]
     },
     { "id": 8,
@@ -235,10 +238,10 @@
       "traderMugshot": "assets/mugs/pablo_pueblo.png",
       "background": "assets/backgrounds/el_asco.png",
       "barks": [
-        "Hola, trader. Pick your poison. Mine is being alive.",
+        "Hola, trader. Pick your poison. Mine is innocence.",
         "No trouble, trader, por favor",
         "No doi más, I'm done with this heat.",
-        "May you find a good destiny after all, trader.",
+        "May you find a friendly fate, trader.",
         "Bottom's up!",
         "Let me know if you need an angel shot.",
         "Dullard boys don't come this way at all. Their god won't let them drink.",

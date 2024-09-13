@@ -1,9 +1,15 @@
-<div class="w-full flex flex-row flex-nowrap justify-between text-right whitespace-nowrap content-center items-center">
-  @if (currentMax > value) {
-  <button (click)="increase()" class="nes-btn is-success">+</button>
-  }
-  {{value}}
-  @if (value > 0) {
-  <button (click)="decrease()" class="nes-btn is-primary">-</button>
-  }
+<div class="content-center items-center">
+  <!-- @if (defaultDisplay) {
+    {{value}}
+    <button (click)="defaultDisplay = false" class="nes-btn is-warning">$</button>
+  } @else { -->
+    @if (currentMax > value) {
+      <button (click)="increase()" class="nes-btn is-success">+</button>
+      }
+      {{value}}
+      @if (value > 0) {
+      <button (click)="decrease()" class="nes-btn is-primary">-</button>
+      }
+  <!-- } -->
+   
 </div>

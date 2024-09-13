@@ -40,6 +40,7 @@ export class InteractiveViewComponent implements AfterViewInit {
 
     this.fabricCanvas.on('mouse:dblclick', (e) => {
       console.log(e.pointer, 'dblclick');
+      return;
 
 
       // this.playerMarker!.top = e.pointer!.y;
@@ -92,7 +93,7 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.fabricCanvas.setHeight(window.innerHeight * 2);
     // this.fabricCanvas.setBackgroundImage('assets/map.png', ()=> {this.fabricCanvas.renderAll()});
 
-    this.renderPlayer();
+    // this.renderPlayer();
 
     this.renderCities();
 

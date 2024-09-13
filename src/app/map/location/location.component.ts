@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../../shared/game.service';
 import ICity from '../../utils/ICity.interface';
@@ -9,7 +9,8 @@ import { Item } from '../../game/Item';
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
-  styleUrl: './location.component.scss'
+  styleUrl: './location.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationComponent implements OnInit {
 
@@ -25,7 +26,7 @@ export class LocationComponent implements OnInit {
   stealMode = false;
   stolenItem?: Item;
 
-  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) { }
+  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.gameService.loadGame();
@@ -33,6 +34,7 @@ export class LocationComponent implements OnInit {
       this.locationId = qp['id'];
     });
     this.trader = this.gameService.getCurrentLocalEconomy(this.trader);
+    this.cdr.detectChanges();
   }
 
   get player() {

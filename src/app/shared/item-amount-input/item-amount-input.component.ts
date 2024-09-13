@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, AbstractControl, ValidationErrors, NG_VALIDATORS, Validator } from '@angular/forms';
 
 @Component({
@@ -20,7 +20,11 @@ import { FormGroup, FormBuilder, FormControl, ControlValueAccessor, NG_VALUE_ACC
 })
 export class ItemAmountInputComponent implements ControlValueAccessor, Validator {
 
-  onChange = (value: number) => { };
+  onChange = (value: number) => {
+    if (!this.hasValueChanged()) {
+      this.defaultDisplay = true;
+    }
+   };
   onTouched = () => { };
   touched = false;
   disabled = false;
@@ -28,9 +32,16 @@ export class ItemAmountInputComponent implements ControlValueAccessor, Validator
   @Input() currentMax: number = 1;
   @Output() change = new EventEmitter<number>();
 
+  defaultDisplay = true;
+  orignalValue: number = 0;
+
   value: number = 0;
 
   constructor() { }
+
+  hasValueChanged() {
+    return this.orignalValue !== this.value;
+  }
 
   writeValue(value: number): void {
     this.value = value;
@@ -63,6 +74,10 @@ export class ItemAmountInputComponent implements ControlValueAccessor, Validator
       };
     }
     return null;
+  }
+
+  startEditing() {
+    this.defaultDisplay = false;
   }
 
   increase() {
