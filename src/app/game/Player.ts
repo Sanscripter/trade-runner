@@ -7,6 +7,7 @@ export class Player {
   money: number;
   health: number = 3;
   position: { x: number, y: number } = { x: 70, y: 70 };
+  speed: number = 150; //default speed (assuming arbitrary dimensions)
 
   constructor(name: string, money?: number) {
     this.name = name;
@@ -32,5 +33,16 @@ export class Player {
   heal(heal: number) {
     this.health += heal;
   };
+
+  travelTo(city: { x: number, y: number }) {
+    //travelling logic
+    this.position.x = city.x;
+    this.position.y = city.y;
+  };
+
+  setSpeed(speed: number) {
+    //set speed based on the inventory
+    this.speed = speed;
+  }
 
 }

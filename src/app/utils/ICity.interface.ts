@@ -13,4 +13,5 @@ export default interface ICity {
   background?: string;
   description?: string;
   barks?: string[];
+  distance?: number; //distaqnce in travel days
 }

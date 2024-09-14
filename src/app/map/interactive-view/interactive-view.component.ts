@@ -21,7 +21,8 @@ export class InteractiveViewComponent implements AfterViewInit {
   @Input() player?: Player;
 
   @Output() travelledTo = new EventEmitter<ICity>();
-
+  
+  @Output() mouseOverCity = new EventEmitter<ICity | null>();
 
   playerMarker?: fabric.Rect;
 
@@ -160,6 +161,15 @@ export class InteractiveViewComponent implements AfterViewInit {
         hoverCursor: 'pointer',
         selectable: false
       })
+
+      rect.on('mouseover', () => {
+        console.log('mouseover', city);
+        this.mouseOverCity.emit(city);
+      });
+      
+      rect.on('mouseleave', () => {
+        this.mouseOverCity.emit(null);
+      });
 
       rect.on('mousedown', () => {
         this.travelledTo.emit(city);

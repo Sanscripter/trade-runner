@@ -6,6 +6,7 @@ import { LocationComponent } from './map/location/location.component';
 import { StartScreenComponent } from './story/start-screen/start-screen.component';
 import { EndScreenComponent } from './story/end-screen/end-screen.component';
 import { CreditsComponent } from './story/credits/credits.component';
+import { TravellingViewComponent } from './map/travelling-view/travelling-view.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'location',
     component: LocationComponent
+  },
+  {
+    path: 'travelling',
+    component: TravellingViewComponent
   },
   {
     path: 'end',

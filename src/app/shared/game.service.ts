@@ -62,6 +62,8 @@ export class GameService {
     }
     this.player = new Player(saveDoc.player.name, saveDoc.player.money);
     this.player.health = saveDoc.player.health;
+    this.player.position = saveDoc.player.position;
+    this.player.speed = saveDoc.player.speed;
     this.player.inventory = new Inventory();
     saveDoc.player.inventory.items.forEach((item: any) => {
       this.player.inventory.addItem(new Item(item.name, item.value, item.description, item.quantity));
@@ -89,7 +91,15 @@ export class GameService {
 
 
   playerMoved(position: { x: number, y: number }) {
-    this.player.position = position;
+    const daysTravelled = this.getDaysTravelled(position);
+    this.player.travelTo(position);
+    this.advanceDay(daysTravelled);
+    this.saveGame();
+  }
+
+  getDaysTravelled(position: { x: number, y: number }) {
+    const distance = Math.sqrt(Math.pow(this.player.position.x - position.x, 2) + Math.pow(this.player.position.y - position.y, 2));
+    return Math.ceil(distance / this.player.speed);
   }
 
   get eventLog() {
@@ -103,7 +113,7 @@ export class GameService {
     if (this.player.money >= 1000000) {
       return ENDINGS.RICH;
     }
-    if (this.player.money >= 100000) {
+    if (this.player.money >= 50000) {
       return ENDINGS.PAID;
     }
     return ENDINGS.INSOLVENT;
@@ -150,8 +160,8 @@ export class GameService {
     });
   }
 
-  advanceDay() {
-    this.day++;
+  advanceDay(daysTravelled: number) {
+    this.day += (daysTravelled ?? 1);
     try {
       this.produceMoreItems();
       this.generateEvents();

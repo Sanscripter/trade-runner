@@ -6,3 +6,10 @@
 .upper-aside-layout {
   height: 80%;
 }
+
+.location-info-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
