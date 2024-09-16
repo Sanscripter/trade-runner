@@ -7,7 +7,7 @@ import { GameService } from './game.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HealthComponent } from './health/health.component';
 import { ItemAmountInputComponent } from './item-amount-input/item-amount-input.component';
-import { MusicService } from './music.service';
+import { SoundService } from './sound.service';
 import { MusicButtonComponent } from './music-button/music-button.component';
 
 
@@ -23,7 +23,7 @@ import { MusicButtonComponent } from './music-button/music-button.component';
   ],
   providers: [
     GameService,
-    MusicService
+    SoundService
   ],
   exports: [
     InventoryComponent,

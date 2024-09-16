@@ -41,6 +41,7 @@ export class GameService {
     this.setupPlayer(playerName);
     this.setupCities();
     this.game = new Game(this.player);
+    this.saveGame();
   };
 
   saveGame() {

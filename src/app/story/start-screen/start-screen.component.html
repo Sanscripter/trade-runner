@@ -1,24 +1,10 @@
 @if (!triggerWarningConsent) {
-<main class="flex flex-col mt-20 p-10">
+<main class="flex flex-col p-20 h-2/3 justify-center">
   <div class="nes-container is-dark with-title">
     <p class="title">Warning</p>
     <p class="!mb-10">
       Mature content ahead.
     </p>
-    <!-- <p class="!mb-10"> This game contains <span class="nes-text is-error">strong language</span>, <span
-        class="nes-text is-warning">mild violence</span>, and <span class="nes-text is-success">drug use</span>. It also
-      contains mentions of <span class="nes-text is-primary">torture</span>, <span class="nes-text is-primary">
-        psychological distress</span>, and <span class="nes-text is-primary">suicide</span>. This content may be
-      disturbing or triggering to some individuals.
-      This game is a fictional work of art (arguably) and should not be a substitute for proper education or real-world
-      understanding. The characters, events, and ideas portrayed in this game are purely fictional and do not reflect
-      real-world beliefs or actions. Please approach the content with critical thinking and discretion. It is important
-      to remember that this is a game meant for entertainment and debate purposes only, and any replication of the ideas
-      or actions of characters within the game is strongly discouraged. Use your judgment responsibly.
-      Please do not play this game if you are under 18 years old, or if you are currently experiencing psychological
-      distress, depression, or suicidal thoughts. This game contains mild-political commentary.
-      Again, player discretion is advised.
-    </p> -->
     <div class="flex flex-row justify-between m-auto w-1/2">
       <button type="button" class="nes-btn m-auto is-error text-2xl" (click)="handleWarningConsent()">Proceed.</button>
       <button type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleWarningDenial()">Take me away. </button>
@@ -26,68 +12,19 @@
   </div>
 </main>
 } @else {
-<main class="flex flex-col gap-5 h-full m-5">
-  <!-- <h2 class="text-2xl p-3">In the distant future of 2004, </h2> -->
+<main class="flex flex-col gap-5 h-full p-20">
   <h2 class="text-3xl p-3">January 8, 2004</h2>
-  @if (currentSlide === 0) {
-    <p>The world has <span class="nes-text is-error">died</span>.</p>
-  <!-- <p class="text-sm leading-10 indent-8 p-10 pt-0 w-full m-auto mb-2 pb-0"> 30 years after the escalation of <span
-      class="nes-text is-error">global conflict</span> wiped
-    <span class="nes-text is-error">86% of man-kind</span>, people of the world - what's left of them - have abandoned
-    the underground shelters they have called home for so long. The surface is now a barren wasteland
-    with limited natural resources that are contested by
-    new factions, forged in the fires of a new world. Amidst the conflict, a new class emerged, out of the need to
-    transport essential goods in the now lawless plains that separate
-    the few remanning human settlements - the <span class="nes-text is-success">Trade Runners</span>. These brave men
-    and
-    women risk their lifes the Dead Zones looking for opportunities to make a <span
-      class="nes-text is-warning">substantial profit</span>
-    trading food, medicine, tools and more.
-  </p> -->
-  }
-  @if (currentSlide === 1) {
-    <p>The world has <span class="nes-text is-error">died</span>.</p>
-    <p>It happened. 30 years ago, it happened.</p>
-    
+  <p *ngIf="currentSlide >=0 && currentSlide < 5" class="ml-5">The world has <span class="nes-text is-error">died</span>.</p>
+  <p *ngIf="currentSlide >=1 && currentSlide < 5" class="ml-5">It happened. 30 years ago, it happened.</p>
+  <p *ngIf="currentSlide >=2 && currentSlide < 5" class="ml-5">Now, <span class="nes-text is-warning">life continues</span>.</p>
+  <p *ngIf="currentSlide >=3 && currentSlide < 5" class="ml-5">People need <span class="nes-text is-primary">food</span>, <span class="nes-text is-warning">shelter</span>, <span class="nes-text is-primary">tools</span>, <span class="nes-text is-error">weapons</span>...</p>
+  <p *ngIf="currentSlide >=4 && currentSlide < 5" class="ml-5">And <span class="nes-text is-error">we</span>  will get it to them, my son.</p>
+  <p *ngIf="currentSlide == 5 && currentSlide < 6" class="ml-5">For a <span class="nes-text is-warning">price.</span></p>
 
-  <!-- <p class="text-sm leading-10 indent-8 p-10 pt-0 w-full m-auto mb-2 pb-0">Your father was one such Runner. He drove
-    both of you to
-    <span class="nes-text is-warning">Happy Valley</span>, a valley surrounded by mountains,
-    home to a group of rapidly <span class="nes-text is-success">expanding settlements</span> and many, many
-    opportunities. He got a loan from a local gang, <span class="nes-text is-error">Los
-      Treze</span>, to start your new life, but something happened. He lost
-    a shipment in a raid and was unable to make his payments. One day, coming back to camp from ressuply, you find your
-    dad on the ground, <span class="nes-text is-error">decapitated</span> . His head is impaled at the
-    entrance of your tent. His teeth are cleched on a piece of paper. You remove and unwrap it. It's note from the
-    killers <span class="nes-text is-error">"100 grand. In 30 days. Or you're next"</span>. You hold a simple funeral,
-    pack up
-    your things and start looking for the first settlement to trade with...
-  </p> -->
-  }
-  @if (currentSlide === 2) {
-    <p>The world has <span class="nes-text is-error">died</span>.</p>
-    <p>It happened. 30 years ago, it happened.</p>
-    <p>Now, <span class="nes-text is-warning">life continues</span>.</p>
-  }
-  @if (currentSlide === 3) {
-    <p>The world has <span class="nes-text is-error">died</span>.</p>
-    <p>It happened. 30 years ago, it happened.</p>
-    <p>Now, <span class="nes-text is-warning">life continues</span>.</p>
-    <p>People need <span class="nes-text is-primary">food</span>, <span class="nes-text is-warning">shelter</span>, <span class="nes-text is-primary">tools</span>, <span class="nes-text is-error">weapons</span>...</p>
-  }
-  @if (currentSlide === 4) {
-    <p>The world has <span class="nes-text is-error">died</span>.</p>
-    <p>It happened. 30 years ago, it happened.</p>
-    <p>Now, <span class="nes-text is-warning">life continues</span>.</p>
-    <p>People need <span class="nes-text is-primary">food</span>, <span class="nes-text is-warning">shelter</span>, <span class="nes-text is-primary">tools</span>, <span class="nes-text is-error">weapons</span>...</p>
-    <p>And <span class="nes-text is-error">we</span> are the ones who will get it to them, my son.</p>
-  }
-  @if (currentSlide === 5) {
-    <p>For a <span class="nes-text is-warning">price.</span></p>
-  }
   @if (currentSlide === 6) {
+  <p class="ml-5"> You came to Happy Vale with your father to make a living as a vagrant trader. Unfortunately, a gang stormed your camp one night, killed your father and gave you <span class="nes-text is-error">30 days</span> to pay a <span class="nes-text is-error">$50.000,00 debt</span> he left.</p>
   <div class="pl-10 mb-2 w-1/2 m-auto ">
-    <label for="name">What's your <span class="nes-text is-warning">name</span>, trade runner?</label>
+    <label for="name">What's your <span class="nes-text is-warning">name</span>, trader?</label>
     <form [formGroup]="nameForm">
       <input type="text" id="name" formControlName="playerName" class="nes-input is-dark" placeholder="eg. Cain Tim">
     </form>
@@ -95,13 +32,8 @@
   <button type="button" class="nes-btn m-auto mt-20 mb-0 bg-white text-4xl" (click)="handleGameStart()">Begin</button>
   }
   <div class="flex flex-row justify-between m-auto w-1/2 mb-20">
-    @if (currentSlide !== 0) {
-    <button type="button" class="nes-btn m-auto is-warning text-2xl" (click)="handlePrevious()">Back</button>
-    }
-    @if (currentSlide !== 6) {
-    <button type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleNext()">Next</button>
-    }
+    <button [disabled]="disableBack" [ngClass]="{'is-disabled':disableBack}" type="button" class="nes-btn m-auto is-warning text-2xl" (click)="handlePrevious()">Back</button>
+    <button [disabled]="disableNext" [ngClass]="{'is-disabled': disableNext}" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleNext()">Next</button>
   </div>
-
 </main>
 }

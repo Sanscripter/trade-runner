@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicService } from '../music.service';
+import { SoundService } from '../sound.service';
 
 @Component({
   selector: 'app-music-button',
@@ -10,7 +10,7 @@ export class MusicButtonComponent {
 
   isMusicPlaying: boolean = true;
 
-  constructor(private musicService: MusicService) { }
+  constructor(private musicService: SoundService) { }
 
   handleMusicButton() {
     if (this.isMusicPlaying) {

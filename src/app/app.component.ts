@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { MapModule } from './map/map.module';
 import { SharedModule } from './shared/shared.module';
 import { StoryModule } from './story/story.module';
-import { MusicService } from './shared/music.service';
+import { SoundService } from './shared/sound.service';
 
 @Component({
   selector: 'app-root',

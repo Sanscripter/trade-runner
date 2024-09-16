@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import packageJson from '../../../../package.json';
-import { MusicService } from '../../shared/music.service';
+import { SoundService } from '../../shared/sound.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -17,7 +17,7 @@ export class MainMenuComponent {
 
   version = packageJson.version;
 
-  constructor(private router: Router, private musicService: MusicService){}
+  constructor(private router: Router, private musicService: SoundService){}
 
   ngOnInit() {
     // this.musicService.playMusic();

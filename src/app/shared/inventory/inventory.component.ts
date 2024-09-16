@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, DoCheck, OnChanges, Sim
 import { Inventory } from '../../game/Inventory';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Item } from '../../game/Item';
+import { SoundService } from '../sound.service';
 
 @Component({
   selector: 'app-inventory',
@@ -16,7 +17,7 @@ export class InventoryComponent {
 
   inventoryForm: FormGroup | undefined;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private soundService: SoundService) { }
 
   ngOnInit() {
     this.inventoryForm = this.fb.group({
@@ -47,6 +48,7 @@ export class InventoryComponent {
     const changedAmount = selected!.quantity! - currentAmount;
     const changed = new Item(selected!.name, selected!.cost!, selected!.description, changedAmount);
     this.emitChange(changed);
+    this.soundService.playSound('GENERIC_ACTION_CLICK', { playbackRate: 2 });
   }
 
   emitChange(item: any) {

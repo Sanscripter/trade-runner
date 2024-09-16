@@ -5,6 +5,7 @@ import ICity from '../../utils/ICity.interface';
 import { Inventory } from '../../game/Inventory';
 import { Player } from '../../game/Player';
 import { Item } from '../../game/Item';
+import { SoundService } from '../../shared/sound.service';
 
 @Component({
   selector: 'app-location',
@@ -28,7 +29,7 @@ export class LocationComponent implements OnInit {
   stealMode = false;
   stolenItem?: Item;
 
-  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, private cdr: ChangeDetectorRef, private soundService: SoundService) { }
 
   ngOnInit() {
     this.gameService.loadGame();
@@ -101,6 +102,7 @@ export class LocationComponent implements OnInit {
 
   startTrade() {
     this.tradeMode = true;
+    this.soundService.playSound('TRADE');
   }
 
   startStealing() {
@@ -110,6 +112,7 @@ export class LocationComponent implements OnInit {
   checkSteal() {
     this.getStealableItems();
     this.checkingSteal = true;
+    this.soundService.playSound('EVIL_CUE_1', { playbackRate: 1.8 });
   }
 
   getStealableItems() {
@@ -159,6 +162,7 @@ export class LocationComponent implements OnInit {
     this.player.inventory.items = this.player.inventory.items.slice(0);
     this.trader.inventory!.items = this.trader.inventory!.items.slice(0);
     this.tradeMode = false;
+    this.soundService.playSound('TRADE', { playbackRate: 0.8 });
     this.gameService.saveGame();
   }
 
@@ -177,11 +181,13 @@ export class LocationComponent implements OnInit {
     this.enableTrade();
     this.playerSells.items = [];
     this.traderSells.items = [];
+    this.soundService.playSound('REVERSE_ACTION_CLICK', { playbackRate: 0.8 });
   }
 
   enableTrade() {
     this.tradeEnabled = true;
     this.lackOfFunds = false;
+    this.soundService.playSound('GENERIC_ACTION_CLICK', { playbackRate: 1.5 });
   }
 
 }

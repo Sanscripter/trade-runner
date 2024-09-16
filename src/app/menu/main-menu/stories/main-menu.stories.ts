@@ -1,6 +1,6 @@
 import { moduleMetadata } from "@storybook/angular";
 import { MusicButtonComponent } from "../../../shared/music-button/music-button.component";
-import { MusicService } from "../../../shared/music.service";
+import { SoundService } from "../../../shared/sound.service";
 import { MainMenuComponent } from "../main-menu.component";
 
 export default {
@@ -9,7 +9,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [MusicButtonComponent],
-      providers: [MusicService]
+      providers: [SoundService]
     })
   ]
 }
