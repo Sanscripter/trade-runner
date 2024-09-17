@@ -141,6 +141,7 @@ export class LocationComponent implements OnInit {
       this.stealFailed = true;
     }
     this.checkingSteal = false;
+    this.gameService.saveGame();
   }
 
   handleTrade() {
