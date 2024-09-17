@@ -10,6 +10,7 @@ export const sounds: any = {
   TRADE: './assets/sounds/trade.mp3',
   GENERIC_ACTION_CLICK: './assets/sounds/generic_button_click.wav',
   REVERSE_ACTION_CLICK: './assets/sounds/reverse_button_click.mp3',
+  LOCATION_HOVER: './assets/sounds/location_hover.mp3',
 };
 
 @Injectable({

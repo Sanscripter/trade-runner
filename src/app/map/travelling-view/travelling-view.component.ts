@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GameService } from '../../shared/game.service';
+import { SoundService } from '../../shared/sound.service';
 
 @Component({
   selector: 'app-travelling-view',
@@ -14,12 +15,16 @@ export class TravellingViewComponent implements OnInit {
   //define speed
   //store current location
 
-  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, private cdr: ChangeDetectorRef, private soundService: SoundService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((qp: any) => {
       this.locationId = qp['id'];
     });
+  }
+
+  handleButtonHover() {
+    this.soundService.playSound('REVERSE_ACTION_CLICK');
   }
   
   completeTrip() {

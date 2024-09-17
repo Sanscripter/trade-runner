@@ -46,6 +46,10 @@ export class StartScreenComponent {
     this.soundService.playSound('REVERSE_ACTION_CLICK');
   }
 
+  handleButtonHover() {
+    this.soundService.playSound('REVERSE_ACTION_CLICK');
+  }
+
   handleGameStart() {
     const playerName = this.nameForm.get('playerName')?.value;
     this.gameService.startGame(playerName!);

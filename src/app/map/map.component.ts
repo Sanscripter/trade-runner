@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit  } from '@angular/core';
 import ICity from '../utils/ICity.interface';
 import { Router } from '@angular/router';
 import { GameService } from '../shared/game.service';
 import { Player } from '../game/Player';
-import { LocationInfoCardComponent } from './location-info-card/location-info-card.component';
+import { SoundService } from '../shared/sound.service';
 
 @Component({
   selector: 'app-map',
@@ -15,7 +15,7 @@ export class MapComponent implements OnInit {
   inventoryOpen = false;
   locationHovered!: ICity | null;
 
-  constructor(private router: Router,public gameService: GameService, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router,public gameService: GameService, private cdr: ChangeDetectorRef, private soundService: SoundService) { }
 
   ngOnInit() {
     this.gameService.loadGame();
@@ -44,7 +44,7 @@ export class MapComponent implements OnInit {
       this.locationHovered = null;
       return;
     }
-  
+    this.soundService.playSound('LOCATION_HOVER');
     this.locationHovered = city;
     this.cdr.detectChanges();
   }

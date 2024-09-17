@@ -6,8 +6,8 @@
       Mature content ahead.
     </p>
     <div class="flex flex-row justify-between m-auto w-1/2">
-      <button type="button" class="nes-btn m-auto is-error text-2xl" (click)="handleWarningConsent()">Proceed.</button>
-      <button type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleWarningDenial()">Take me away. </button>
+      <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto is-error text-2xl" (click)="handleWarningConsent()">Proceed.</button>
+      <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleWarningDenial()">Take me away. </button>
     </div>
   </div>
 </main>
@@ -29,11 +29,11 @@
       <input type="text" id="name" formControlName="playerName" class="nes-input is-dark" placeholder="eg. Cain Tim">
     </form>
   </div>
-  <button type="button" class="nes-btn m-auto mt-20 mb-0 bg-white text-4xl" (click)="handleGameStart()">Begin</button>
+  <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto mt-20 mb-0 bg-white text-4xl" (click)="handleGameStart()">Begin</button>
   }
   <div class="flex flex-row justify-between m-auto w-1/2 mb-20">
-    <button [disabled]="disableBack" [ngClass]="{'is-disabled':disableBack}" type="button" class="nes-btn m-auto is-warning text-2xl" (click)="handlePrevious()">Back</button>
-    <button [disabled]="disableNext" [ngClass]="{'is-disabled': disableNext}" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleNext()">Next</button>
+    <button (mouseover)="handleButtonHover()" [disabled]="disableBack" [ngClass]="{'is-disabled':disableBack}" type="button" class="nes-btn m-auto is-warning text-2xl" (click)="handlePrevious()">Back</button>
+    <button (mouseover)="handleButtonHover()" [disabled]="disableNext" [ngClass]="{'is-disabled': disableNext}" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleNext()">Next</button>
   </div>
 </main>
 }

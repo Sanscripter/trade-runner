@@ -25,10 +25,15 @@ export class MainMenuComponent {
 
   handleMenuOption(option: string) {
     this.MENU_OPTIONS[option]();
+    this.musicService.playSound('GENERIC_ACTION_CLICK');
   }
 
   handleStart() {
     this.router.navigate(['start']);
   };
+
+  handleButtonHover() {
+    this.musicService.playSound('REVERSE_ACTION_CLICK');
+  }
 
 }

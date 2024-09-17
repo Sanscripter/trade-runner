@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { fabric } from 'fabric';
 import ICity from '../../utils/ICity.interface';
 import { Player } from '../../game/Player';
@@ -39,39 +39,39 @@ export class InteractiveViewComponent implements AfterViewInit {
       preserveObjectStacking: true,
     });
 
-    this.fabricCanvas.on('mouse:dblclick', (e) => {
-      console.log(e.pointer, 'dblclick');
-      return;
+    // this.fabricCanvas.on('mouse:dblclick', (e) => {
+    //   console.log(e.pointer, 'dblclick');
+    //   return;
 
 
-      // this.playerMarker!.top = e.pointer!.y;
-      // this.playerMarker!.left = e.pointer!.x;
-      this.playerMarker?.animate('top', this.transformTop(e.pointer!.y), {
-        duration: this.travelDuration(e.pointer!.y, this.player!.position.y),
-        easing: fabric.util.ease.easeOutCubic,
-        onChange: () => {
-          this.fabricCanvas.renderAll();
-        },
-        onComplete: () => {
-          // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
+    //   // this.playerMarker!.top = e.pointer!.y;
+    //   // this.playerMarker!.left = e.pointer!.x;
+    //   this.playerMarker?.animate('top', this.transformTop(e.pointer!.y), {
+    //     duration: this.travelDuration(e.pointer!.y, this.player!.position.y),
+    //     easing: fabric.util.ease.easeOutCubic,
+    //     onChange: () => {
+    //       this.fabricCanvas.renderAll();
+    //     },
+    //     onComplete: () => {
+    //       // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
 
-          this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
-        }
-      });
+    //       this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
+    //     }
+    //   });
 
-      this.playerMarker?.animate('left', this.transformLeft(e.pointer!.x), {
-        duration: this.travelDuration(e.pointer!.x, this.player!.position.x),
-        easing: fabric.util.ease.easeOutCubic,
-        onChange: () => {
-          this.fabricCanvas.renderAll();
-        },
-        onComplete: () => {
-          // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
-          this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
-        }
-      });
+    //   this.playerMarker?.animate('left', this.transformLeft(e.pointer!.x), {
+    //     duration: this.travelDuration(e.pointer!.x, this.player!.position.x),
+    //     easing: fabric.util.ease.easeOutCubic,
+    //     onChange: () => {
+    //       this.fabricCanvas.renderAll();
+    //     },
+    //     onComplete: () => {
+    //       // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
+    //       this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
+    //     }
+    //   });
 
-    });
+    // });
 
 
     this.fabricCanvas.on('mouse:move', (e) => {
@@ -122,6 +122,7 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.playerMarker = new fabric.Rect({
       top: this.player!.position.y,
       left: this.player!.position.x,
+      
       width: 10,
       height: 10,
       fill: 'red',
@@ -133,18 +134,25 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.fabricCanvas.add(this.playerMarker);
   }
 
+  playerInCity(city: ICity): boolean {
+    if (!this.player) return false;
+    return this.player.position.x === city.x  && this.player.position.y === city.y;
+  }
+
+
   renderCities() {
     if (!this.fabricCanvas) return;
 
     this.cities.forEach((city) => {
+      const playerInCity = this.playerInCity(city);
       const rect = new fabric.Rect({
         top: city.y,
         left: city.x,
         width: city.size * .6 + 10,
         height: city.size * .7 + 10,
         fill: 'black',
-        stroke: 'white',
-        borderColor: 'white',
+        stroke: playerInCity ? 'red' : 'white' ,
+        borderColor: playerInCity ? 'red' : 'white',
         selectable: false,
         hasBorders: false,
         hoverCursor: 'pointer'
@@ -153,7 +161,7 @@ export class InteractiveViewComponent implements AfterViewInit {
       const name = new fabric.Text(city.name, {
         top: city.y + rect.height! + 10,
         left: city.x - rect.width! * .5,
-        fill: 'white',
+        fill: playerInCity ? 'red' : 'white' ,
         width: rect.width,
         fontFamily: 'Press Start 2P',
         fontSize: 12,
@@ -162,6 +170,11 @@ export class InteractiveViewComponent implements AfterViewInit {
         selectable: false
       })
 
+      name.on('mouseover', () => {
+        console.log('mouseover', city);
+        this.mouseOverCity.emit(city);
+      });
+      
       rect.on('mouseover', () => {
         console.log('mouseover', city);
         this.mouseOverCity.emit(city);

@@ -41,6 +41,7 @@ export class GameService {
     this.setupPlayer(playerName);
     this.setupCities();
     this.game = new Game(this.player);
+    this.player.travelTo(this.cities.find(v=> v.name ==='Gas Station') || this.cities[1]); //TODO: Create choose starting city
     this.saveGame();
   };
 
