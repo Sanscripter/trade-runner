@@ -11,6 +11,7 @@ export const sounds: any = {
   GENERIC_ACTION_CLICK: './assets/sounds/generic_button_click.wav',
   REVERSE_ACTION_CLICK: './assets/sounds/reverse_button_click.mp3',
   LOCATION_HOVER: './assets/sounds/location_hover.mp3',
+  AGONIZING_DEATH: './assets/sounds/agonizing_death.wav',
 };
 
 @Injectable({
