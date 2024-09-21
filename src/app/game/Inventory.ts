@@ -2,6 +2,7 @@ import { Item } from "./Item";
 
 export class Inventory {
   items: Item[] = [];
+  
 
   constructor() {
     this.items = [];
@@ -14,6 +15,10 @@ export class Inventory {
 
   // Add an item to the inventory, if it already exists, increase the quantity
   addItem(item: Item) {
+    if (!item.quantity) {
+      //TODO: REMOVE THIS GAMBI WHEN WE FIND OUT WHY THE QUANTITY IS NOT BEING SET
+      item.quantity = 1;
+    }
     let existingItem = this.items.find(i => i.name === item.name);
     if (existingItem) {
       existingItem.quantity! += item.quantity!;

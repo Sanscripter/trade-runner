@@ -5,8 +5,8 @@ export class GameEvents {
 
   constructor(eventConfig: any, day: number) {
     this.day = day;
-    this.description = eventConfig.description;
-    this.effect = eventConfig.effect;
+    this.description = eventConfig?.description;
+    this.effect = eventConfig?.effect;
   }
 
   setEffect(effect: any) {

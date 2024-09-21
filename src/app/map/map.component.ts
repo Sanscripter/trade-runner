@@ -44,8 +44,10 @@ export class MapComponent implements OnInit {
       this.locationHovered = null;
       return;
     }
-    this.soundService.playSound('LOCATION_HOVER');
-    this.locationHovered = city;
+    if(this.locationHovered?.id !== city.id) {
+      this.locationHovered = city;
+      this.soundService.playSound('LOCATION_HOVER');
+    }
     this.cdr.detectChanges();
   }
 

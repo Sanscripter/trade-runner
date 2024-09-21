@@ -5,7 +5,7 @@ export class Player {
   name: string;
   inventory: Inventory = new Inventory();
   money: number;
-  health: number = 3;
+  health: number = 5;
   position: { x: number, y: number } = { x: 70, y: 70 };
   speed: number = 150; //default speed (assuming arbitrary dimensions)
 
@@ -15,7 +15,7 @@ export class Player {
   }
 
   get stealingChance() {
-    return 0.5;
+    return 0.5; //TODO: ADD LOGIC TO CALCULATE STEALING CHANCE BASED ON STATS AND INVENTORY
   }
 
   setInventory(inventory: Inventory) {
@@ -28,6 +28,7 @@ export class Player {
 
   takeDamage(damage: number) {
     this.health -= damage;
+    //TODO: SHOULD HAVE EFFECTS TO CHANGE THE UI BASED ON DAMAGE
   };
 
   heal(heal: number) {

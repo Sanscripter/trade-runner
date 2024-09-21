@@ -20,7 +20,9 @@ export class MainMenuComponent {
   constructor(private router: Router, private musicService: SoundService){}
 
   ngOnInit() {
-    // this.musicService.playMusic();
+    setTimeout(() => {
+      this.musicService.playSound('LOCATION_HOVER');
+    }, 200);
   }
 
   handleMenuOption(option: string) {

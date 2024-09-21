@@ -137,7 +137,8 @@ export class LocationComponent implements OnInit {
       this.trader.inventory!.removeItem(this.stolenItem);
       this.stealSuccess = true;
     } else {
-      this.player.takeDamage(Math.ceil(this.trader.size! * Math.random()/2));
+      // this.player.takeDamage(Math.ceil(this.trader.size! * Math.random()/2));
+      this.player.takeDamage(1); //TODO: In the future damage must be defined by trader personality, trader size, item value, etc
       this.stealFailed = true;
     }
     this.checkingSteal = false;

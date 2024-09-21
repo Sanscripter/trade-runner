@@ -11,6 +11,16 @@ import { ENDINGS } from '../game/Endings.enum';
 import { EFFECT_TYPES } from '../game/Effect_Types.enum';
 import { GameEvents as GameEvent } from '../game/GameEvents';
 
+const PRICE_IMPACT = {
+  [EFFECT_TYPES.SCARCITY]: 1.3,
+  [EFFECT_TYPES.EXCESS]: 0.4,
+  [EFFECT_TYPES.POVERTY]: 0.25,
+  [EFFECT_TYPES.ABUNDANCE]: 2,
+  [EFFECT_TYPES.CITY_BUYING_X]: 1.5,
+  [EFFECT_TYPES.CITY_SELLING_X]: 0.3,
+  'default': 0.8
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -164,6 +174,7 @@ export class GameService {
 
   advanceDay(daysTravelled: number) {
     this.day += (daysTravelled ?? 1);
+    console.log('Day', this.day);
     try {
       this.produceMoreItems();
       this.generateEvents();
@@ -174,15 +185,16 @@ export class GameService {
   };
 
   generateEvents() {
-    const todayEventCount = Math.floor(Math.random() * this.dailyEventLimit);
+    const todayEventCount = Math.floor(Math.random() * this.dailyEventLimit + 1);
     if (this.activeEvents.length > 0 && this.day % 2 === 0) {
       this.activeEvents.splice(this.activeEvents.length - 1, 1);
     }
     for (let i = 0; i < todayEventCount; i++) {
-      let eventConfig = this.configs.GameEventsConfig?.events[Math.floor(Math.random() * this.configs?.GameEventsConfig.events.length)];
+      let eventConfig = GameEventsConfig?.events[Math.floor(Math.random() * GameEventsConfig.events.length)];
       let event = new GameEvent(eventConfig, this.day);
       this.proccessEventEffect(event);
       this._eventLog.push(event);
+      this.saveGame();
     }
   };
 
@@ -202,7 +214,7 @@ export class GameService {
       subject = this.cities[Math.floor(Math.random() * this.cities.length)];
       target = ItemsConfig.items[Math.floor(Math.random() * ItemsConfig.items.length)];
       const qty = Math.ceil((effect.type === EFFECT_TYPES.CITY_BUYING_X ? 1 : 20) * Math.random() + 2);
-      const seedItem = new Item(target.name, target.value, target.description, qty, target.id);
+      const seedItem = new Item(target.name, target.value, target?.description, qty, target.id);
       subject.inventory.addItem(seedItem);
       this.activeEvents = this.activeEvents.filter((e) => !((e.effect.subject?.name === subject?.name) && (e.effect.type === EFFECT_TYPES.CITY_BUYING_X ? e.effect.type === EFFECT_TYPES.CITY_SELLING_X : e.effect.type === EFFECT_TYPES.CITY_BUYING_X)));
     }
@@ -243,7 +255,7 @@ export class GameService {
     location.inventory.items.forEach((item: Item) => {
       const effect = relevantEvents.find(e => e.effect.subject === item && e.effect.subject.id === item.id)?.effect;
       const priceImpact = effect?.type === EFFECT_TYPES.SCARCITY ? 1.3 : effect?.type === EFFECT_TYPES.EXCESS ? 0.4 : 0.8;
-      item.cost = item.value * (priceImpact + Math.random());
+      item.cost = item.value * (priceImpact + Math.random() + 0.01);
     });
   }
 
@@ -258,17 +270,17 @@ export class GameService {
   reflectEconomicStatus(location: ICity, relevantEvents: GameEvent[]) {
     if (relevantEvents.find(e => e.effect.type === EFFECT_TYPES.CITY_BUYING_X)) {
       let playerItem = this.player.inventory.items.find((item: Item) => item.id === relevantEvents.find(e => e.effect.type === EFFECT_TYPES.CITY_BUYING_X)?.effect.target?.id);
-      playerItem!.cost = playerItem?.cost! * (1.5 + Math.random());
+      playerItem!.cost = playerItem?.cost! * (1.5 + Math.random()) + 0.01;
       let locationItem = location.inventory.items.find((item: Item) => item.id === relevantEvents.find(e => e.effect.type === EFFECT_TYPES.CITY_BUYING_X)?.effect.target?.id);
-      locationItem!.cost = locationItem?.cost! * (1.9 + Math.random());
+      locationItem!.cost = locationItem?.cost! * (1.9 + Math.random()) + 0.01;
     }
     if (relevantEvents.find(e => e.effect.type === EFFECT_TYPES.CITY_SELLING_X)) {
       let event = relevantEvents.find(e => e.effect.type === EFFECT_TYPES.CITY_SELLING_X)!;
       let relevantItem = ItemsConfig.items.find((item: Item) => item.id === event.effect.target?.id)
       let playerItem = this.player.inventory.items.find((item: Item) => item.id === relevantItem?.id);
-      playerItem!.cost = playerItem?.cost! * (0.3 + Math.random());
+      playerItem!.cost = playerItem?.cost! * (0.3 + Math.random()) + 0.01;
       let locationItem = location.inventory.items.find((item: Item) => item.id === relevantItem?.id);
-      let cost = relevantItem?.value! * (0.5 + Math.random());;
+      let cost = relevantItem?.value! * (0.5 + Math.random()) + 0.01;
       let qty = Math.ceil(5 * Math.random() + 2);
       if (!locationItem) {
         let excessItem = new Item(relevantItem?.name!, cost, relevantItem?.description!, qty, relevantItem?.id!);
