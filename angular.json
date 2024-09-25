@@ -38,8 +38,8 @@
               "node_modules/nes.css/css/nes.css",
               "src/styles.scss"
             ],
-            "scripts": []
-          },
+            "scripts": [],
+            "baseHref": "./"          },
           "configurations": {
             "production": {
               "budgets": [
