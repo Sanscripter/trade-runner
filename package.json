@@ -1,6 +1,12 @@
 {
   "name": "trade_runner",
-  "version": "Public Alpha - 0.20.0",
+  "version": "0.20.0-alpha.0",
+  "description": "Public Alpha Version of Trade Runner",
+  "author": {
+    "name": "Guillermo Murúa",
+    "email": "guillermoasmurua@gmail.com"
+  },
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -11,9 +17,44 @@
     "storybook": "ng run trading-grounds:storybook",
     "build-storybook": "ng run trading-grounds:build-storybook",
     "electron": "npm run build && electron .",
-    "electron-dev": "concurrently -k \"ng serve\" \"set NODE_ENV=development && electron .\""
+    "electron-dev": "concurrently -k \"ng serve\" \"set NODE_ENV=development && electron .\"",
+    "electron-build": "npm run build && electron-builder"
   },
   "private": true,
+  "build": {
+    "appId": "com.trade_runner.id",
+    "productName": "Trade Runner",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/trading-grounds/**/*",
+      "node_modules/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "extraResources": [
+      "src/assets/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "games"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "games"
+    }
+  },
   "dependencies": {
     "@angular/animations": "^17.1.2",
     "@angular/common": "^17.1.2",
@@ -49,6 +90,7 @@
     "autoprefixer": "^10.4.17",
     "concurrently": "^9.0.1",
     "electron": "^32.1.2",
+    "electron-builder": "^25.0.5",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
