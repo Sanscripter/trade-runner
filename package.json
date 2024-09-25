@@ -41,18 +41,20 @@
         "nsis",
         "zip"
       ],
-      "icon": "icon.ico"
+      "icon": "src/assets/icons/icon_win.ico"
     },
     "linux": {
       "target": [
         "AppImage",
         "deb"
       ],
-      "category": "games"
+      "category": "games",
+      "icon": "src/assets/icons/icon_deb.png"
     },
     "mac": {
       "target": "dmg",
-      "category": "games"
+      "category": "games",
+      "icon": "src/assets/icons/icon_mac.icns"
     }
   },
   "dependencies": {

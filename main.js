@@ -5,6 +5,10 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    icon: path.join(
+      __dirname,
+      "dist/trading-grounds/browser/assets/icons/icon_deb.png"
+    ),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
