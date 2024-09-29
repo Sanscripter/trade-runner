@@ -6,6 +6,28 @@ import { CommonModule } from '@angular/common';
 import { SoundService } from '../../shared/sound.service';
 import { SharedModule } from '../../shared/shared.module';
 
+//TODO: extract from here
+const LIST_OF_SCENARIOS = [
+  {
+    id: 0,
+    title: 'Pay debt',
+    description: "You've been struck by tragedy and now have limited time to pay off your debt.",
+    disabled: false
+  },
+  {
+    id: 1,
+    title: 'Survive',
+    description: "You need to survive for a few days",
+    disabled: true
+  },
+  {
+    id: 2,
+    title: 'Acquire item',
+    description: "You need to acquire a specific item",
+    disabled: true
+  },
+];
+
 @Component({
   selector: 'app-start-screen',
   standalone: true,
@@ -18,6 +40,11 @@ export class StartScreenComponent {
   currentSlide: number = 0;
   public nameForm!: FormGroup;
   public triggerWarningConsent = false;
+  public scenarioSelected = false;
+
+  get scenarios() {
+    return LIST_OF_SCENARIOS;
+  }
 
   get disableNext() {
     return this.currentSlide === 6;
@@ -34,6 +61,11 @@ export class StartScreenComponent {
     this.nameForm.valueChanges.subscribe(() => {
       this.soundService.playSound('GENERIC_ACTION_CLICK', { playbackRate: 2 });
     });
+  }
+
+  handleScenarioSelect(scenario: any) {
+    this.scenarioSelected = true;
+    this.soundService.playSound('GENERIC_ACTION_CLICK');
   }
 
   handleNext() {
@@ -57,14 +89,6 @@ export class StartScreenComponent {
     this.router.navigate(['map']);
   }
 
-  handleWarningConsent() {
-    this.triggerWarningConsent = true;
-    this.soundService.playSound('GENERIC_ACTION_CLICK', { playbackRate: 0.8 });
-  }
-
-  handleWarningDenial() {
-    this.soundService.playSound('REVERSE_ACTION_CLICK', { playbackRate: 0.8 });
-    window.location.href = 'https://wholesomegames.com/';
-  }
+ 
 
 }

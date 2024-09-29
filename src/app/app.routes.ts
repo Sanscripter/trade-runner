@@ -20,6 +20,10 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'warning',
+    component: MainMenuComponent
+  },
+  {
     path: 'start',
     component: StartScreenComponent
   },
@@ -46,6 +50,6 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'menu'
+    redirectTo: 'warning'
   }
 ];

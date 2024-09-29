@@ -5,6 +5,7 @@
       "name": "Car",
       "description": "A useful vehicle for transportation",
       "value": 100000,
+     "image": "car-ic.png",
       "effects": [
         {
           "name": "transport",
@@ -17,6 +18,7 @@
       "name": "Pistol",
       "description": "A small firearm for self-defense and more...",
       "value": 5000,
+     "image": "tool.png",
       "effects": [
         {
           "name": "shooting",
@@ -35,6 +37,7 @@
       "name": "Rifle",
       "description": "A long firearm for hunting and more...",
       "value": 10000,
+     "image": "tool.png",
       "effects": [
         {
           "name": "shooting",
@@ -53,6 +56,7 @@
       "name": "Knife",
       "description": "A small blade for survival.",
       "value": 1000,
+     "image": "tool.png",
       "effects": [
         {
           "name": "cutting",
@@ -71,6 +75,7 @@
       "name": "Backpack",
       "description": "A useful item for carrying more stuff.",
       "value": 1000,
+     "image": "tool.png",
       "effects": [
         {
           "name": "inventory",
@@ -84,6 +89,7 @@
       "name": "Tent",
       "description": "A useful item for resting.",
       "value": 1000,
+     "image": "tent.png",
       "effects": [
         {
           "name": "rest",
@@ -97,6 +103,7 @@
       "name": "Bread",
       "description": "The quintessential baked good.",
       "value": 10,
+     "image": "bread.png",
       "effects": [
         {
           "name": "heal",
@@ -115,6 +122,7 @@
       "name": "Sweetroll",
       "description": "From a baker who used to be a trader like you.",
       "value": 20,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -133,6 +141,7 @@
       "name": "Pizza Slice",
       "description": "Healthy carbs for the martial teen!",
       "value": 25,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -151,6 +160,7 @@
       "name": "Meat Jerky",
       "description": "Probably from before the apocalypse.",
       "value": 40,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -169,6 +179,7 @@
       "name": "Soylent Brown",
       "description": "Number 2 soylent in the market!",
       "value": 60,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -187,6 +198,7 @@
       "name": "Wine",
       "description": "... and dine!",
       "value": 75,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -205,6 +217,7 @@
       "name": "Milk",
       "description": "What do you want me to say? It's cow juice.",
       "value": 10,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -223,6 +236,7 @@
       "name": "Cow Juice",
       "description": "This got weird.",
       "value": 5,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -241,6 +255,7 @@
       "name": "Salad",
       "description": "For the calorie-concious trader!",
       "value": 10,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -259,6 +274,7 @@
       "name": "Chocolate Bar",
       "description": "Better (choco)late than never!",
       "value": 500,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -277,6 +293,7 @@
       "name": "Marshmallow",
       "description": "It makes no sense that they even have this. Or batteries, for that matter. Taste's good though!",
       "value": 50,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",
@@ -373,6 +390,7 @@
       "name": "Steak",
       "description": "Aged to perfection.",
       "value": 1500,
+     "image": "tool.png",
       "effects": [
         {
           "name": "heal",

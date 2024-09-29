@@ -78,7 +78,7 @@ export class GameService {
     this.player.speed = saveDoc.player.speed;
     this.player.inventory = new Inventory();
     saveDoc.player.inventory.items.forEach((item: any) => {
-      this.player.inventory.addItem(new Item(item.name, item.value, item.description, item.quantity));
+      this.player.inventory.addItem(new Item(item.name, item.value, item.description, item.quantity, item.id, item.img));
     });
     this.day = saveDoc.day;
     this.cities = [];
@@ -88,7 +88,7 @@ export class GameService {
         inventory: new Inventory()
       }
       city.inventory.items.forEach((item: any) => {
-        loadedCity.inventory.addItem(new Item(item.name, item.value, item.description, item.quantity));
+        loadedCity.inventory.addItem(new Item(item.name, item.value, item.description, item.quantity, item.id, item.img));
       });
       this.cities.push(loadedCity);
     });
@@ -139,7 +139,7 @@ export class GameService {
       };
       location.inventory?.items?.forEach((itemRef: any) => {
         const item = this.configs.ItemsConfig?.items.find((i: any) => i.id === itemRef.id)!;
-        newLocation.inventory.addItem(new Item(item.name, item.value, item.description, itemRef.quantity));
+        newLocation.inventory.addItem(new Item(item.name, item.value, item.description, itemRef.quantity, item.id, item.image));
       });
       return newLocation;
     });
@@ -147,13 +147,11 @@ export class GameService {
 
   setupPlayer(playerName: string) {
     this.player = new Player(playerName, 1000);
-    const bread = new Item('Bread', 5, 'A loaf of bread', 10, 7);
-    const tent = new Item('Tent', 1000, 'A warm, blood-soaked tent', 1, 1006);
-    const spear = new Item('Spear', 500, 'A sharp, pointy stick', 1, 1010);
-    const car = new Item('Personal Car', 10000, 'A great means of transportation', 1, 1011);
+    const bread = new Item('Bread', 5, 'A loaf of bread', 10, 7, 'bread.png');
+    const tent = new Item('Tent', 1000, 'A warm, blood-soaked tent', 1, 1006, 'tent.png');
+    const car = new Item('Personal Car', 10000, 'A great means of transportation', 1, 1011, 'car-ic.png');
     this.player.inventory.addItem(bread);
     this.player.inventory.addItem(tent);
-    this.player.inventory.addItem(spear);
     this.player.inventory.addItem(car);
   };
 
@@ -166,7 +164,7 @@ export class GameService {
       const amountOfNewItems = Math.floor(Math.random() * 10);
       for (let i = 0; i < amountOfNewItems; i++) {
         const item = ItemsConfig.items[Math.floor(Math.random() * ItemsConfig.items.length)];
-        const newItem = new Item(item.name, item.value, item.description, Math.ceil(Math.random() * 10));
+        const newItem = new Item(item.name, item.value, item.description, Math.ceil(Math.random() * 10), item.id, item.image);
         city.inventory.addItem(newItem);
       }
     });
@@ -214,7 +212,7 @@ export class GameService {
       subject = this.cities[Math.floor(Math.random() * this.cities.length)];
       target = ItemsConfig.items[Math.floor(Math.random() * ItemsConfig.items.length)];
       const qty = Math.ceil((effect.type === EFFECT_TYPES.CITY_BUYING_X ? 1 : 20) * Math.random() + 2);
-      const seedItem = new Item(target.name, target.value, target?.description, qty, target.id);
+      const seedItem = new Item(target.name, target.value, target?.description, qty, target.id, target.img);
       subject.inventory.addItem(seedItem);
       this.activeEvents = this.activeEvents.filter((e) => !((e.effect.subject?.name === subject?.name) && (e.effect.type === EFFECT_TYPES.CITY_BUYING_X ? e.effect.type === EFFECT_TYPES.CITY_SELLING_X : e.effect.type === EFFECT_TYPES.CITY_BUYING_X)));
     }
@@ -283,7 +281,7 @@ export class GameService {
       let cost = relevantItem?.value! * (0.5 + Math.random()) + 0.01;
       let qty = Math.ceil(5 * Math.random() + 2);
       if (!locationItem) {
-        let excessItem = new Item(relevantItem?.name!, cost, relevantItem?.description!, qty, relevantItem?.id!);
+        let excessItem = new Item(relevantItem?.name!, cost, relevantItem?.description!, qty, relevantItem?.id!, relevantItem?.image!);
         location.inventory.addItem(excessItem);
       }
       locationItem!.cost = cost;

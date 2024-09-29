@@ -1,34 +1,27 @@
 <div class="w-full" style="font-size: x-small;">
   <p>Inventory:</p>
-  <div class="nes-table-responsive">
-    <form [formGroup]="inventoryForm!">
-      <table formArrayName="items" class="nes-table is-dark">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Cost</th>
-            <th>Qty.</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let itemForm of items.controls; let i = index">
-          <tr [formGroup]="itemForm">
-            <td>{{itemForm.value.name!}}</td>
-            <td class="whitespace-nowrap text-right">{{itemForm.value.cost | currency:'USD'}}</td>
-            <td class="text-right whitespace-nowrap flex justify-end content-center items-center">
-
-              @if (displayHandlers) {
-              <app-item-amount-input (change)="changedAmount($event,i)" [currentMax]="itemForm.value.currentMax!" class="w-full"
-                formControlName="quantity"></app-item-amount-input>
-              } @else {
-              <p>{{itemForm.value.quantity!}}</p>
-              }
 
 
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+  <form [formGroup]="inventoryForm!">
+    <div formArrayName="items" *ngFor="let itemForm of items.controls; let i = index" class="nes-container is-dark">
 
-  </div>
+      <div [formGroup]="itemForm" class="flex justify-between">
+        <div>
+          <img width="64" height="64" src="assets/items/{{itemForm.value.img}}" alt="{{itemForm.value.description}}">
+        </div>
+        <div>{{itemForm.value.name!}}</div>
+        <div class="whitespace-nowrap text-right">{{itemForm.value.cost | currency:'USD'}}</div>
+        <div class="text-right whitespace-nowrap flex justify-end content-center items-center">
+          @if (displayHandlers) {
+          <app-item-amount-input (change)="changedAmount($event,i)" [currentMax]="itemForm.value.currentMax!"
+            class="w-full" formControlName="quantity"></app-item-amount-input>
+          } @else {
+          <p>{{itemForm.value.quantity!}}</p>
+          }
+        </div>
+      </div>
+    </div>
+
+  </form>
+
 </div>

@@ -1,39 +1,48 @@
-@if (!triggerWarningConsent) {
-<main class="flex flex-col p-20 h-2/3 justify-center">
-  <div class="nes-container is-dark with-title">
-    <p class="title">Warning</p>
-    <p class="!mb-10">
-      Mature content ahead.
-    </p>
-    <div class="flex flex-row justify-between m-auto w-1/2">
-      <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto is-error text-2xl" (click)="handleWarningConsent()">Proceed.</button>
-      <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleWarningDenial()">Take me away. </button>
+@if (!scenarioSelected) {
+  
+  <h2 class="text-3xl pt-6 px-6">Pick your scenario:</h2>
+  <div class="flex justify-around mt-32 pt-14 py-28 px-24 h-1/2">
+  @for (scenario of scenarios; track scenario.id) {
+    <div class="nes-container is-dark with-title w-96 flex flex-col justify-between">
+      <p class="title">{{ scenario.title }}</p>
+      <p>{{ scenario.description }}</p>
+      <button 
+        [ngClass]="{'is-disabled': scenario.disabled}"
+        [disabled]="scenario.disabled"
+        (mouseover)="scenario.disabled? null : handleButtonHover()" 
+        (click)="handleScenarioSelect(scenario)" 
+        class="nes-btn mt-8 is-primary">Select</button>
     </div>
-  </div>
-</main>
-} @else {
-<main class="flex flex-col gap-5 h-full p-20">
-  <h2 class="text-3xl p-3">January 8, 2004</h2>
-  <p *ngIf="currentSlide >=0 && currentSlide < 5" class="ml-5">The world has <span class="nes-text is-error">died</span>.</p>
-  <p *ngIf="currentSlide >=1 && currentSlide < 5" class="ml-5">It happened. 30 years ago, it happened.</p>
-  <p *ngIf="currentSlide >=2 && currentSlide < 5" class="ml-5">Now, <span class="nes-text is-warning">life continues</span>.</p>
-  <p *ngIf="currentSlide >=3 && currentSlide < 5" class="ml-5">People need <span class="nes-text is-primary">food</span>, <span class="nes-text is-warning">shelter</span>, <span class="nes-text is-primary">tools</span>, <span class="nes-text is-error">weapons</span>...</p>
-  <p *ngIf="currentSlide >=4 && currentSlide < 5" class="ml-5">And <span class="nes-text is-error">we</span>  will get it to them, my son.</p>
-  <p *ngIf="currentSlide == 5 && currentSlide < 6" class="ml-5">For a <span class="nes-text is-warning">price.</span></p>
-
-  @if (currentSlide === 6) {
-  <p class="ml-5"> You came to Happy Vale with your father to make a living as a vagrant trader. Unfortunately, a gang stormed your camp one night, killed your father and gave you <span class="nes-text is-error">30 days</span> to pay a <span class="nes-text is-error">$50.000,00 debt</span> he left.</p>
-  <div class="pl-10 mb-2 w-1/2 m-auto ">
-    <label for="name">What's your <span class="nes-text is-warning">name</span>, trader?</label>
-    <form [formGroup]="nameForm">
-      <input type="text" id="name" formControlName="playerName" class="nes-input is-dark" placeholder="eg. Cain Tim">
-    </form>
-  </div>
-  <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto mt-20 mb-0 bg-white text-4xl" (click)="handleGameStart()">Begin</button>
   }
-  <div class="flex flex-row justify-between m-auto w-1/2 mb-20">
-    <button (mouseover)="handleButtonHover()" [disabled]="disableBack" [ngClass]="{'is-disabled':disableBack}" type="button" class="nes-btn m-auto is-warning text-2xl" (click)="handlePrevious()">Back</button>
-    <button (mouseover)="handleButtonHover()" [disabled]="disableNext" [ngClass]="{'is-disabled': disableNext}" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleNext()">Next</button>
-  </div>
-</main>
+</div>
+
+} @else {
+  <main class="flex flex-col gap-5 h-full p-20">
+    <h2 class="text-3xl p-3">January 8, 2004</h2>
+    <p *ngIf="currentSlide >=0 && currentSlide < 5" class="ml-5">The world has <span class="nes-text is-error">died</span>.</p>
+    <p *ngIf="currentSlide >=1 && currentSlide < 5" class="ml-5">It happened. 30 years ago, it happened.</p>
+    <p *ngIf="currentSlide >=2 && currentSlide < 5" class="ml-5">Now, <span class="nes-text is-warning">life continues</span>.</p>
+    <p *ngIf="currentSlide >=3 && currentSlide < 5" class="ml-5">People need <span class="nes-text is-primary">food</span>, <span class="nes-text is-warning">shelter</span>, <span class="nes-text is-primary">tools</span>, <span class="nes-text is-error">weapons</span>...</p>
+    <p *ngIf="currentSlide >=4 && currentSlide < 5" class="ml-5">And <span class="nes-text is-error">we</span>  will get it to them, my son.</p>
+    <p *ngIf="currentSlide == 5 && currentSlide < 6" class="ml-5">For a <span class="nes-text is-warning">price.</span></p>
+  
+    @if (currentSlide === 6) {
+    <p class="ml-5"> You came to Happy Vale with your father to make a living as a vagrant trader. Unfortunately, a gang stormed your camp one night, killed your father and gave you <span class="nes-text is-error">30 days</span> to pay a <span class="nes-text is-error">$50.000,00 debt</span> he left.</p>
+    <div class="pl-10 mb-2 w-1/2 m-auto ">
+      <label for="name">What's your <span class="nes-text is-warning">name</span>, trader?</label>
+      <form [formGroup]="nameForm">
+        <input type="text" id="name" formControlName="playerName" class="nes-input is-dark" placeholder="eg. Cain Tim">
+      </form>
+    </div>
+    <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto mt-20 mb-0 bg-white text-4xl" (click)="handleGameStart()">Begin</button>
+    }
+    <div class="flex flex-row justify-between m-auto w-1/2 mb-20">
+      <button (mouseover)="handleButtonHover()" [disabled]="disableBack" [ngClass]="{'is-disabled':disableBack}" type="button" class="nes-btn m-auto is-warning text-2xl" (click)="handlePrevious()">Back</button>
+      <button (mouseover)="handleButtonHover()" [disabled]="disableNext" [ngClass]="{'is-disabled': disableNext}" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleNext()">Next</button>
+    </div>
+  </main>
+  
 }
+
+
+

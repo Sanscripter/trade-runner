@@ -132,7 +132,7 @@ export class LocationComponent implements OnInit {
       const randomItem = this.stealableItems[index];
       console.log('random',randomItem);
       const randomQty = 1; //In the future we can add a random quantity
-      this.stolenItem = new Item(randomItem.name, randomItem?.cost!, randomItem.description, randomQty);
+      this.stolenItem = new Item(randomItem.name, randomItem?.cost!, randomItem.description, randomQty, randomItem.id, randomItem.img);
       this.player.inventory.addItem(this.stolenItem);
       this.trader.inventory!.removeItem(this.stolenItem);
       this.stealSuccess = true;

@@ -17,17 +17,19 @@ export class MainMenuComponent {
 
   version = packageJson.version;
 
-  constructor(private router: Router, private musicService: SoundService){}
+  acceptedTriggerWarning = false;
+
+  constructor(private router: Router, private soundService: SoundService){}
 
   ngOnInit() {
     setTimeout(() => {
-      this.musicService.playSound('LOCATION_HOVER');
+      this.soundService.playSound('LOCATION_HOVER');
     }, 200);
   }
 
   handleMenuOption(option: string) {
     this.MENU_OPTIONS[option]();
-    this.musicService.playSound('GENERIC_ACTION_CLICK');
+    this.soundService.playSound('GENERIC_ACTION_CLICK');
   }
 
   handleStart() {
@@ -35,7 +37,17 @@ export class MainMenuComponent {
   };
 
   handleButtonHover() {
-    this.musicService.playSound('REVERSE_ACTION_CLICK');
+    this.soundService.playSound('REVERSE_ACTION_CLICK');
+  }
+
+  handleWarningConsent() {
+    this.acceptedTriggerWarning = true;
+    this.soundService.playSound('GENERIC_ACTION_CLICK', { playbackRate: 0.8 });
+  }
+
+  handleWarningDenial() {
+    this.soundService.playSound('REVERSE_ACTION_CLICK', { playbackRate: 0.8 });
+    window.location.href = 'https://wholesomegames.com/';
   }
 
 }

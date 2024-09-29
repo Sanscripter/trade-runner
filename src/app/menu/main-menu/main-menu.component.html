@@ -1,4 +1,19 @@
-<section class="flex flex-col h-full w-full">
+@if (!acceptedTriggerWarning) {
+  <main class="flex flex-col p-20 h-2/3 justify-center">
+    <div class="nes-container is-dark with-title">
+      <p class="title">Warning</p>
+      <p class="!mb-10">
+        Mature content ahead.
+      </p>
+      <div class="flex flex-row justify-between m-auto w-1/2">
+        <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto is-error text-2xl" (click)="handleWarningConsent()">Proceed.</button>
+        <button (mouseover)="handleButtonHover()" type="button" class="nes-btn m-auto bg-white text-2xl" (click)="handleWarningDenial()">Take me away. </button>
+      </div>
+    </div>
+  </main>
+} @else {
+  
+<main class="flex flex-col h-full w-full">
   <div class="!m-auto w-3/4 nes-container with-title is-dark is-centered">
     <p class="title">Guillermo Murúa's</p>
     <h1 class="text-8xl ">Trade Runner</h1>
@@ -11,5 +26,10 @@
   <div class="justify-start flex flex-row">
     <p>Version: {{ version }}</p>
   </div>
-</section>
+</main>
+
+}
+
+
+
 
