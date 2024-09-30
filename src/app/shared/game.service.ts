@@ -101,6 +101,16 @@ export class GameService {
     localStorage.removeItem('saveDoc');
   }
 
+  computeLocationChanges() {
+    this.cities.forEach((c) => {
+      if(c.mobile) {
+        c.x = c.x  + Math.floor((Math.random() > .3 ? 1 : -1) * c.speed! ?? 1);
+        c.y = c.y + Math.floor((Math.random() > .3 ? 1 : -1) * c.speed! ?? 1);
+      }
+    })
+    this.saveGame();
+  }
+
 
   playerMoved(position: { x: number, y: number }) {
     const daysTravelled = this.getDaysTravelled(position);

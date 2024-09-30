@@ -139,6 +139,8 @@ export class InteractiveViewComponent implements AfterViewInit {
 
     // this.renderPlayer();
 
+    
+
     this.renderCities();
 
     this.panToPlayer();

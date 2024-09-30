@@ -21,6 +21,7 @@ export class MapComponent implements OnInit {
     this.gameService.loadGame();
     this.player = this.gameService.player;
 
+
     if (this.gameService.isGameOver()) {
       this.router.navigate(['end']);
     }
@@ -32,6 +33,8 @@ export class MapComponent implements OnInit {
 
   handleTravelling(city: ICity) {
     this.gameService.playerMoved(city);
+    this.gameService.computeLocationChanges();
+
     this.router.navigate([`travelling`], {
       queryParams: {
         id: city.id

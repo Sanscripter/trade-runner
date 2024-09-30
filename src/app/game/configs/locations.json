@@ -183,6 +183,8 @@
       "y": 100,
       "size": 1,
       "name": "Wind Autumn",
+      "mobile": true,
+      "speed": 100,
      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 5000,
       "inventory":{
