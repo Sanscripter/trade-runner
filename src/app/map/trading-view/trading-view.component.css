@@ -1,0 +1,11 @@
+.trader-icon {
+    height: 135px;
+    width: 175px;
+    transform:scaleX(-1);
+  }
+  
+  .trade-container {
+    max-height: 90%;
+    min-width: 23%;
+  }
+  

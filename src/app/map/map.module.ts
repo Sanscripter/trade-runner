@@ -6,6 +6,7 @@ import { InteractiveViewComponent } from './interactive-view/interactive-view.co
 import { LocationComponent } from './location/location.component';
 import { LocationInfoCardComponent } from './location-info-card/location-info-card.component';
 import { TravellingViewComponent } from './travelling-view/travelling-view.component';
+import { TradingViewComponent } from './trading-view/trading-view.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { TravellingViewComponent } from './travelling-view/travelling-view.compo
     LocationComponent,
     InteractiveViewComponent,
     LocationInfoCardComponent,
-    TravellingViewComponent
+    TravellingViewComponent,
+    TradingViewComponent
   ]
 })
 export class MapModule { }

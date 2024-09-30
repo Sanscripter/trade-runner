@@ -122,6 +122,14 @@ export class InteractiveViewComponent implements AfterViewInit {
     //change to actual map size
     this.fabricCanvas.setWidth(MAP_WIDTH);
     this.fabricCanvas.setHeight(MAP_HEIGHT);
+    this.fabricCanvas.add(new fabric.Rect({
+      width: MAP_WIDTH,
+      height: MAP_HEIGHT,
+      fill: 'transparent',
+      stroke: 'white',
+      borderColor: 'white',
+      selectable: false,
+    }));
     // this.fabricCanvas.setBackgroundImage('assets/map.png', ()=> {this.fabricCanvas.renderAll()});
 
     // this.renderTileGrid();

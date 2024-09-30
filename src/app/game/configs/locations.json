@@ -5,6 +5,7 @@
       "y": 50,
       "size": 1,
       "name": "Corey's \nHouse",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 200,
       "inventory":{
         "items":[
@@ -38,6 +39,7 @@
       "y": 700,
       "size": 5,
       "name": "Viana's \nGrange",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 8000,
       "inventory":{
         "items":[
@@ -70,6 +72,7 @@
       "y": 100,
       "size": 3,
       "name": "BUY USED TV \nSETS NOW!1!!",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 10000,
       "inventory":{
         "items":[
@@ -95,6 +98,7 @@
       "y": 700,
       "size": 10,
       "name": "Fort Lieber",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 500000,
       "inventory":{
         "items":[
@@ -144,6 +148,7 @@
       "y": 700,
       "size": 5,
       "name": "Paradize",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 40000,
       "inventory":{
         "items":[
@@ -178,6 +183,7 @@
       "y": 100,
       "size": 1,
       "name": "Wind Autumn",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 5000,
       "inventory":{
         "items":[
@@ -201,6 +207,7 @@
       "y": 1000,
       "size": 4,
       "name": "Gas Station",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 20000,
       "inventory":{
         "items":[
@@ -225,6 +232,7 @@
       "y": 300,
       "size": 4,
       "name": "El Asco",
+     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 10000,
       "inventory":{
         "items":[

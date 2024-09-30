@@ -1,16 +1,18 @@
 <div class="w-full" style="font-size: x-small;">
   <p>Inventory:</p>
-
-
   <form [formGroup]="inventoryForm!">
     <div formArrayName="items" *ngFor="let itemForm of items.controls; let i = index" class="nes-container is-dark">
 
-      <div [formGroup]="itemForm" class="flex justify-between">
-        <div>
-          <img width="64" height="64" src="assets/items/{{itemForm.value.img}}" alt="{{itemForm.value.description}}">
+      <div [formGroup]="itemForm" class="flex flex-col justify-between">
+        <div class="flex flex-row">
+          <div class="w-1/2">
+            <img width="64" height="64" src="assets/items/{{itemForm.value.img}}" alt="{{itemForm.value.description}}">
+          </div>
+          <div class="w-1/2">
+            <div>{{itemForm.value.name!}}</div>
+            <div class="whitespace-nowrap text-right">{{itemForm.value.cost | currency:'USD'}}</div>
+          </div>
         </div>
-        <div>{{itemForm.value.name!}}</div>
-        <div class="whitespace-nowrap text-right">{{itemForm.value.cost | currency:'USD'}}</div>
         <div class="text-right whitespace-nowrap flex justify-end content-center items-center">
           @if (displayHandlers) {
           <app-item-amount-input (change)="changedAmount($event,i)" [currentMax]="itemForm.value.currentMax!"
@@ -23,5 +25,4 @@
     </div>
 
   </form>
-
 </div>
