@@ -1,17 +1,14 @@
-
-
-<div class="card">
+<div class="card" *ngIf="location">
   <div>
     <span>Name:</span>
-    <span>{{location?.name}}</span>
+    <span>{{ location.name }}</span>
   </div>
   <div>
     <span>Size:</span>
-    <span>{{location?.size}}</span>
+    <span>{{ location.size }}</span>
   </div>
   <div>
     <span>Distance:</span>
-    <span>{{location?.distance}}</span>
+    <span>{{ location.distance }}</span>
   </div>
-
 </div>

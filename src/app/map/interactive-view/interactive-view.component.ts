@@ -1,9 +1,16 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { fabric } from 'fabric';
 import ICity from '../../utils/ICity.interface';
 import { Player } from '../../game/Player';
 
-
+const SIDEBAR_WIDTH = 0.16666667;
 const TILE_SIZE = 20;
 const MAP_WIDTH = 2400;
 const MAP_HEIGHT = 1200;
@@ -11,16 +18,14 @@ const MAP_HEIGHT = 1200;
 @Component({
   selector: 'app-interactive-view',
   templateUrl: './interactive-view.component.html',
-  styleUrls: ['./interactive-view.component.scss']
+  styleUrls: ['./interactive-view.component.scss'],
 })
 export class InteractiveViewComponent implements AfterViewInit {
-
   canvasCtx: CanvasRenderingContext2D | null = null;
   @ViewChild('interactiveViewCanvas')
   canvas!: HTMLCanvasElement;
   fabricCanvas!: fabric.Canvas;
   mouseUp: any;
-
 
   @Input() cities: ICity[] = [];
 
@@ -31,7 +36,6 @@ export class InteractiveViewComponent implements AfterViewInit {
   @Output() mouseOverCity = new EventEmitter<ICity | null>();
 
   playerMarker?: fabric.Rect;
-
 
   isPanning: boolean = false;
   selection: boolean = false;
@@ -49,45 +53,17 @@ export class InteractiveViewComponent implements AfterViewInit {
       preserveObjectStacking: true,
     });
 
-    this.visibleArea = {
-      left: window.innerWidth / 6 + 100,
-      top: 100,
-      right: window.innerWidth - 100,
-      bottom: window.innerHeight - 100,
-    };
-    // this.fabricCanvas.on('mouse:dblclick', (e) => {
-    //   console.log(e.pointer, 'dblclick');
-    //   return;
+    // First load adjust
+    this.resizeCanvas();
 
+    // Enable zoom functionality
+    this.enableZoom();
 
-    //   // this.playerMarker!.top = e.pointer!.y;
-    //   // this.playerMarker!.left = e.pointer!.x;
-    //   this.playerMarker?.animate('top', this.transformTop(e.pointer!.y), {
-    //     duration: this.travelDuration(e.pointer!.y, this.player!.position.y),
-    //     easing: fabric.util.ease.easeOutCubic,
-    //     onChange: () => {
-    //       this.fabricCanvas.renderAll();
-    //     },
-    //     onComplete: () => {
-    //       // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
-
-    //       this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
-    //     }
-    //   });
-
-    //   this.playerMarker?.animate('left', this.transformLeft(e.pointer!.x), {
-    //     duration: this.travelDuration(e.pointer!.x, this.player!.position.x),
-    //     easing: fabric.util.ease.easeOutCubic,
-    //     onChange: () => {
-    //       this.fabricCanvas.renderAll();
-    //     },
-    //     onComplete: () => {
-    //       // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
-    //       this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
-    //     }
-    //   });
-
-    // });
+    // Re-adjust when resizing
+    window.addEventListener('resize', () => {
+      this.resizeCanvas();
+      this.panToPlayer(); // Re-centers player
+    });
 
     this.fabricCanvas.on('mouse:down', (e) => {
       this.isPanning = true;
@@ -98,64 +74,179 @@ export class InteractiveViewComponent implements AfterViewInit {
 
     this.fabricCanvas.on('mouse:move', (e) => {
       if (!this.isPanning) return;
+
       const evt = e.e as MouseEvent;
-      const delta = new fabric.Point(evt.clientX - this.lastPosX, evt.clientY - this.lastPosY);
-      this.fabricCanvas.relativePan(delta);
+      const delta = new fabric.Point(
+        evt.clientX - this.lastPosX,
+        evt.clientY - this.lastPosY
+      );
+
+      const zoom = this.fabricCanvas.getZoom();
+
+      // Use maps real size
+      const canvasWidth = MAP_WIDTH * zoom;
+      const canvasHeight = MAP_HEIGHT * zoom;
+
+      const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH; // Sidebar has 16% of screen width
+      const viewportWidth = window.innerWidth - sidebarWidth;
+
+      const viewport = this.fabricCanvas.viewportTransform!;
+
+      // Calculating actual drag limits (based on map and window)
+      const minX = Math.min(0, viewportWidth - canvasWidth);
+      const minY = Math.min(0, window.innerHeight - canvasHeight);
+
+      let nextX = viewport[4] + delta.x;
+      let nextY = viewport[5] + delta.y;
+
+      // Applying drag limits to the right and up
+      if (nextX > 0) nextX = 0; // Left limit
+      if (nextY > 0) nextY = 0; // Right limit
+      if (nextX < minX) nextX = minX; // Top limit
+      if (nextY < minY) nextY = minY; // Bottom limit
+
+      viewport[4] = nextX;
+      viewport[5] = nextY;
+
+      this.fabricCanvas.setViewportTransform(viewport);
+
       this.lastPosX = evt.clientX;
       this.lastPosY = evt.clientY;
-      // this.updateVisibleObjects();
 
+      this.updateVisibleArea();
     });
 
     this.fabricCanvas.on('mouse:up', () => {
       this.isPanning = false;
     });
 
+    // Centralizes player when P is pressed
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'p') {
+      if (e.key === 'p' || e.key === 'P') {
         this.panToPlayer();
       }
     });
 
-
-
-    //change to actual map size
-    this.fabricCanvas.setWidth(MAP_WIDTH);
-    this.fabricCanvas.setHeight(MAP_HEIGHT);
-    this.fabricCanvas.add(new fabric.Rect({
-      width: MAP_WIDTH,
-      height: MAP_HEIGHT,
-      fill: 'transparent',
-      stroke: 'white',
-      borderColor: 'white',
-      selectable: false,
-    }));
-    // this.fabricCanvas.setBackgroundImage('assets/map.png', ()=> {this.fabricCanvas.renderAll()});
-
-    // this.renderTileGrid();
-    // this.updateVisibleObjects();
-
-
-
-    // this.renderPlayer();
-
-    
-
+    // Add your objects to the canvas after resizing
     this.renderCities();
+    this.panToPlayer(); // Centers on player when loading
+  }
 
-    this.panToPlayer();
+  enableZoom() {
+    this.fabricCanvas.on('mouse:wheel', (opt) => {
+      const event = opt.e as WheelEvent;
+      const delta = event.deltaY;
+      let zoom = this.fabricCanvas.getZoom();
 
+      // Calcula a largura da sidebar
+      const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH;
+
+      // Calcula o zoom mínimo levando em conta a sidebar
+      const zoomMin = Math.min(
+        (window.innerWidth - sidebarWidth) / MAP_WIDTH, // Ajuste para a largura da janela menos a sidebar
+        window.innerHeight / MAP_HEIGHT // Ajuste para a altura da janela
+      );
+
+      // Ajusta o zoom multiplicando pelo fator delta
+      zoom *= 0.999 ** delta;
+
+      // Limita o zoom entre o valor mínimo (zoomMin) e o máximo (20)
+      if (zoom > 20) zoom = 20;
+      if (zoom < zoomMin) zoom = zoomMin; // O zoom não pode ser menor que o necessário para mostrar o mapa todo
+
+      const zoomPoint = new fabric.Point(event.offsetX, event.offsetY);
+      this.fabricCanvas.zoomToPoint(zoomPoint, zoom);
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      // Ajusta o viewport ao dar zoom e atualiza a área visível
+      this.fixViewportOnZoom(zoom);
+      this.updateVisibleArea();
+    });
+  }
+
+  fixViewportOnZoom(zoom: number) {
+    const viewport = this.fabricCanvas.viewportTransform!;
+
+    const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH;
+    const canvasWidth = MAP_WIDTH * zoom;
+    const canvasHeight = MAP_HEIGHT * zoom;
+    const viewportWidth = window.innerWidth - sidebarWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Calculando limites para centralizar o canvas
+    const minX = Math.min(0, viewportWidth - canvasWidth);
+    const minY = Math.min(0, viewportHeight - canvasHeight);
+
+    if (viewport[4] > 0) viewport[4] = 0; // Limitar à esquerda
+    if (viewport[5] > 0) viewport[5] = 0; // Limitar ao topo
+    if (viewport[4] < minX) viewport[4] = minX; // Limitar à direita
+    if (viewport[5] < minY) viewport[5] = minY; // Limitar ao fundo
+
+    this.fabricCanvas.setViewportTransform(viewport);
+    this.fabricCanvas.renderAll();
+  }
+
+  resizeCanvas() {
+    const sidebarWidth = document.querySelector('aside')?.clientWidth || 0;
+
+    this.fabricCanvas.setWidth(window.innerWidth - sidebarWidth);
+    this.fabricCanvas.setHeight(window.innerHeight);
+
+    const zoom = this.fabricCanvas.getZoom();
+    this.fixViewportOnZoom(zoom);
+
+    // Atualiza a área visível após o redimensionamento
+    this.updateVisibleArea();
   }
 
   panToPlayer() {
-    this.panToPosition(this.player!.position.x + window.innerWidth/3, this.player!.position.y + window.innerHeight/2);
-  }
+    const x = this.player!.position.x;
+    const y = this.player!.position.y;
 
+    const zoom = this.fabricCanvas.getZoom();
+    const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH; // Sidebar has 16% of width
+    const viewportWidth = window.innerWidth - sidebarWidth;
+    const viewportHeight = window.innerHeight;
+
+    const canvasWidth = MAP_WIDTH * zoom;
+    const canvasHeight = MAP_HEIGHT * zoom;
+
+    const viewport = this.fabricCanvas.viewportTransform!;
+
+    // Calculate the player be inside bounds
+    let playerX = x * zoom - viewportWidth / 2;
+    let playerY = y * zoom - viewportHeight / 2;
+
+    // Make sure player doesn't leave the boundaries
+    const minX = 0;
+    const minY = 0;
+    const maxX = canvasWidth - viewportWidth;
+    const maxY = canvasHeight - viewportHeight;
+
+    if (playerX < minX) playerX = minX; // Left limit
+    if (playerY < minY) playerY = minY; // Top limit
+    if (playerX > maxX) playerX = maxX; // Right limit
+    if (playerY > maxY) playerY = maxY; // Left limit
+
+    viewport[4] = -playerX;
+    viewport[5] = -playerY;
+
+    this.fabricCanvas.setViewportTransform(viewport);
+    this.fabricCanvas.requestRenderAll();
+
+    // Update visible area after panning to the player
+    this.updateVisibleArea();
+  }
 
   // Function to pan the canvas to a specific position (x, y)
   panToPosition(x: number, y: number) {
     // Get the center of the canvas
-    const canvasCenter = new fabric.Point(this.fabricCanvas.getWidth() / 2, this.fabricCanvas.getHeight() / 2);
+    const canvasCenter = new fabric.Point(
+      this.fabricCanvas.getWidth() / 2,
+      this.fabricCanvas.getHeight() / 2
+    );
 
     // Point you want to pan to
     const targetPoint = new fabric.Point(x, y);
@@ -163,36 +254,58 @@ export class InteractiveViewComponent implements AfterViewInit {
     // Pan to make targetPoint the center of the canvas
     this.fabricCanvas.absolutePan(targetPoint.subtract(canvasCenter));
 
-
     // Render the canvas after the panning
     this.fabricCanvas.requestRenderAll();
-  }
 
+    // Update the visible area after panning
+    this.updateVisibleArea();
+  }
 
   updateVisibleObjects() {
     this.fabricCanvas.getObjects().forEach((obj) => {
-      const objBounds = obj.getBoundingRect();  // Get the bounding box of the object
+      const objBounds = obj.getBoundingRect(true); // Get bounding rect of object, with true to apply transformations
 
+      // Check if object is within the visible area
       const isInViewport =
         objBounds.left < this.visibleArea.right &&
         objBounds.top < this.visibleArea.bottom &&
         objBounds.left + objBounds.width > this.visibleArea.left &&
         objBounds.top + objBounds.height > this.visibleArea.top;
 
-      // Hide objects that are not in the viewport
-      if (!isInViewport) {
-        obj.set('visible', false);  // Hide the object
-      } else {
-        obj.set('visible', true);   // Ensure the object is visible if it's in the viewport
-      }
+      // Update object visibility
+      obj.set('visible', isInViewport);
     });
 
-    // Re-render the canvas
+    // Render the canvas after updating visibility
     this.fabricCanvas.requestRenderAll();
   }
 
-  renderTileGrid() {
+  updateVisibleArea() {
+    const viewport = this.fabricCanvas.viewportTransform!;
+    const zoom = this.fabricCanvas.getZoom();
 
+    // Calculate the sidebar width
+    const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH;
+
+    // The visible area should take into account the zoom and the viewport offsets
+    this.visibleArea.left = Math.max(0, -viewport[4] / zoom);
+    this.visibleArea.top = Math.max(0, -viewport[5] / zoom);
+
+    // Correct the calculation for the right and bottom edges
+    this.visibleArea.right = Math.min(
+      MAP_WIDTH,
+      this.visibleArea.left + (window.innerWidth - sidebarWidth) / zoom
+    );
+    this.visibleArea.bottom = Math.min(
+      MAP_HEIGHT,
+      this.visibleArea.top + window.innerHeight / zoom
+    );
+
+    // Ensure visible objects are updated based on the new visible area
+    this.updateVisibleObjects();
+  }
+
+  renderTileGrid() {
     const rows = this.fabricCanvas.height! / TILE_SIZE; // Number of rows
     const cols = this.fabricCanvas.width! / TILE_SIZE; // Number of columns
 
@@ -236,7 +349,6 @@ export class InteractiveViewComponent implements AfterViewInit {
     // });
   }
 
-
   travelDuration(to: number, from: number): number {
     const baseDuration = 5000;
     const distance = Math.abs(to - from);
@@ -265,7 +377,7 @@ export class InteractiveViewComponent implements AfterViewInit {
       fill: 'red',
       selectable: false,
       hasBorders: false,
-      hoverCursor: 'pointer'
+      hoverCursor: 'pointer',
     });
 
     this.fabricCanvas.add(this.playerMarker);
@@ -273,9 +385,10 @@ export class InteractiveViewComponent implements AfterViewInit {
 
   playerInCity(city: ICity): boolean {
     if (!this.player) return false;
-    return this.player.position.x === city.x && this.player.position.y === city.y;
+    return (
+      this.player.position.x === city.x && this.player.position.y === city.y
+    );
   }
-
 
   renderCities() {
     if (!this.fabricCanvas) return;
@@ -292,28 +405,26 @@ export class InteractiveViewComponent implements AfterViewInit {
         borderColor: playerInCity ? 'red' : 'white',
         selectable: false,
         hasBorders: false,
-        hoverCursor: 'pointer'
+        hoverCursor: 'pointer',
       });
 
       const name = new fabric.Text(city.name, {
         top: city.y + rect.height! + 10,
-        left: city.x - rect.width! * .5,
+        left: city.x - rect.width! * 0.5,
         fill: playerInCity ? 'red' : 'white',
         width: rect.width,
         fontFamily: 'Press Start 2P',
         fontSize: 12,
         textAlign: 'center',
         hoverCursor: 'pointer',
-        selectable: false
-      })
+        selectable: false,
+      });
 
       name.on('mouseover', () => {
-        console.log('mouseover', city);
         this.mouseOverCity.emit(city);
       });
 
       rect.on('mouseover', () => {
-        console.log('mouseover', city);
         this.mouseOverCity.emit(city);
       });
 
