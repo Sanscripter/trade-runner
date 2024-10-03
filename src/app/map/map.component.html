@@ -1,21 +1,41 @@
 <main class="flex flex-row w-full h-full">
-  
-  <aside class="flex flex-col w-1/6 nes-container is-dark p-2 justify-between z-50 border-solid border border-white absolute">
+  <aside
+    class="flex flex-col w-sidebar nes-container is-dark p-2 justify-between z-50 border-solid border border-white"
+  >
     <div class="upper-aside-layout flex flex-col">
       <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()" />
-      <app-eventlog class="eventlog-layout" [eventLog]="gameService.eventLog" [day]="gameService.getCurrentDay()" />
+      <app-eventlog
+        class="eventlog-layout"
+        [eventLog]="gameService.eventLog"
+        [day]="gameService.getCurrentDay()"
+      />
     </div>
-    <button class="nes-btn is-warning" (click)="toggleInventory()">Inventory</button>
+    <button class="nes-btn is-warning" (click)="toggleInventory()">
+      Inventory
+    </button>
   </aside>
+
   @if (inventoryOpen) {
-    <div class="nes-container is-dark h-full absolute top-0
-    left-1 z-50">
-      <app-inventory [inventory]="player.inventory" />
-    </div>
+  <div class="nes-container is-dark h-full absolute top-0 left-sidebar z-50">
+    <app-inventory [inventory]="player.inventory" />
+  </div>
   }
-  <section class="flex w-full text-center absolute">
-    <app-location-info-card class="location-info-card" #appInfoCard [location]="locationHovered" [player]="player"></app-location-info-card>
-    <app-interactive-view (mouseOverCity)="renderLocationInfoCard($event)" (travelledTo)="handleTravelling($event)" [cities]="gameService.cities" [player]="gameService.player" />
+
+  <!-- Seção do mapa -->
+  <section class="flex-grow h-full text-center">
+    <app-location-info-card
+      class="location-info-card"
+      #appInfoCard
+      [location]="locationHovered"
+      [player]="player"
+    ></app-location-info-card>
+
+    <app-interactive-view
+      class="w-full h-full"
+      (mouseOverCity)="renderLocationInfoCard($event)"
+      (travelledTo)="handleTravelling($event)"
+      [cities]="gameService.cities"
+      [player]="gameService.player"
+    ></app-interactive-view>
   </section>
 </main>
-

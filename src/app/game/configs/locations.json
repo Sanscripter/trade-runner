@@ -1,25 +1,25 @@
 {
-  "locations":[
-    { "id": 1,
+  "locations": [
+    {
+      "id": 1,
       "x": 50,
       "y": 50,
       "size": 1,
       "name": "Corey's \nHouse",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 200,
-      "inventory":{
-        "items":[
-          {"id": 57, "quantity":1},
-          {"id": 4, "quantity":1},
-          {"id": 5, "quantity":1},
-          {"id": 6, "quantity":1},
-          {"id": 8, "quantity":5},
-          {"id": 13, "quantity":5},
-          {"id": 16, "quantity":5},
-          {"id": 34, "quantity":3},
-          {"id": 38, "quantity":1},
-          {"id": 39, "quantity":1},
-          {"id": 18, "quantity":5}
+      "inventory": {
+        "items": [
+          { "id": 57, "quantity": 1 },
+          { "id": 4, "quantity": 1 },
+          { "id": 5, "quantity": 1 },
+          { "id": 6, "quantity": 1 },
+          { "id": 8, "quantity": 5 },
+          { "id": 13, "quantity": 5 },
+          { "id": 16, "quantity": 5 },
+          { "id": 34, "quantity": 3 },
+          { "id": 38, "quantity": 1 },
+          { "id": 39, "quantity": 1 },
+          { "id": 18, "quantity": 5 }
         ]
       },
       "traderMugshot": "assets/mugs/corey.png",
@@ -34,26 +34,27 @@
         "I just wanted to play my Gametoy, but they wouldn't listen..."
       ]
     },
-    { "id": 2,
+    {
+      "id": 2,
       "x": 950,
       "y": 700,
       "size": 5,
       "name": "Viana's \nGrange",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 8000,
-      "inventory":{
-        "items":[
-          {"id":1, "quantity":2},
-          {"id":3, "quantity":2},
-          {"id":7, "quantity":10},
-          {"id":10, "quantity":50},
-          {"id":11, "quantity":60},
-          {"id":13, "quantity":100},
-          {"id":14, "quantity":50},
-          {"id":15, "quantity":10},
-          {"id":31, "quantity":100},
-          {"id":33, "quantity":2},
-          {"id":43, "quantity":100}
+      "inventory": {
+        "items": [
+          { "id": 1, "quantity": 2 },
+          { "id": 3, "quantity": 2 },
+          { "id": 7, "quantity": 10 },
+          { "id": 10, "quantity": 50 },
+          { "id": 11, "quantity": 60 },
+          { "id": 13, "quantity": 100 },
+          { "id": 14, "quantity": 50 },
+          { "id": 15, "quantity": 10 },
+          { "id": 31, "quantity": 100 },
+          { "id": 33, "quantity": 2 },
+          { "id": 43, "quantity": 100 }
         ]
       },
       "background": "assets/backgrounds/vianas_grange.png",
@@ -67,25 +68,26 @@
         "Hit Fort Lieber recently? Cpt. Measly is kinda cute."
       ]
     },
-    { "id": 3,
+    {
+      "id": 3,
       "x": 1900,
       "y": 100,
       "size": 3,
       "name": "BUY USED TV \nSETS NOW!1!!",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 10000,
-      "inventory":{
-        "items":[
-          {"id":18, "quantity":100},
-          {"id":38, "quantity":20},
-          {"id":41, "quantity":900},
-          {"id":40, "quantity":20},
-          {"id":39, "quantity":20}
+      "inventory": {
+        "items": [
+          { "id": 18, "quantity": 100 },
+          { "id": 38, "quantity": 20 },
+          { "id": 41, "quantity": 900 },
+          { "id": 40, "quantity": 20 },
+          { "id": 39, "quantity": 20 }
         ]
       },
       "traderMugshot": "assets/mugs/tv_gods.png",
       "background": "assets/backgrounds/buy_used_tv_sets.png",
-      "barks":[
+      "barks": [
         "These are not our heads, trader, it's just our corporate-mandated uniform. It's both a marketing stunt AND a metaphor.",
         "We are hungry.",
         "Our radio marketing strategy is working! We are moving units like crazy!",
@@ -93,45 +95,46 @@
         "You'd have thought that technological progress would have stopped when we went underground, but BOY were you wrong! Have you heard of the Beat a Maxx? I'm telling you the guys in Paradize are all over this trinket!"
       ]
     },
-    { "id": 4,
+    {
+      "id": 4,
       "x": 2000,
       "y": 700,
       "size": 10,
       "name": "Fort Lieber",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 500000,
-      "inventory":{
-        "items":[
-          {"id":1, "quantity":6},
-          {"id":2, "quantity":2},
-          {"id":3, "quantity":3},
-          {"id":4, "quantity":3},
-          {"id":5, "quantity":5},
-          {"id":6, "quantity":7},
-          {"id":7, "quantity":2},
-          {"id":8, "quantity":1},
-          {"id":46, "quantity":1},
-          {"id":47, "quantity":10},
-          {"id":47, "quantity":5},
-          {"id":52, "quantity":5},
-          {"id": 36, "quantity": 1},
-          {"id":9, "quantiy": 20},
-          {"id":10, "quantiy": 20},
-          {"id":11, "quantiy": 20},
-          {"id":12, "quantiy": 20},
-          {"id":15, "quantiy": 20},
-          {"id":16, "quantiy": 10},
-          {"id":17, "quantiy": 5},
-          {"id":18, "quantiy": 5},
-          {"id":19, "quantiy": 2},
-          {"id":20, "quantiy": 2},
-          {"id":21, "quantiy": 20},
-          {"id":22, "quantiy": 1},
-          {"id":23, "quantiy": 20},
-          {"id":24, "quantiy": 20},
-          {"id":25, "quantiy": 20},
-          {"id":26, "quantiy": 20},
-          {"id":27, "quantiy": 20}
+      "inventory": {
+        "items": [
+          { "id": 1, "quantity": 6 },
+          { "id": 2, "quantity": 2 },
+          { "id": 3, "quantity": 3 },
+          { "id": 4, "quantity": 3 },
+          { "id": 5, "quantity": 5 },
+          { "id": 6, "quantity": 7 },
+          { "id": 7, "quantity": 2 },
+          { "id": 8, "quantity": 1 },
+          { "id": 46, "quantity": 1 },
+          { "id": 47, "quantity": 10 },
+          { "id": 47, "quantity": 5 },
+          { "id": 52, "quantity": 5 },
+          { "id": 36, "quantity": 1 },
+          { "id": 9, "quantiy": 20 },
+          { "id": 10, "quantiy": 20 },
+          { "id": 11, "quantiy": 20 },
+          { "id": 12, "quantiy": 20 },
+          { "id": 15, "quantiy": 20 },
+          { "id": 16, "quantiy": 10 },
+          { "id": 17, "quantiy": 5 },
+          { "id": 18, "quantiy": 5 },
+          { "id": 19, "quantiy": 2 },
+          { "id": 20, "quantiy": 2 },
+          { "id": 21, "quantiy": 20 },
+          { "id": 22, "quantiy": 1 },
+          { "id": 23, "quantiy": 20 },
+          { "id": 24, "quantiy": 20 },
+          { "id": 25, "quantiy": 20 },
+          { "id": 26, "quantiy": 20 },
+          { "id": 27, "quantiy": 20 }
         ]
       },
       "traderMugshot": "assets/mugs/cpt_measly.png",
@@ -143,24 +146,24 @@
         "I'll ram you with my whole fleet if you try to steal from us."
       ]
     },
-    { "id": 5,
+    {
+      "id": 5,
       "x": 250,
       "y": 700,
       "size": 5,
       "name": "Paradize",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 40000,
-      "inventory":{
-        "items":[
-          {"id":33, "quantity":100},
-          {"id":30, "quantity":50},
-          {"id":14, "quantity":50},
-          {"id":34, "quantity":100},
-          {"id":3, "quantity":25},
-          {"id":28, "quantity":5},
-          {"id":29, "quantity":5},
-          {"id":46, "quantity":1}
-
+      "inventory": {
+        "items": [
+          { "id": 33, "quantity": 100 },
+          { "id": 30, "quantity": 50 },
+          { "id": 14, "quantity": 50 },
+          { "id": 34, "quantity": 100 },
+          { "id": 3, "quantity": 25 },
+          { "id": 28, "quantity": 5 },
+          { "id": 29, "quantity": 5 },
+          { "id": 46, "quantity": 1 }
         ]
       },
       "traderMugshot": "assets/mugs/dullard_cult.png",
@@ -178,21 +181,22 @@
         "One day we might not let you leave."
       ]
     },
-    { "id": 6,
+    {
+      "id": 6,
       "x": 350,
       "y": 100,
       "size": 1,
       "name": "Wind Autumn",
       "mobile": true,
       "speed": 100,
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 5000,
-      "inventory":{
-        "items":[
-          {"id": 44, "quantity": 100},
-          {"id": 43, "quantity": 100},
-          {"id": 58, "quantity": 100},
-          {"id": 53, "quantity": 1}
+      "inventory": {
+        "items": [
+          { "id": 44, "quantity": 100 },
+          { "id": 43, "quantity": 100 },
+          { "id": 58, "quantity": 100 },
+          { "id": 53, "quantity": 1 }
         ]
       },
       "traderMugshot": "assets/mugs/wind_autumn.png",
@@ -204,21 +208,22 @@
         "Love is the strongest currency, child! And I'm rich!"
       ]
     },
-    { "id": 7,
+    {
+      "id": 7,
       "x": 600,
       "y": 1000,
       "size": 4,
       "name": "Gas Station",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 20000,
-      "inventory":{
-        "items":[
-          {"id":1, "quantity":1},
-          {"id":2, "quantity":1},
-          {"id":32, "quantity":100},
-          {"id":4, "quantity":1},
-          {"id":56, "quantity":13},
-          {"id":59, "quantity":20}
+      "inventory": {
+        "items": [
+          { "id": 1, "quantity": 1 },
+          { "id": 2, "quantity": 1 },
+          { "id": 32, "quantity": 100 },
+          { "id": 4, "quantity": 1 },
+          { "id": 56, "quantity": 13 },
+          { "id": 59, "quantity": 20 }
         ]
       },
       "traderMugshot": "assets/mugs/carlos_treze.png",
@@ -229,20 +234,21 @@
         "Do not cross Carlos Treze!"
       ]
     },
-    { "id": 8,
+    {
+      "id": 8,
       "x": 800,
       "y": 300,
       "size": 4,
       "name": "El Asco",
-     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "money": 10000,
-      "inventory":{
-        "items":[
-          {"id":59, "quantity":100},
-          {"id":60, "quantity":100},
-          {"id":12, "quantity":100},
-          {"id": 1, "quantity":1},
-          {"id": 2, "quantity":2}
+      "inventory": {
+        "items": [
+          { "id": 59, "quantity": 100 },
+          { "id": 60, "quantity": 100 },
+          { "id": 12, "quantity": 100 },
+          { "id": 1, "quantity": 1 },
+          { "id": 2, "quantity": 2 }
         ]
       },
       "traderMugshot": "assets/mugs/pablo_pueblo.png",

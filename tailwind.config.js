@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        sidebar: "16.666667%",
+      },
+    },
   },
   mode: "jit",
   purge: {
