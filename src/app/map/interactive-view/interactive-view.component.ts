@@ -56,6 +56,39 @@ export class InteractiveViewComponent implements AfterViewInit {
     // First load adjust
     this.resizeCanvas();
 
+    // this.fabricCanvas.on('mouse:dblclick', (e) => {
+    //   console.log(e.pointer, 'dblclick');
+    //   return;
+
+    //   // this.playerMarker!.top = e.pointer!.y;
+    //   // this.playerMarker!.left = e.pointer!.x;
+    //   this.playerMarker?.animate('top', this.transformTop(e.pointer!.y), {
+    //     duration: this.travelDuration(e.pointer!.y, this.player!.position.y),
+    //     easing: fabric.util.ease.easeOutCubic,
+    //     onChange: () => {
+    //       this.fabricCanvas.renderAll();
+    //     },
+    //     onComplete: () => {
+    //       // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
+
+    //       this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
+    //     }
+    //   });
+
+    //   this.playerMarker?.animate('left', this.transformLeft(e.pointer!.x), {
+    //     duration: this.travelDuration(e.pointer!.x, this.player!.position.x),
+    //     easing: fabric.util.ease.easeOutCubic,
+    //     onChange: () => {
+    //       this.fabricCanvas.renderAll();
+    //     },
+    //     onComplete: () => {
+    //       // this.fabricCanvas.absolutePan(this.playerMarker!.getCoords()[0]);
+    //       this.player!.position = { x: e.pointer!.x, y: e.pointer!.y };
+    //     }
+    //   });
+
+    // });
+
     // Enable zoom functionality
     this.enableZoom();
 
@@ -101,8 +134,8 @@ export class InteractiveViewComponent implements AfterViewInit {
 
       // Applying drag limits to the right and up
       if (nextX > 0) nextX = 0; // Left limit
-      if (nextY > 0) nextY = 0; // Right limit
-      if (nextX < minX) nextX = minX; // Top limit
+      if (nextY > 0) nextY = 0; // Top limit
+      if (nextX < minX) nextX = minX; // Right limit
       if (nextY < minY) nextY = minY; // Bottom limit
 
       viewport[4] = nextX;
@@ -138,21 +171,21 @@ export class InteractiveViewComponent implements AfterViewInit {
       const delta = event.deltaY;
       let zoom = this.fabricCanvas.getZoom();
 
-      // Calcula a largura da sidebar
+      // Calculate the sidebar width
       const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH;
 
-      // Calcula o zoom mínimo levando em conta a sidebar
+      // Calculate the minimum zoom level, considering the sidebar
       const zoomMin = Math.min(
-        (window.innerWidth - sidebarWidth) / MAP_WIDTH, // Ajuste para a largura da janela menos a sidebar
-        window.innerHeight / MAP_HEIGHT // Ajuste para a altura da janela
+        (window.innerWidth - sidebarWidth) / MAP_WIDTH, // Adjust for the window width minus the sidebar
+        window.innerHeight / MAP_HEIGHT // Adjust for the window height
       );
 
-      // Ajusta o zoom multiplicando pelo fator delta
+      // Adjust zoom by multiplying by the delta factor
       zoom *= 0.999 ** delta;
 
-      // Limita o zoom entre o valor mínimo (zoomMin) e o máximo (20)
+      // Limit the zoom between the minimum (zoomMin) and maximum (20)
       if (zoom > 20) zoom = 20;
-      if (zoom < zoomMin) zoom = zoomMin; // O zoom não pode ser menor que o necessário para mostrar o mapa todo
+      if (zoom < zoomMin) zoom = zoomMin; // Zoom can't be smaller than necessary to show the whole map
 
       const zoomPoint = new fabric.Point(event.offsetX, event.offsetY);
       this.fabricCanvas.zoomToPoint(zoomPoint, zoom);
@@ -160,7 +193,7 @@ export class InteractiveViewComponent implements AfterViewInit {
       event.preventDefault();
       event.stopPropagation();
 
-      // Ajusta o viewport ao dar zoom e atualiza a área visível
+      // Adjust the viewport after zooming and update the visible area
       this.fixViewportOnZoom(zoom);
       this.updateVisibleArea();
     });
@@ -175,14 +208,14 @@ export class InteractiveViewComponent implements AfterViewInit {
     const viewportWidth = window.innerWidth - sidebarWidth;
     const viewportHeight = window.innerHeight;
 
-    // Calculando limites para centralizar o canvas
+    // Calculate the boundaries to keep the canvas centered
     const minX = Math.min(0, viewportWidth - canvasWidth);
     const minY = Math.min(0, viewportHeight - canvasHeight);
 
-    if (viewport[4] > 0) viewport[4] = 0; // Limitar à esquerda
-    if (viewport[5] > 0) viewport[5] = 0; // Limitar ao topo
-    if (viewport[4] < minX) viewport[4] = minX; // Limitar à direita
-    if (viewport[5] < minY) viewport[5] = minY; // Limitar ao fundo
+    if (viewport[4] > 0) viewport[4] = 0; // Left limit
+    if (viewport[5] > 0) viewport[5] = 0; // Top limit
+    if (viewport[4] < minX) viewport[4] = minX; // Right limit
+    if (viewport[5] < minY) viewport[5] = minY; // Bottom limit
 
     this.fabricCanvas.setViewportTransform(viewport);
     this.fabricCanvas.renderAll();
@@ -228,7 +261,7 @@ export class InteractiveViewComponent implements AfterViewInit {
     if (playerX < minX) playerX = minX; // Left limit
     if (playerY < minY) playerY = minY; // Top limit
     if (playerX > maxX) playerX = maxX; // Right limit
-    if (playerY > maxY) playerY = maxY; // Left limit
+    if (playerY > maxY) playerY = maxY; // Bottom limit
 
     viewport[4] = -playerX;
     viewport[5] = -playerY;
@@ -323,10 +356,6 @@ export class InteractiveViewComponent implements AfterViewInit {
           selectable: false,
           hoverCursor: 'pointer',
         });
-        rect.on('mousedown', () => {
-          // alert('clicked'+ ` ${row}, ${col}`);
-        });
-        // rect.on('mouseover', () => { alert('mouseover'+ `${row}, ${col}`); });
         this.fabricCanvas.add(rect);
       }
     }
