@@ -33,9 +33,26 @@
     <app-interactive-view
       class="w-full h-full"
       (mouseOverCity)="renderLocationInfoCard($event)"
-      (travelledTo)="handleTravelling($event)"
+      (fastTravelTo)="handleFastTravelTo($event)"
+      (enterLocation)="handleEnterLocation($event)"
       [cities]="gameService.cities"
       [player]="gameService.player"
     ></app-interactive-view>
   </section>
 </main>
+
+
+<dialog #fastTravelConfirmation class="nes-dialog is-dark is-rounded" id="fast-travel-confirmation">
+  <form method="dialog">
+    <p class="title">Confirm fast travel</p>
+    <p>Fast travel to {{this.fastTravelTo?.name}}?</p>
+    <div>
+      <p>Cost:</p>
+      <p>(theoretical costs...)</p>
+    </div>
+    <menu class="dialog-menu">
+      <button class="nes-btn">Cancel</button>
+      <button class="nes-btn is-primary" (click)="handleFastTravelConfirm()">Confirm</button>
+    </menu>
+  </form>
+</dialog>

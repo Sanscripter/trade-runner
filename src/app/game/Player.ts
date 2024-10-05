@@ -1,3 +1,4 @@
+import ICity from "../utils/ICity.interface";
 import { Inventory } from "./Inventory";
 
 export class Player {
@@ -7,7 +8,9 @@ export class Player {
   money: number;
   health: number = 5;
   position: { x: number, y: number } = { x: 70, y: 70 };
+  targetPosition?: { x: number, y: number };
   speed: number = 150; //default speed (assuming arbitrary dimensions)
+
 
   constructor(name: string, money?: number) {
     this.name = name;
@@ -25,6 +28,10 @@ export class Player {
   setMoney(money: number) {
     this.money = money;
   };
+
+  setTargetPosition(target: { x: number, y: number } | ICity) {
+
+  }
 
   takeDamage(damage: number) {
     this.health -= damage;

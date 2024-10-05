@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit  } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
 import ICity from '../utils/ICity.interface';
 import { Router } from '@angular/router';
 import { GameService } from '../shared/game.service';
@@ -14,6 +14,10 @@ export class MapComponent implements OnInit {
   player!: Player;
   inventoryOpen = false;
   locationHovered!: ICity | null;
+  fastTravelTo!: ICity | null;
+
+  @ViewChild('fastTravelConfirmation') fastTravelConfirmation: ElementRef<HTMLDialogElement> | undefined;
+
 
   constructor(private router: Router,public gameService: GameService, private cdr: ChangeDetectorRef, private soundService: SoundService) { }
 
@@ -31,14 +35,34 @@ export class MapComponent implements OnInit {
     this.inventoryOpen = !this.inventoryOpen;
   }
 
-  handleTravelling(city: ICity) {
+  handleFastTravelTo(city: ICity) {
+    this.fastTravelTo = city;
+    this.fastTravelConfirmation?.nativeElement.showModal();
+  }
+
+  handleEnterLocation(city: ICity) {
     this.gameService.playerMoved(city);
+    this.gameService.computeLocationChanges();
+
+    this.router.navigate([`location`], {
+      queryParams: {
+        id: city.id
+      }
+    });
+  }
+
+  handleFastTravelConfirm() {
+    this.gameService.playerMoved(this.fastTravelTo!);
     this.gameService.computeLocationChanges();
 
     this.router.navigate([`travelling`], {
       queryParams: {
-        id: city.id
+        id: this.fastTravelTo!.id
       }
+    })
+    .finally(() => {
+      this.fastTravelTo = null;
+      this.fastTravelConfirmation?.nativeElement.close();
     });
   }
 

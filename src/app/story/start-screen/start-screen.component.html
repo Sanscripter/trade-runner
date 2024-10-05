@@ -1,7 +1,7 @@
 @if (!scenarioSelected) {
   
   <h2 class="text-3xl pt-6 px-6">Pick your scenario:</h2>
-  <div class="flex justify-around mt-32 pt-14 py-28 px-24 h-1/2">
+  <div class="flex justify-around mt-24 pt-14 py-28 px-24 h-2/3">
   @for (scenario of scenarios; track scenario.id) {
     <div class="nes-container is-dark with-title w-96 flex flex-col justify-between">
       <p class="title">{{ scenario.title }}</p>
@@ -27,7 +27,7 @@
     <p *ngIf="currentSlide == 5 && currentSlide < 6" class="ml-5">For a <span class="nes-text is-warning">price.</span></p>
   
     @if (currentSlide === 6) {
-    <p class="ml-5"> You came to Happy Vale with your father to make a living as a vagrant trader. Unfortunately, a gang stormed your camp one night, killed your father and gave you <span class="nes-text is-error">30 days</span> to pay a <span class="nes-text is-error">$50.000,00 debt</span> he left.</p>
+    <p class="ml-5"> You came to Happy Valley with your father to make a living as a vagrant trader. Unfortunately, a gang stormed your camp one night, killed your father and gave you <span class="nes-text is-error">30 days</span> to pay a <span class="nes-text is-error">$50.000,00 debt</span> he left.</p>
     <div class="pl-10 mb-2 w-1/2 m-auto ">
       <label for="name">What's your <span class="nes-text is-warning">name</span>, trader?</label>
       <form [formGroup]="nameForm">

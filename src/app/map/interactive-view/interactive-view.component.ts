@@ -31,7 +31,10 @@ export class InteractiveViewComponent implements AfterViewInit {
 
   @Input() player?: Player;
 
-  @Output() travelledTo = new EventEmitter<ICity>();
+
+  @Output() enterLocation = new EventEmitter<ICity>();
+
+  @Output() fastTravelTo = new EventEmitter<ICity>();
 
   @Output() mouseOverCity = new EventEmitter<ICity | null>();
 
@@ -55,6 +58,46 @@ export class InteractiveViewComponent implements AfterViewInit {
 
     // First load adjust
     this.resizeCanvas();
+
+    this.fabricCanvas.on('mouse:dblclick', (e) => {
+      const zoom = this.fabricCanvas.getZoom();
+      const panX = this.fabricCanvas.viewportTransform![4];
+      const panY = this.fabricCanvas.viewportTransform![5];
+    
+      const targetX = e.pointer!.x / zoom - panX;
+      const targetY = e.pointer!.y / zoom - panY;
+    
+      // Get current player marker position
+      const currentX = this.playerMarker!.left!/ zoom - panX;
+      const currentY = this.playerMarker!.top!/ zoom - panY;
+    
+      // Calculate distance between current and target position
+      const distanceX = targetX - currentX!;
+      const distanceY = targetY - currentY!;
+    
+      // Use Pythagorean theorem to calculate total distance
+      const totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+    
+      // Set a consistent duration based on distance
+      const duration = totalDistance * 100 / this.player?.speed!; // Adjust this factor to control speed
+    
+      // Animate both top and left together using the same duration
+      this.playerMarker?.animate({
+        top: targetY,
+        left: targetX
+      }, {
+        duration: duration,
+        onChange: () => {
+          this.fabricCanvas.renderAll();
+          console.log('rendering');
+        },
+        onComplete: () => {
+          // Ensure player position is updated after animation completes
+          this.player!.position = { x: targetX, y: targetY };
+        }
+      });
+    });
+    
 
     // this.fabricCanvas.on('mouse:dblclick', (e) => {
     //   console.log(e.pointer, 'dblclick');
@@ -162,6 +205,7 @@ export class InteractiveViewComponent implements AfterViewInit {
 
     // Add your objects to the canvas after resizing
     this.renderCities();
+    this.renderPlayer();
     this.panToPlayer(); // Centers on player when loading
   }
 
@@ -321,8 +365,8 @@ export class InteractiveViewComponent implements AfterViewInit {
     const sidebarWidth = window.innerWidth * SIDEBAR_WIDTH;
 
     // The visible area should take into account the zoom and the viewport offsets
-    this.visibleArea.left = Math.max(0, -viewport[4] / zoom);
-    this.visibleArea.top = Math.max(0, -viewport[5] / zoom);
+    this.visibleArea.left = Math.max(-10, -viewport[4] / zoom + 10);
+    this.visibleArea.top = Math.max(-10, -viewport[5] / zoom +10);
 
     // Correct the calculation for the right and bottom edges
     this.visibleArea.right = Math.min(
@@ -352,7 +396,6 @@ export class InteractiveViewComponent implements AfterViewInit {
           fill: 'transparent', // Make it invisible
           stroke: 'green',
           borderColor: 'green',
-
           selectable: false,
           hoverCursor: 'pointer',
         });
@@ -396,11 +439,11 @@ export class InteractiveViewComponent implements AfterViewInit {
 
   renderPlayer() {
     if (!this.fabricCanvas) return;
+    if (!this.player) return;
 
     this.playerMarker = new fabric.Rect({
       top: this.player!.position.y,
       left: this.player!.position.x,
-
       width: 10,
       height: 10,
       fill: 'red',
@@ -439,7 +482,7 @@ export class InteractiveViewComponent implements AfterViewInit {
 
       const name = new fabric.Text(city.name, {
         top: city.y + rect.height! + 10,
-        left: city.x - rect.width! * 0.5,
+        left: city.x,
         fill: playerInCity ? 'red' : 'white',
         width: rect.width,
         fontFamily: 'Press Start 2P',
@@ -461,9 +504,19 @@ export class InteractiveViewComponent implements AfterViewInit {
         this.mouseOverCity.emit(null);
       });
 
-      rect.on('mousedown', () => {
-        this.travelledTo.emit(city);
+      rect.on('mousedblclick', () => {
+        this.fastTravelTo.emit(city);
       });
+
+      rect.on('mousedown', () => {
+        if (this.playerInCity(city)) {
+          this.enterLocation.emit(city);
+        } else {
+          // this.playerTarget.emit(city);
+          this.player?.setTargetPosition(city);
+        }
+      });
+
       this.fabricCanvas.add(rect, name);
     });
   }
