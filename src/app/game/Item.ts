@@ -1,8 +1,9 @@
 export class Item {
   id?: number;
   name: string;
-  cost?: number;
-  value: number;
+  cost?: number; //what it sells for
+  value: number; //theoretical intrinsic worth
+  originalValue?: number; //value it was bought for
   description: string;
   icon?: string;
   quantity?: number;

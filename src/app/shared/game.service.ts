@@ -271,7 +271,8 @@ export class GameService {
     this.player.inventory.items.forEach((item: Item) => {
       const effect = relevantEvents.find(e => e.effect.subject === item && e.effect.subject.id === item.id)?.effect;
       const priceImpact = effect?.type === EFFECT_TYPES.SCARCITY ? 1.3 : effect?.type === EFFECT_TYPES.EXCESS ? 0.4 : 0.8;
-      item.cost = item.value * (priceImpact + Math.random());
+      const finalPrice = item.value * (priceImpact + Math.random() + 0.01);
+      item.cost = finalPrice;
     });
   }
 

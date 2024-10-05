@@ -23,6 +23,7 @@ export class Inventory {
     if (existingItem) {
       existingItem.quantity! += item.quantity!;
     } else {
+      item.originalValue = item.cost;
       this.items.push(item);
     }
   };

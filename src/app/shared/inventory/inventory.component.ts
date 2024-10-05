@@ -13,6 +13,7 @@ export class InventoryComponent {
 
   @Input() inventory?: Inventory;
   @Input() mode: 'agent' | 'overworld' = 'overworld'; //ignore this
+  @Input() isPlayer = false;
   @Output() change = new EventEmitter<Inventory>();
 
   inventoryForm: FormGroup | undefined;

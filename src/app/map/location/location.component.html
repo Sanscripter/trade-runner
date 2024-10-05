@@ -1,38 +1,24 @@
 <p class="bg-black z-10 text-center w-full">
   {{ trader.name }}
 </p>
-<main class="h-full flex content-between w-full">
-  <img
-    class="w-full h-full z-0 absolute"
-    [src]="trader.background"
-    style="transform: scaleX(-1)"
-    alt=""
-  />
+<img class="w-full h-full z-0 absolute" [src]="trader.background" style="transform: scaleX(-1)" alt="" />
+<main class="h-full flex">
+
+  @if (selectedOption=== 'trader') {
+  <app-trading-view [trader]="trader" (optionSelected)="selectOption($event)"></app-trading-view>
+  }
 
   @if (!selectedOption) {
   <div class="flex flex-col w-1/4 nes-container is-dark p-4 h-64">
     <p>{{ trader.description }}</p>
   </div>
   <div class="flex flex-col h-1/2 w-1/4 pr-12">
-    <button
-      type="button"
-      class="nes-btn is-primary text-3xl m-auto mb-2"
-      (click)="selectOption('trader')"
-    >
+    <button type="button" class="nes-btn is-primary text-3xl m-auto mb-2" (click)="selectOption('trader')">
       Talk to Trader
     </button>
-    <button
-      type="button"
-      class="nes-btn is-warning text-3xl m-auto mb-3"
-      (click)="handleGoBack()"
-    >
+    <button type="button" class="nes-btn is-warning text-3xl m-auto mb-3" (click)="handleGoBack()">
       Leave >
     </button>
   </div>
-  } @else { @if (selectedOption=== 'trader') {
-  <app-trading-view
-    [trader]="trader"
-    (optionSelected)="selectOption($event)"
-  ></app-trading-view>
-  } }
+  }
 </main>

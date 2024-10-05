@@ -9,3 +9,6 @@
     min-width: 23%;
   }
   
+  .view-container {
+    width: 100vw;
+  }
