@@ -1,4 +1,4 @@
-export class GameEvents {
+export class GameEvent {
   description!: string;
   day!: number;
   effect: any;

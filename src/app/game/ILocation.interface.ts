@@ -1,6 +1,6 @@
-import { Inventory } from "../game/Inventory";
+import { Inventory } from "./Inventory";
 
-export default interface ICity {
+export default interface ILocation {
   id: number;
   x: number;
   y:number;

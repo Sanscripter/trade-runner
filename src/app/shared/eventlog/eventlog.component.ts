@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core';
-import { GameEvents } from '../../game/GameEvents';
+import { GameEvent } from '../../game/GameEvents';
 
 @Component({
   selector: 'app-eventlog',
@@ -9,10 +9,10 @@ import { GameEvents } from '../../game/GameEvents';
 })
 export class EventlogComponent {
 
-  @Input() eventLog: GameEvents[] = [];
+  @Input() eventLog: GameEvent[] = [];
   @Input() day: number = 1;
 
-  getHeat(event: GameEvents): any {
+  getHeat(event: GameEvent): any {
     const age = this.day - event.day;
     if (age === 0) {
       return { 'is-error': true };

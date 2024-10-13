@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
-import ICity from '../utils/ICity.interface';
+import ILocation from '../game/ILocation.interface';
 import { Router } from '@angular/router';
 import { GameService } from '../shared/game.service';
 import { Player } from '../game/Player';
@@ -13,8 +13,8 @@ import { SoundService } from '../shared/sound.service';
 export class MapComponent implements OnInit {
   player!: Player;
   inventoryOpen = false;
-  locationHovered!: ICity | null;
-  fastTravelTo!: ICity | null;
+  locationHovered!: ILocation | null;
+  fastTravelTo!: ILocation | null;
 
   @ViewChild('fastTravelConfirmation') fastTravelConfirmation: ElementRef<HTMLDialogElement> | undefined;
 
@@ -23,10 +23,10 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.gameService.loadGame();
-    this.player = this.gameService.player;
+    this.player = this.gameService.game.player;
 
 
-    if (this.gameService.isGameOver()) {
+    if (this.gameService.game.isGameOver()) {
       this.router.navigate(['end']);
     }
   }
@@ -35,14 +35,14 @@ export class MapComponent implements OnInit {
     this.inventoryOpen = !this.inventoryOpen;
   }
 
-  handleFastTravelTo(city: ICity) {
+  handleFastTravelTo(city: ILocation) {
     this.fastTravelTo = city;
     this.fastTravelConfirmation?.nativeElement.showModal();
   }
 
-  handleEnterLocation(city: ICity) {
-    this.gameService.playerMoved(city);
-    this.gameService.computeLocationChanges();
+  handleEnterLocation(city: ILocation) {
+    // this.gameService.playerMoved(city);
+    this.gameService.game.computeLocationChanges();
 
     this.router.navigate([`location`], {
       queryParams: {
@@ -52,8 +52,8 @@ export class MapComponent implements OnInit {
   }
 
   handleFastTravelConfirm() {
-    this.gameService.playerMoved(this.fastTravelTo!);
-    this.gameService.computeLocationChanges();
+    // this.gameService.game.playerMoved(this.fastTravelTo!);
+    this.gameService.game.computeLocationChanges();
 
     this.router.navigate([`travelling`], {
       queryParams: {
@@ -66,7 +66,7 @@ export class MapComponent implements OnInit {
     });
   }
 
-  renderLocationInfoCard(city: ICity | null) {
+  renderLocationInfoCard(city: ILocation | null) {
     if(!city) {
       this.locationHovered = null;
       return;

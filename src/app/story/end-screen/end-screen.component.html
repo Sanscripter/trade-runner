@@ -58,7 +58,7 @@
   </section>
   <section class="nes-container with-title is-dark w-full">
     <p class="title">Stats</p>
-    <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()"></app-agent-stats>
+    <app-agent-stats [stats]="player" [day]="gameService.game.getCurrentDay()"></app-agent-stats>
   </section>
   <section class="flex flex-row w-full mt-5">
     <button class="nes-btn is-error m-auto" (click)="handleExit()">Exit</button>
