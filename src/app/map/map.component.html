@@ -32,11 +32,10 @@
 
     <phaser-interactive-view
       class="w-full h-full"
-      (mouseOverCity)="renderLocationInfoCard($event)"
+      (mouseOverLocation)="renderLocationInfoCard($event)"
       (fastTravelTo)="handleFastTravelTo($event)"
       (enterLocation)="handleEnterLocation($event)"
-      [cities]="gameService.game.locations"
-      [player]="gameService.game.player"
+      [game]="gameService.game"
     ></phaser-interactive-view>
   </section>
 </main>

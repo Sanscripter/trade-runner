@@ -22,7 +22,6 @@ import { MusicButtonComponent } from './music-button/music-button.component';
     MusicButtonComponent
   ],
   providers: [
-    GameService,
     SoundService
   ],
   exports: [

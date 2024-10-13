@@ -74,9 +74,6 @@ export class Player {
       this.currentStats = playerConfig.currentStats;
     }
 
-    
-    
-
   }
 
   computeMaxStats() {
@@ -85,7 +82,7 @@ export class Player {
       health: this.attributes?.resilience * 10,
       hunger: 100,
       thirst: 100,
-      vice: this.attributes?.scoundrel * 10,
+      vice: 0,
       speed: 10
     }
   }

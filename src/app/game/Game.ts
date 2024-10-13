@@ -59,7 +59,7 @@ export class Game {
     this.configs = {
       ...config
     };
-    this.player = new Player(this.configs.PlayerConfig.name);
+    this.player = new Player(this.configs.PlayerConfig);
     this.eventManager = new GameEventsManager();
     this.setupLocations();
   }
@@ -82,8 +82,8 @@ export class Game {
   computeLocationChanges() {
     this.locations.forEach((c) => {
       if(c.mobile) {
-        c.x = c.x  + Math.floor((Math.random() > .3 ? 1 : -1) * c.speed! ?? 1);
-        c.y = c.y + Math.floor((Math.random() > .3 ? 1 : -1) * c.speed! ?? 1);
+        c.x = c.x  + Math.floor((Math.random() > .3 ? 1 : -1) * c.speed!/2 ?? 1);
+        c.y = c.y + Math.floor((Math.random() > .3 ? 1 : -1) * c.speed!/2 ?? 1);
       }
     })
   }

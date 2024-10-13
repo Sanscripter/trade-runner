@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import ILocation from '../../game/ILocation.interface';
 import { Player } from '../../game/Player';
 import { MapScene } from './game-scenes/MapScene';
+import { Game } from '../../game/Game';
 
 
 const SIDEBAR_WIDTH = 0.16666667;
@@ -17,18 +18,16 @@ const MAP_HEIGHT = 1200;
 })
 export class PhaserInteractiveViewComponent implements OnDestroy {
 
-  phaserGame?: Phaser.Game;
+  phaserInteractiveInstance?: Phaser.Game;
   config: Phaser.Types.Core.GameConfig;
-  @Input() cities: ILocation[] = [];
-
-  @Input() player?: Player;
-
+  
+  @Input() game?: Game;
 
   @Output() enterLocation = new EventEmitter<ILocation>();
 
   @Output() fastTravelTo = new EventEmitter<ILocation>();
 
-  @Output() mouseOverCity = new EventEmitter<ILocation | null>();
+  @Output() mouseOverLocation = new EventEmitter<ILocation | null>();
 
   constructor() {
     this.config = {
@@ -44,25 +43,23 @@ export class PhaserInteractiveViewComponent implements OnDestroy {
     };
   }
 
-  // ngAfterViewInit(): void {
-  //   // Pass input data to the scene before the game starts
-  //   const mapScene = new MapScene();
-  //   mapScene.cities = this.cities;
-  //   mapScene.player = this.player;
-  //   mapScene.enterLocation = this.enterLocation;
-  //   mapScene.fastTravelTo = this.fastTravelTo;
-  //   mapScene.mouseOverCity = this.mouseOverCity;
+  ngAfterViewInit(): void {
+    // Pass input data to the scene before the game starts
+    const mapScene = new MapScene(this.game!);
+    mapScene.enterLocation = this.enterLocation;
+    mapScene.fastTravelTo = this.fastTravelTo;
+    mapScene.mouseOverLocation = this.mouseOverLocation;
 
-  //   // Update the config to include the instance
-  //   this.config.scene = mapScene;
+    // Update the config to include the instance
+    this.config.scene = mapScene;
 
-  //   // Create the Phaser game
-  //   this.phaserGame = new Phaser.Game(this.config);
-  // }
+    // Create the Phaser game
+    this.phaserInteractiveInstance = new Phaser.Game(this.config);
+  }
 
   ngOnDestroy() {
-    if (this.phaserGame) {
-      this.phaserGame.destroy(true);
+    if (this.phaserInteractiveInstance) {
+      this.phaserInteractiveInstance.destroy(true);
     }
   }
 }

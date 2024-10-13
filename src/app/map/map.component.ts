@@ -66,7 +66,7 @@ export class MapComponent implements OnInit {
     });
   }
 
-  renderLocationInfoCard(city: ILocation | null) {
+  renderLocationInfoCard(city: any | ILocation | null) {
     if(!city) {
       this.locationHovered = null;
       return;

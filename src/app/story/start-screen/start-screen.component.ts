@@ -30,8 +30,6 @@ const LIST_OF_SCENARIOS = [
 
 @Component({
   selector: 'app-start-screen',
-  standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, RouterModule, CommonModule, SharedModule],
   templateUrl: './start-screen.component.html',
   styleUrl: './start-screen.component.scss'
 })

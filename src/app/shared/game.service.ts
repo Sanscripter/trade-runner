@@ -18,7 +18,7 @@ const DEFAULT_PLAYER_CONFIG =  {
     scoundrel: 5
   },
   currentStats: {
-    health: 100,
+    health: 5,
     hunger: 100,
     thirst: 100,
     vice: 0,
@@ -26,14 +26,12 @@ const DEFAULT_PLAYER_CONFIG =  {
   }
 };
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class GameService {
 
   game!: Game;
   
-  serializer!: JsonSerializer;
+  serializer = new JsonSerializer();
   gameState: any = null; //if game is null, start a new game
 
   startGame(playerName: string) {
@@ -46,7 +44,7 @@ export class GameService {
         name: playerName,
       }
     });
-    this.serializer = new JsonSerializer();
+    this.saveGame();
   };
 
   saveGame() {
@@ -64,7 +62,7 @@ export class GameService {
       console.error('No game state found');
       return;
     }
-    this.game = this.serializer.deserialize(Game, this.gameState);
+    // this.game = this.serializer.deserialize(JSON.parse(this.gameState), Game) as Game;
   }
 
   eraseSave() {

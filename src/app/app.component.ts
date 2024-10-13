@@ -8,8 +8,6 @@ import { SoundService } from './shared/sound.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [SharedModule, MapModule, StoryModule, CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
