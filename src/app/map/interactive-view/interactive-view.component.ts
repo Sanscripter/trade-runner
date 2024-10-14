@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { fabric } from 'fabric';
-import ICity from '../../utils/ICity.interface';
+import ILocation from '../../game/ILocation.interface';
 import { Player } from '../../game/Player';
 
 const SIDEBAR_WIDTH = 0.16666667;
@@ -27,16 +27,16 @@ export class InteractiveViewComponent implements AfterViewInit {
   fabricCanvas!: fabric.Canvas;
   mouseUp: any;
 
-  @Input() cities: ICity[] = [];
+  @Input() cities: ILocation[] = [];
 
   @Input() player?: Player;
 
 
-  @Output() enterLocation = new EventEmitter<ICity>();
+  @Output() enterLocation = new EventEmitter<ILocation>();
 
-  @Output() fastTravelTo = new EventEmitter<ICity>();
+  @Output() fastTravelTo = new EventEmitter<ILocation>();
 
-  @Output() mouseOverCity = new EventEmitter<ICity | null>();
+  @Output() mouseOverCity = new EventEmitter<ILocation | null>();
 
   playerMarker?: fabric.Rect;
 
@@ -60,42 +60,11 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.resizeCanvas();
 
     this.fabricCanvas.on('mouse:dblclick', (e) => {
-      const zoom = this.fabricCanvas.getZoom();
-      const panX = this.fabricCanvas.viewportTransform![4];
-      const panY = this.fabricCanvas.viewportTransform![5];
-    
-      const targetX = e.pointer!.x / zoom - panX;
-      const targetY = e.pointer!.y / zoom - panY;
-    
-      // Get current player marker position
-      const currentX = this.playerMarker!.left!/ zoom - panX;
-      const currentY = this.playerMarker!.top!/ zoom - panY;
-    
-      // Calculate distance between current and target position
-      const distanceX = targetX - currentX!;
-      const distanceY = targetY - currentY!;
-    
-      // Use Pythagorean theorem to calculate total distance
-      const totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-    
-      // Set a consistent duration based on distance
-      const duration = totalDistance * 100 / this.player?.speed!; // Adjust this factor to control speed
-    
-      // Animate both top and left together using the same duration
-      this.playerMarker?.animate({
-        top: targetY,
-        left: targetX
-      }, {
-        duration: duration,
-        onChange: () => {
-          this.fabricCanvas.renderAll();
-          console.log('rendering');
-        },
-        onComplete: () => {
-          // Ensure player position is updated after animation completes
-          this.player!.position = { x: targetX, y: targetY };
-        }
-      });
+      //don't allow dbclick on rect
+      if (e.target && e.target.type === 'rect') {
+        return;
+      }
+      this.animatePlayerMove(e)
     });
     
 
@@ -204,10 +173,87 @@ export class InteractiveViewComponent implements AfterViewInit {
     });
 
     // Add your objects to the canvas after resizing
-    this.renderCities();
     this.renderPlayer();
+    this.renderCities();
     this.panToPlayer(); // Centers on player when loading
   }
+
+  animatePlayerMove(e: any, frameCallback?: () => void) {
+    const zoom = this.fabricCanvas.getZoom();
+    const panX = this.fabricCanvas.viewportTransform![4];
+    const panY = this.fabricCanvas.viewportTransform![5];
+  
+    // Adjust targetX and targetY to correct for zoom and pan
+    const targetX = (e.pointer!.x - panX) / zoom;
+    const targetY = (e.pointer!.y - panY) / zoom;
+  
+    // Get current player marker position in world coordinates
+    const currentX = (this.playerMarker!.left! - panX) / zoom;
+    const currentY = (this.playerMarker!.top! - panY) / zoom;
+  
+    // Calculate distance between current and target position
+    const distanceX = targetX - currentX;
+    const distanceY = targetY - currentY;
+  
+    // Use Pythagorean theorem to calculate total distance
+    const totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+  
+    // Set a consistent duration based on distance
+    const duration = totalDistance * 100 / this.player?.currentStats.speed!; // Adjust this factor to control speed
+  
+    // Calculate the number of frames for 12 FPS
+    const fps = 12;
+    const frameDuration = 1000 / fps;
+    const totalFrames = Math.ceil(duration / frameDuration);
+  
+    // Initialize the current frame
+    let currentFrame = 0;
+  
+    // Function to update player position for each frame
+    const animateFrame = () => {
+      if (currentFrame < totalFrames) {
+        const progress = currentFrame / totalFrames;
+  
+        // Interpolate position in world coordinates
+        const newX = currentX + progress * distanceX;
+        const newY = currentY + progress * distanceY;
+  
+        // Update the marker position in world coordinates, considering zoom and pan offsets
+        this.playerMarker!.set({
+          left: newX * zoom + panX,
+          top: newY * zoom + panY,
+        });
+  
+        this.fabricCanvas.renderAll();
+  
+        // Call the frame callback to update other animations
+        if (frameCallback) frameCallback();
+  
+        currentFrame++;
+        setTimeout(() => {
+          requestAnimationFrame(animateFrame);
+        }, frameDuration);
+      } else {
+        // Finalize position when animation is complete
+        this.playerMarker!.set({
+          left: targetX * zoom + panX,
+          top: targetY * zoom + panY,
+        });
+        this.fabricCanvas.renderAll();
+  
+        // Update player position after animation completes
+        this.player!.position = { x: targetX, y: targetY };
+        this.enterLocation.emit(
+          this.cities.find(city => city.x === targetX && city.y === targetY)!
+        );
+      }
+    };
+  
+    // Start the animation
+    animateFrame();
+  }
+  
+  
 
   enableZoom() {
     this.fabricCanvas.on('mouse:wheel', (opt) => {
@@ -455,7 +501,7 @@ export class InteractiveViewComponent implements AfterViewInit {
     this.fabricCanvas.add(this.playerMarker);
   }
 
-  playerInCity(city: ICity): boolean {
+  playerInCity(city: ILocation): boolean {
     if (!this.player) return false;
     return (
       this.player.position.x === city.x && this.player.position.y === city.y
@@ -507,13 +553,14 @@ export class InteractiveViewComponent implements AfterViewInit {
       rect.on('mousedblclick', () => {
         this.fastTravelTo.emit(city);
       });
+      
+
 
       rect.on('mousedown', () => {
         if (this.playerInCity(city)) {
           this.enterLocation.emit(city);
         } else {
-          // this.playerTarget.emit(city);
-          this.player?.setTargetPosition(city);
+          this.animatePlayerMove({ pointer: { x: city.x, y: city.y } });
         }
       });
 

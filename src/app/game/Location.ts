@@ -1,7 +1,7 @@
-import ICity from "../utils/ICity.interface";
+import ILocation from "./ILocation.interface";
 import { Inventory } from "./Inventory";
 
-export class Location implements ICity {
+export class Location implements ILocation {
   id!: number;
   name!: string;
   inventory?: Inventory;

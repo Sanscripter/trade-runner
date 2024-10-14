@@ -1,20 +1,90 @@
-import ICity from "../utils/ICity.interface";
+import ILocation from "./ILocation.interface";
 import { Inventory } from "./Inventory";
 
-export class Player {
-  id = 0;
+export interface IPlayerConfig {
   name: string;
-  inventory: Inventory = new Inventory();
   money: number;
-  health: number = 5;
+  health: number;
+  position: { x: number, y: number };
+  attributes?: IAttributes;
+  currentStats?: IStats;
+  inventory?: Inventory;
+}
+
+export interface IAttributes {
+  // attributes (0 - 10)
+  resilience: number;
+  insight: number;
+  scoundrel: number;
+}
+
+export interface IStats {
+  health: number;
+  hunger: number;
+  thirst: number;
+  speed: number;
+  vice: number;
+}
+
+export interface IStatModifier {
+  type: 'item' | 'event';
+  name: string;
+  description: string;
+}
+
+
+// TODO: REVIEW TO CREATE A GENERAL CHARACTER CLASS
+export class Player {
+  
+  name: string = "Player";
+  attributes!: IAttributes;
+
+  //Stats
+  maxStats!: IStats;
+  currentStats!: IStats;
+
+
+  // static modifiers
+  statsModifiers: Map<IStatModifier,IStats> = new Map();
+
+
+  // changes frequently
+  inventory: Inventory = new Inventory();
+  money: number;  
   position: { x: number, y: number } = { x: 70, y: 70 };
-  targetPosition?: { x: number, y: number };
-  speed: number = 150; //default speed (assuming arbitrary dimensions)
 
 
-  constructor(name: string, money?: number) {
-    this.name = name;
-    this.money = money ? money : 0;
+  constructor(playerConfig: IPlayerConfig) {
+    
+    this.name = playerConfig.name;
+    this.money = playerConfig.money;
+    this.position = playerConfig.position;
+    
+    if (playerConfig.inventory) {
+      this.inventory = playerConfig.inventory;
+    }
+
+    if (playerConfig.attributes) {
+      this.attributes = playerConfig.attributes;
+    } 
+
+    this.computeMaxStats();
+
+    if (playerConfig.currentStats) {
+      this.currentStats = playerConfig.currentStats;
+    }
+
+  }
+
+  computeMaxStats() {
+    // COMPUTE STATS BASED ON ATTRIBUTES
+    this.maxStats = {
+      health: this.attributes?.resilience * 10,
+      hunger: 100,
+      thirst: 100,
+      vice: 0,
+      speed: 10
+    }
   }
 
   get stealingChance() {
@@ -29,17 +99,17 @@ export class Player {
     this.money = money;
   };
 
-  setTargetPosition(target: { x: number, y: number } | ICity) {
+  setTargetPosition(target: { x: number, y: number } | ILocation) {
 
   }
 
   takeDamage(damage: number) {
-    this.health -= damage;
+    this.currentStats.health -= damage;
     //TODO: SHOULD HAVE EFFECTS TO CHANGE THE UI BASED ON DAMAGE
   };
 
   heal(heal: number) {
-    this.health += heal;
+    this.currentStats.health += heal;
   };
 
   travelTo(city: { x: number, y: number }) {
@@ -50,7 +120,7 @@ export class Player {
 
   setSpeed(speed: number) {
     //set speed based on the inventory
-    this.speed = speed;
+    this.currentStats.speed = speed;
   }
 
 }

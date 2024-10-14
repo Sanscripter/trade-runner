@@ -3,11 +3,11 @@
     class="flex flex-col w-sidebar nes-container is-dark p-2 justify-between z-50 border-solid border border-white"
   >
     <div class="upper-aside-layout flex flex-col">
-      <app-agent-stats [stats]="player" [day]="gameService.getCurrentDay()" />
+      <app-agent-stats [stats]="player" [day]="gameService.game.getCurrentDay()" />
       <app-eventlog
         class="eventlog-layout"
-        [eventLog]="gameService.eventLog"
-        [day]="gameService.getCurrentDay()"
+        [eventLog]="gameService.game.eventLog"
+        [day]="gameService.game.getCurrentDay()"
       />
     </div>
     <button class="nes-btn is-warning" (click)="toggleInventory()">
@@ -30,14 +30,13 @@
       [player]="player"
     ></app-location-info-card>
 
-    <app-interactive-view
+    <phaser-interactive-view
       class="w-full h-full"
-      (mouseOverCity)="renderLocationInfoCard($event)"
+      (mouseOverLocation)="renderLocationInfoCard($event)"
       (fastTravelTo)="handleFastTravelTo($event)"
       (enterLocation)="handleEnterLocation($event)"
-      [cities]="gameService.cities"
-      [player]="gameService.player"
-    ></app-interactive-view>
+      [game]="gameService.game"
+    ></phaser-interactive-view>
   </section>
 </main>
 

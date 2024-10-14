@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import ICity from '../../utils/ICity.interface';
+import ILocation from '../../game/ILocation.interface';
 import { Player } from '../../game/Player';
 
 @Component({
@@ -9,7 +9,7 @@ import { Player } from '../../game/Player';
 })
 export class LocationInfoCardComponent implements OnChanges {
 
-  @Input() location: ICity | null | undefined;
+  @Input() location: ILocation | null | undefined;
 
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -26,7 +26,7 @@ export class LocationInfoCardComponent implements OnChanges {
 
   getCurrentDistaceInDays() {
     const currentPosition = this.player?.position!//current position of the player
-    const speed = this.player?.speed!;//speed of the player
+    const speed = this.player?.currentStats.speed!;//speed of the player
     const distance = Math.sqrt(Math.pow(currentPosition.x - this.location!.x, 2) + Math.pow(currentPosition.y - this.location!.y, 2));
     return Math.ceil(distance / speed);
   }

@@ -3,6 +3,7 @@ import { GameService } from '../../shared/game.service';
 import { ENDINGS } from '../../game/Endings.enum';
 import { Router } from '@angular/router';
 import { SoundService } from '../../shared/sound.service';
+import { Game } from '../../game/Game';
 
 @Component({
   selector: 'app-end-screen',
@@ -19,16 +20,16 @@ export class EndScreenComponent implements OnInit {
 
   ngOnInit() {
     this.gameService.loadGame();
-    this.ending = this.gameService.ending;
+    this.ending = this.gameService.game.ending;
     this.playEndingSound();
   }
 
   get player() {
-    return this.gameService.player;
+    return this.gameService.game.player;
   }
 
   handleExit() {
-    this.gameService.resetGame();
+    this.gameService.game = {} as Game; // or new Game();
     this.router.navigate(['menu']);
   }
 

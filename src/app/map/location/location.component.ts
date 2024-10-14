@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../../shared/game.service';
-import ICity from '../../utils/ICity.interface';
+import ILocation from '../../game/ILocation.interface';
 import { SoundService } from '../../shared/sound.service';
 
 @Component({
@@ -22,16 +22,16 @@ export class LocationComponent implements OnInit {
     this.route.queryParams.subscribe((qp: any) => {
       this.locationId = qp['id'];
     });
-    this.trader = this.gameService.getCurrentLocalEconomy(this.trader);
+    this.trader = this.gameService.game.getCurrentLocalEconomy(this.trader);
     this.cdr.detectChanges();
   }
 
   get trader() {
-    return this.gameService.cities.find(c => c.id == this.locationId)!;
+    return this.gameService.game.locations.find(c => c.id == this.locationId)!;
   };
 
-  set trader(trader: ICity) {
-    this.gameService.cities = this.gameService.cities.map(c => c.id === trader.id ? trader : c);
+  set trader(trader: ILocation) {
+    this.gameService.game.locations = this.gameService.game.locations.map(c => c.id === trader.id ? trader : c);
   };
 
   selectOption(option: string|null) {
@@ -39,7 +39,7 @@ export class LocationComponent implements OnInit {
   }
 
   handleGoBack() {
-    if (this.gameService.isGameOver()) {
+    if (this.gameService.game.isGameOver()) {
       this.router.navigate(['end']);
       return;
     }

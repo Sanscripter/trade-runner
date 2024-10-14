@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { Inventory } from '../../game/Inventory';
 import { Item } from '../../game/Item';
 import { Player } from '../../game/Player';
-import ICity from '../../utils/ICity.interface';
+import ILocation from '../../game/ILocation.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GameService } from '../../shared/game.service';
 import { SoundService } from '../../shared/sound.service';
@@ -15,7 +15,7 @@ import { SoundService } from '../../shared/sound.service';
 })
 export class TradingViewComponent implements OnInit {
 
-  @Input() trader!: ICity;
+  @Input() trader!: ILocation;
 
   @Output() optionSelected = new EventEmitter<string | null>();
 
@@ -40,7 +40,7 @@ export class TradingViewComponent implements OnInit {
 
   
   get player() {
-    return this.gameService.player;
+    return this.gameService.game.player;
   };
 
   get bark() {
@@ -156,7 +156,7 @@ export class TradingViewComponent implements OnInit {
     this.gameService.saveGame();
   }
 
-  transferMoney(from: Player | ICity, to: Player | ICity, amount: number) {
+  transferMoney(from: Player | ILocation, to: Player | ILocation, amount: number) {
     const contrainedValue = Math.min(from.money!, amount);
     from.money! -= contrainedValue;
     to.money! += contrainedValue;
