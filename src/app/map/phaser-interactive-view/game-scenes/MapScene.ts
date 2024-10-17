@@ -5,7 +5,6 @@ import ILocation from '../../../game/ILocation.interface';
 import { Game } from '../../../game/Game';
 
 export class MapScene extends Phaser.Scene {
-
   enterLocation = new EventEmitter<ILocation>();
 
   fastTravelTo = new EventEmitter<ILocation>();
@@ -21,7 +20,10 @@ export class MapScene extends Phaser.Scene {
 
   private playerTween?: Phaser.Tweens.Tween;
 
-  private locationGraphics: { graphic: Phaser.GameObjects.Rectangle, location: ILocation }[] = [];
+  private locationGraphics: {
+    graphic: Phaser.GameObjects.Rectangle;
+    location: ILocation;
+  }[] = [];
 
   private isDragging: boolean = false;
   private dragStartPoint: Phaser.Math.Vector2 = new Phaser.Math.Vector2();
@@ -150,7 +152,7 @@ export class MapScene extends Phaser.Scene {
     );
 
     // Get the player's current speed (units per second)
-    const speed = this.baseGame.player.currentStats.speed;
+    const speed = this.baseGame.player.currentStats.speed.value;
 
     // Calculate the duration of the tween based on distance and speed
     const duration = (distance / (speed * 20)) * 1000; // Convert seconds to milliseconds
@@ -193,17 +195,12 @@ export class MapScene extends Phaser.Scene {
       this.locationGraphics.push({ graphic: locationGraphic, location });
 
       const locationName = this.add
-        .text(
-          location.x,
-          location.y + location.size * 15,
-          location.name,
-          {
-            fontFamily: 'Press Start 2P',
-            fontSize: '1000px',
-            color: '#ffffff',
-            align: 'center',
-          }
-        )
+        .text(location.x, location.y + location.size * 15, location.name, {
+          fontFamily: 'Press Start 2P',
+          fontSize: '1000px',
+          color: '#ffffff',
+          align: 'center',
+        })
         .setOrigin(0.5);
 
       locationGraphic.on('pointerover', () => {
@@ -251,8 +248,10 @@ export class MapScene extends Phaser.Scene {
         const dragY = pointer.y - this.dragStartPoint.y;
 
         // Adjust for zoom level to ensure consistent dragging speed
-        this.cameras.main.scrollX = this.cameraStartPoint.x - dragX / this.cameras.main.zoom;
-        this.cameras.main.scrollY = this.cameraStartPoint.y - dragY / this.cameras.main.zoom;
+        this.cameras.main.scrollX =
+          this.cameraStartPoint.x - dragX / this.cameras.main.zoom;
+        this.cameras.main.scrollY =
+          this.cameraStartPoint.y - dragY / this.cameras.main.zoom;
       }
     });
 
@@ -269,24 +268,49 @@ export class MapScene extends Phaser.Scene {
     });
 
     // Zoom with mouse wheel
-    this.input.on('wheel', (_pointer: any, _gameObjects: any, _deltaX: any, deltaY: number, _deltaZ: any) => {
-      if (deltaY > 0) {
-        // Zoom out
-        this.cameras.main.zoom = Phaser.Math.Clamp(this.cameras.main.zoom - 0.1, 0.5, 2);
-      } else if (deltaY < 0) {
-        // Zoom in
-        this.cameras.main.zoom = Phaser.Math.Clamp(this.cameras.main.zoom + 0.1, 0.5, 2);
+    this.input.on(
+      'wheel',
+      (
+        _pointer: any,
+        _gameObjects: any,
+        _deltaX: any,
+        deltaY: number,
+        _deltaZ: any
+      ) => {
+        if (deltaY > 0) {
+          // Zoom out
+          this.cameras.main.zoom = Phaser.Math.Clamp(
+            this.cameras.main.zoom - 0.1,
+            0.5,
+            2
+          );
+        } else if (deltaY < 0) {
+          // Zoom in
+          this.cameras.main.zoom = Phaser.Math.Clamp(
+            this.cameras.main.zoom + 0.1,
+            0.5,
+            2
+          );
+        }
       }
-    });
+    );
 
     // Zoom with '+' and '-' keys
     this.input.keyboard!.on('keydown', (event: any) => {
       if (event.key === '+' || event.key === '=') {
         // Zoom in
-        this.cameras.main.zoom = Phaser.Math.Clamp(this.cameras.main.zoom + 0.1, 0.5, 2);
+        this.cameras.main.zoom = Phaser.Math.Clamp(
+          this.cameras.main.zoom + 0.1,
+          0.5,
+          2
+        );
       } else if (event.key === '-') {
         // Zoom out
-        this.cameras.main.zoom = Phaser.Math.Clamp(this.cameras.main.zoom - 0.1, 0.5, 2);
+        this.cameras.main.zoom = Phaser.Math.Clamp(
+          this.cameras.main.zoom - 0.1,
+          0.5,
+          2
+        );
       }
     });
   }

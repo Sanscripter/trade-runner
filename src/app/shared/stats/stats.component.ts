@@ -5,10 +5,9 @@ import ILocation from '../../game/ILocation.interface';
 @Component({
   selector: 'app-agent-stats',
   templateUrl: './stats.component.html',
-  styleUrl: './stats.component.scss'
+  styleUrl: './stats.component.scss',
 })
 export class StatsComponent {
-
   @Input() stats!: Player | ILocation;
   @Input() day: number = 0;
 
@@ -17,7 +16,14 @@ export class StatsComponent {
   }
 
   get playerHealth(): number {
-    return this.stats instanceof Player ? this.stats.currentStats.health : 0;
+    return this.stats instanceof Player
+      ? this.stats.currentStats.health.value
+      : 0;
   }
 
+  get playerMaxHealth(): number {
+    return this.stats instanceof Player
+      ? this.stats.currentStats.health.max
+      : 0;
+  }
 }

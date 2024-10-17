@@ -31,7 +31,6 @@ export class InteractiveViewComponent implements AfterViewInit {
 
   @Input() player?: Player;
 
-
   @Output() enterLocation = new EventEmitter<ILocation>();
 
   @Output() fastTravelTo = new EventEmitter<ILocation>();
@@ -64,9 +63,8 @@ export class InteractiveViewComponent implements AfterViewInit {
       if (e.target && e.target.type === 'rect') {
         return;
       }
-      this.animatePlayerMove(e)
+      this.animatePlayerMove(e);
     });
-    
 
     // this.fabricCanvas.on('mouse:dblclick', (e) => {
     //   console.log(e.pointer, 'dblclick');
@@ -182,53 +180,56 @@ export class InteractiveViewComponent implements AfterViewInit {
     const zoom = this.fabricCanvas.getZoom();
     const panX = this.fabricCanvas.viewportTransform![4];
     const panY = this.fabricCanvas.viewportTransform![5];
-  
+
     // Adjust targetX and targetY to correct for zoom and pan
     const targetX = (e.pointer!.x - panX) / zoom;
     const targetY = (e.pointer!.y - panY) / zoom;
-  
+
     // Get current player marker position in world coordinates
     const currentX = (this.playerMarker!.left! - panX) / zoom;
     const currentY = (this.playerMarker!.top! - panY) / zoom;
-  
+
     // Calculate distance between current and target position
     const distanceX = targetX - currentX;
     const distanceY = targetY - currentY;
-  
+
     // Use Pythagorean theorem to calculate total distance
-    const totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-  
+    const totalDistance = Math.sqrt(
+      distanceX * distanceX + distanceY * distanceY
+    );
+
     // Set a consistent duration based on distance
-    const duration = totalDistance * 100 / this.player?.currentStats.speed!; // Adjust this factor to control speed
-  
+    const duration =
+      (totalDistance * 100) / this.player?.currentStats.speed!.value!; // Adjust this factor to control speed
+
     // Calculate the number of frames for 12 FPS
     const fps = 12;
     const frameDuration = 1000 / fps;
     const totalFrames = Math.ceil(duration / frameDuration);
-  
+
     // Initialize the current frame
     let currentFrame = 0;
-  
+
     // Function to update player position for each frame
     const animateFrame = () => {
       if (currentFrame < totalFrames) {
         const progress = currentFrame / totalFrames;
-  
+
         // Interpolate position in world coordinates
         const newX = currentX + progress * distanceX;
         const newY = currentY + progress * distanceY;
-  
+
         // Update the marker position in world coordinates, considering zoom and pan offsets
         this.playerMarker!.set({
           left: newX * zoom + panX,
           top: newY * zoom + panY,
         });
-  
+
         this.fabricCanvas.renderAll();
-  
+
         // Call the frame callback to update other animations
         if (frameCallback) frameCallback();
-  
+
         currentFrame++;
         setTimeout(() => {
           requestAnimationFrame(animateFrame);
@@ -240,20 +241,18 @@ export class InteractiveViewComponent implements AfterViewInit {
           top: targetY * zoom + panY,
         });
         this.fabricCanvas.renderAll();
-  
+
         // Update player position after animation completes
         this.player!.position = { x: targetX, y: targetY };
         this.enterLocation.emit(
-          this.cities.find(city => city.x === targetX && city.y === targetY)!
+          this.cities.find((city) => city.x === targetX && city.y === targetY)!
         );
       }
     };
-  
+
     // Start the animation
     animateFrame();
   }
-  
-  
 
   enableZoom() {
     this.fabricCanvas.on('mouse:wheel', (opt) => {
@@ -412,7 +411,7 @@ export class InteractiveViewComponent implements AfterViewInit {
 
     // The visible area should take into account the zoom and the viewport offsets
     this.visibleArea.left = Math.max(-10, -viewport[4] / zoom + 10);
-    this.visibleArea.top = Math.max(-10, -viewport[5] / zoom +10);
+    this.visibleArea.top = Math.max(-10, -viewport[5] / zoom + 10);
 
     // Correct the calculation for the right and bottom edges
     this.visibleArea.right = Math.min(
@@ -553,8 +552,6 @@ export class InteractiveViewComponent implements AfterViewInit {
       rect.on('mousedblclick', () => {
         this.fastTravelTo.emit(city);
       });
-      
-
 
       rect.on('mousedown', () => {
         if (this.playerInCity(city)) {

@@ -4,14 +4,16 @@
       "description": "{{subject}} is now flooding the market. Prices are dropping.",
       "effect": {
         "type": "EXCESS",
-        "subjectType": "ITEM"
+        "subjectType": "ITEM",
+        "targetType": ""
       }
     },
     {
       "description": "{{subject}} is now hard to find. Prices are rising.",
       "effect": {
         "type": "SCARCITY",
-        "subjectType": "ITEM"
+        "subjectType": "ITEM",
+        "targetType": ""
       }
     },
     {
@@ -34,28 +36,32 @@
       "description": "{{subject}} was hazed in an attack. Spoils are selling for cheap.",
       "effect": {
         "type": "POVERTY",
-        "subjectType": "CITY"
+        "subjectType": "CITY",
+        "targetType": ""
       }
     },
     {
       "description": "{{subject}} was struck by sickness and facing poverty.",
       "effect": {
         "type": "POVERTY",
-        "subjectType": "CITY"
+        "subjectType": "CITY",
+        "targetType": ""
       }
     },
     {
       "description": "{{subject}} has become a hub for traders. Prices are rising.",
       "effect": {
         "type": "ABUNDANCE",
-        "subjectType": "CITY"
+        "subjectType": "CITY",
+        "targetType": ""
       }
     },
     {
       "description": "{{subject}} has become successful and well managed. Their goods are trading at a premium.",
       "effect": {
         "type": "ABUNDANCE",
-        "subjectType": "CITY"
+        "subjectType": "CITY",
+        "targetType": ""
       }
     }
   ]

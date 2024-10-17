@@ -1,12 +1,12 @@
-import { Inventory } from "./Inventory";
+import { Inventory } from './Inventory';
 
 export default interface ILocation {
   id: number;
   x: number;
-  y:number;
+  y: number;
   name: string;
   size: number;
-  inventory?: Inventory | any;
+  inventory?: Inventory;
   money?: number;
   health?: number;
   traderMugshot?: string;

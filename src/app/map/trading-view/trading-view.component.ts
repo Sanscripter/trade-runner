@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Inventory } from '../../game/Inventory';
 import { Item } from '../../game/Item';
 import { Player } from '../../game/Player';
@@ -6,22 +14,22 @@ import ILocation from '../../game/ILocation.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GameService } from '../../shared/game.service';
 import { SoundService } from '../../shared/sound.service';
+import { InventoryItem } from '../../game/InventoryItem';
 
 @Component({
   selector: 'app-trading-view',
   templateUrl: './trading-view.component.html',
   styleUrls: ['./trading-view.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TradingViewComponent implements OnInit {
-
   @Input() trader!: ILocation;
 
   @Output() optionSelected = new EventEmitter<string | null>();
 
   playerSells = new Inventory();
   traderSells = new Inventory();
-  stealableItems: Item[] = [];
+  stealableItems: InventoryItem[] = [];
   checkingSteal = false;
   tradeMode = false;
   notEnoughMoney = false;
@@ -30,21 +38,25 @@ export class TradingViewComponent implements OnInit {
   stealSuccess = false;
   stealFailed = false;
   stealMode = false;
-  stolenItem?: Item;
+  stolenItem?: InventoryItem;
 
-  constructor(private router: Router, public gameService: GameService, private cdr: ChangeDetectorRef, private soundService: SoundService) { }
+  constructor(
+    private router: Router,
+    public gameService: GameService,
+    private cdr: ChangeDetectorRef,
+    private soundService: SoundService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-
-  
   get player() {
     return this.gameService.game.player;
-  };
+  }
 
   get bark() {
-    return this.trader.barks![Math.floor(Math.random() * this.trader.barks!.length)];
+    return this.trader.barks![
+      Math.floor(Math.random() * this.trader.barks!.length)
+    ];
   }
 
   get playerInventory() {
@@ -56,8 +68,7 @@ export class TradingViewComponent implements OnInit {
   }
 
   handleGoBack() {
-   this.optionSelected.emit(null)
-    
+    this.optionSelected.emit(null);
   }
 
   handlePlayerSell(event: any) {
@@ -76,12 +87,12 @@ export class TradingViewComponent implements OnInit {
     this.lackOfFunds = false;
     const playerValue = this.playerSells.totalValue;
     const traderValue = this.traderSells.totalValue;
-    if (playerValue > (this.trader.money! + traderValue)) {
+    if (playerValue > this.trader.money! + traderValue) {
       this.lackOfFunds = true;
       this.tradeEnabled = false;
       return;
     }
-    if (traderValue > (this.player.money! + playerValue)) {
+    if (traderValue > this.player.money! + playerValue) {
       this.notEnoughMoney = true;
       this.tradeEnabled = false;
       return;
@@ -107,7 +118,8 @@ export class TradingViewComponent implements OnInit {
     //every time we steal,  a few items are available (2)
     const items = this.trader.inventory!.items;
     const randomItems = [];
-    for (let i = 0; i < 2; i++) { //TODO: In the future stealable must be defined by relative value and trade personality
+    for (let i = 0; i < 2; i++) {
+      //TODO: In the future stealable must be defined by relative value and trade personality
       const randomItem = items[Math.floor(Math.random() * items.length)];
       randomItems.push(randomItem);
     }
@@ -116,13 +128,28 @@ export class TradingViewComponent implements OnInit {
 
   handleStealing(index: number) {
     this.stealMode = true;
-    if (Math.random() > this.player.stealingChance!){//TODO: In the future stealing chance must be defined by player personality
-      const randomItem = this.stealableItems[index];
-      console.log('random',randomItem);
+    if (Math.random() > this.player.stealingChance!) {
+      //TODO: In the future stealing chance must be defined by player personality
+      const randomItem = this.stealableItems[index].item;
+      console.log('random', randomItem);
       const randomQty = 1; //In the future we can add a random quantity
-      this.stolenItem = new Item(randomItem.name, randomItem?.cost!, randomItem.description, randomQty, randomItem.id, randomItem.img);
-      this.player.inventory.addItem(this.stolenItem);
-      this.trader.inventory!.removeItem(this.stolenItem);
+      const item = new Item(
+        randomItem!.name,
+        randomItem!.value,
+        randomItem!.description,
+        randomItem!.id,
+        randomItem!.image,
+        randomItem!.slotSize,
+        randomItem!.effects
+      );
+      this.stolenItem = new InventoryItem(
+        item,
+        randomQty,
+        randomItem?.value!,
+        randomItem?.value!
+      );
+      this.player.inventory.addInvItem(this.stolenItem);
+      this.trader.inventory!.removeInvItem(this.stolenItem);
       this.stealSuccess = true;
     } else {
       // this.player.takeDamage(Math.ceil(this.trader.size! * Math.random()/2));
@@ -136,16 +163,19 @@ export class TradingViewComponent implements OnInit {
   handleTrade() {
     //If it's positive add to player wallet and remove from trader wallet
     //If it's negative do the opposite
-    const netTrasactionValue = this.playerSells.totalValue - this.traderSells.totalValue;
-    netTrasactionValue > 0 ? this.transferMoney(this.trader, this.player, netTrasactionValue) : this.transferMoney(this.player, this.trader, -netTrasactionValue);
+    const netTrasactionValue =
+      this.playerSells.totalValue - this.traderSells.totalValue;
+    netTrasactionValue > 0
+      ? this.transferMoney(this.trader, this.player, netTrasactionValue)
+      : this.transferMoney(this.player, this.trader, -netTrasactionValue);
     // trasfer items
-    this.playerSells.items.forEach(item => {
-      this.player.inventory!.removeItem(item);
-      this.trader.inventory!.addItem(item);
+    this.playerSells.items.forEach((item) => {
+      this.player.inventory!.removeInvItem(item);
+      this.trader.inventory!.addInvItem(item);
     });
-    this.traderSells.items.forEach(item => {
-      this.trader.inventory!.removeItem(item);
-      this.player.inventory!.addItem(item);
+    this.traderSells.items.forEach((item) => {
+      this.trader.inventory!.removeInvItem(item);
+      this.player.inventory!.addInvItem(item);
     });
     this.playerSells.items = [];
     this.traderSells.items = [];
@@ -156,7 +186,11 @@ export class TradingViewComponent implements OnInit {
     this.gameService.saveGame();
   }
 
-  transferMoney(from: Player | ILocation, to: Player | ILocation, amount: number) {
+  transferMoney(
+    from: Player | ILocation,
+    to: Player | ILocation,
+    amount: number
+  ) {
     const contrainedValue = Math.min(from.money!, amount);
     from.money! -= contrainedValue;
     to.money! += contrainedValue;
@@ -179,6 +213,4 @@ export class TradingViewComponent implements OnInit {
     this.lackOfFunds = false;
     this.soundService.playSound('GENERIC_ACTION_CLICK', { playbackRate: 1.5 });
   }
-
-
 }
