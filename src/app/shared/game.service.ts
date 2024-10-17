@@ -6,46 +6,67 @@ import * as ItemsConfig from '../game/configs/items.json';
 import * as GameEventsConfig from '../game/configs/game_events.json';
 import { JsonSerializer } from 'typescript-json-serializer';
 
+const DEFAULT_X = 600;
+const DEFAULT_Y = 1085;
+const DEFAULT_HEALTH = 5;
+const DEFAULT_HUNGER = 100;
+const DEFAULT_THIRST = 100;
+const DEFAULT_VICE = 0;
+const DEFAULT_SPEED = 50;
 
-//TODO: EXTRACT 
-const DEFAULT_PLAYER_CONFIG =  {
+//TODO: EXTRACT
+const DEFAULT_PLAYER_CONFIG = {
   money: 5000,
-  position: { x: 0, y: 0 },
+  position: { x: DEFAULT_X, y: DEFAULT_Y },
   inventory: new Inventory(),
   attributes: {
     resiliance: 5,
     insight: 5,
-    scoundrel: 5
+    scoundrel: 5,
   },
   currentStats: {
-    health: 5,
-    hunger: 100,
-    thirst: 100,
-    vice: 0,
-    speed: 10
-  }
+    health: {
+      value: DEFAULT_HEALTH,
+      max: DEFAULT_HEALTH,
+    },
+    hunger: {
+      value: DEFAULT_HUNGER,
+      max: DEFAULT_HUNGER,
+    },
+    thirst: {
+      value: DEFAULT_THIRST,
+      max: DEFAULT_THIRST,
+    },
+    vice: {
+      value: DEFAULT_VICE,
+      max: DEFAULT_VICE,
+    },
+    speed: {
+      value: DEFAULT_SPEED,
+      max: DEFAULT_SPEED,
+    },
+  },
 };
 
 @Injectable()
 export class GameService {
-
   game!: Game;
-  
+
   serializer = new JsonSerializer();
   gameState: any = null; //if game is null, start a new game
 
   startGame(playerName: string) {
     this.game = new Game({
-      ItemsConfig: {...ItemsConfig},
-      LocationsConfig: {...LocationsConfig},
-      GameEventsConfig: {...GameEventsConfig},
+      ItemsConfig: { ...ItemsConfig },
+      LocationsConfig: { ...LocationsConfig },
+      GameEventsConfig: { ...GameEventsConfig },
       PlayerConfig: {
         ...DEFAULT_PLAYER_CONFIG,
         name: playerName,
-      }
+      },
     });
     this.saveGame();
-  };
+  }
 
   saveGame() {
     if (!this.game || !this.serializer) {
@@ -54,7 +75,7 @@ export class GameService {
     }
     const gameState = this.serializer.serialize(this.game);
     localStorage.setItem('gameState', JSON.stringify(gameState));
-  };
+  }
 
   loadGame() {
     this.gameState = localStorage.getItem('gameState');
@@ -67,6 +88,5 @@ export class GameService {
 
   eraseSave() {
     localStorage.removeItem('gameState');
-  }  
-
+  }
 }

@@ -5,11 +5,18 @@
       "name": "Car",
       "description": "A useful vehicle for transportation",
       "value": 100000,
-     "image": "car-ic.png",
+      "image": "car-ic.png",
+      "slotSize": 100,
       "effects": [
         {
           "name": "transport",
-          "description": "Increased inventory by 2 slots. Visit 2 cities per day. Incurs variable fuel and maintenance costs"
+          "level": 1,
+          "description": "Visit 2 cities per day. Incurs variable fuel and maintenance costs."
+        },
+        {
+          "name": "expansion",
+          "level": 3,
+          "description": "Increased inventory by 15 slots."
         }
       ]
     },
@@ -18,17 +25,18 @@
       "name": "Pistol",
       "description": "A small firearm for self-defense and more...",
       "value": 5000,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "shooting",
           "level": 1,
-          "description": "Gives the option to shoot under certain circunstances for small damage. Incurs variable ammo costs."
+          "description": "Gives the option to shoot under certain circumstances for small damage. Incurs variable ammo costs."
         },
         {
           "name": "intimidation",
           "level": 2,
-          "description": "Gives the option to intimidate under certain circunstances. Increases the chance of stealing from traders. Deccreases the chance of being jumped."
+          "description": "Gives the option to intimidate under certain circumstances. Increases the chance of stealing from traders. Decreases the chance of being jumped."
         }
       ]
     },
@@ -37,17 +45,18 @@
       "name": "Rifle",
       "description": "A long firearm for hunting and more...",
       "value": 10000,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "shooting",
           "level": 2,
-          "description": "Gives the option to shoot under certain circunstances for medium damage. Incurs variable ammo costs."
+          "description": "Gives the option to shoot under certain circumstances for medium damage. Incurs variable ammo costs."
         },
         {
           "name": "intimidation",
           "level": 3,
-          "description": "Gives the option to intimidate under certain circunstances. Increases the chance of stealing from traders. Deccreases the chance of being jumped."
+          "description": "Gives the option to intimidate under certain circumstances. Increases the chance of stealing from traders. Decreases the chance of being jumped."
         }
       ]
     },
@@ -56,17 +65,18 @@
       "name": "Knife",
       "description": "A small blade for survival.",
       "value": 1000,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "cutting",
           "level": 1,
-          "description": "Gives the option to cut under certain circunstances for small damage."
+          "description": "Gives the option to cut under certain circumstances for small damage."
         },
         {
           "name": "intimidation",
           "level": 1,
-          "description": "Gives the option to intimidate under certain circunstances. Increases the chance of stealing from traders. Deccreases the chance of being jumped."
+          "description": "Gives the option to intimidate under certain circumstances. Increases the chance of stealing from traders. Decreases the chance of being jumped."
         }
       ]
     },
@@ -75,12 +85,13 @@
       "name": "Backpack",
       "description": "A useful item for carrying more stuff.",
       "value": 1000,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
-          "name": "inventory",
-          "level": 1,
-          "description": "Increases inventory by 2 stacks."
+          "name": "expansion",
+          "level": 2,
+          "description": "Increases inventory by 10 slots."
         }
       ]
     },
@@ -89,7 +100,8 @@
       "name": "Tent",
       "description": "A useful item for resting.",
       "value": 1000,
-     "image": "tent.png",
+      "image": "tent.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "rest",
@@ -103,7 +115,8 @@
       "name": "Bread",
       "description": "The quintessential baked good.",
       "value": 10,
-     "image": "bread.png",
+      "image": "bread.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -122,7 +135,8 @@
       "name": "Sweetroll",
       "description": "From a baker who used to be a trader like you.",
       "value": 20,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -141,7 +155,8 @@
       "name": "Pizza Slice",
       "description": "Healthy carbs for the martial teen!",
       "value": 25,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -160,7 +175,8 @@
       "name": "Meat Jerky",
       "description": "Probably from before the apocalypse.",
       "value": 40,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -179,7 +195,8 @@
       "name": "Soylent Brown",
       "description": "Number 2 soylent in the market!",
       "value": 60,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -198,7 +215,8 @@
       "name": "Wine",
       "description": "... and dine!",
       "value": 75,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -217,7 +235,8 @@
       "name": "Milk",
       "description": "What do you want me to say? It's cow juice.",
       "value": 10,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -236,7 +255,8 @@
       "name": "Cow Juice",
       "description": "This got weird.",
       "value": 5,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -253,9 +273,10 @@
     {
       "id": 15,
       "name": "Salad",
-      "description": "For the calorie-concious trader!",
+      "description": "For the calorie-conscious trader!",
       "value": 10,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -274,7 +295,8 @@
       "name": "Chocolate Bar",
       "description": "Better (choco)late than never!",
       "value": 500,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -291,9 +313,10 @@
     {
       "id": 17,
       "name": "Marshmallow",
-      "description": "It makes no sense that they even have this. Or batteries, for that matter. Taste's good though!",
+      "description": "It makes no sense that they even have this. Or batteries, for that matter. Tastes good though!",
       "value": 50,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -311,86 +334,126 @@
       "id": 18,
       "name": "Batteries",
       "description": "Powering the apocalypse!",
-      "value": 40
+      "value": 40,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 19,
       "name": "Hammer",
       "description": "Useful, even without nails.",
-      "value": 60
+      "value": 60,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 20,
       "name": "Hand Saw",
       "description": "Do you wanna play a game?",
-      "value": 150
+      "value": 150,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 21,
       "name": "Shirt",
       "description": "Probably better than the one you're wearing.",
-      "value": 50
+      "value": 50,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 22,
       "name": "Jean Shorts",
       "description": "They got it ON A FIRE... sale.",
-      "value": 60
+      "value": 60,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 23,
       "name": "Shoes",
       "description": "Definitely made for walking.",
-      "value": 200
+      "value": 200,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 24,
       "name": "Sunglasses",
-      "description": "Never give away that your sleeping again.",
-      "value": 500
+      "description": "Never give away that you're sleeping again.",
+      "value": 500,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 25,
       "name": "Taser",
       "description": "I barely know her!",
-      "value": 800
+      "value": 800,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 26,
       "name": "Box",
       "description": "Up to two mysteries inside!",
-      "value": 20
+      "value": 20,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 27,
       "name": "Pocket Watch",
       "description": "Gold-colored, broken. Nostalgic, somehow.",
-      "value": 300
+      "value": 300,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 28,
       "name": "Human Arm",
       "description": "We agreed it's technically a weapon, too.",
-      "value": 100
+      "value": 100,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 29,
       "name": "Human Leg",
       "description": "Wait 'till I tell you the price...",
-      "value": 200
+      "value": 200,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 30,
-      "name": "Supcious Meat",
+      "name": "Suspicious Meat",
       "description": "Edible(?)",
-      "value": 400
+      "value": 400,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 31,
       "name": "Steak",
       "description": "Aged to perfection.",
       "value": 1500,
-     "image": "tool.png",
+      "image": "tool.png",
+      "slotSize": 1,
       "effects": [
         {
           "name": "heal",
@@ -408,175 +471,262 @@
       "id": 32,
       "name": "Fuel",
       "description": "Makes cars go vroom vroom vroom! Also: global warming.",
-      "value": 4000
+      "value": 4000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 33,
       "name": "Bible",
       "description": "Some pages are conveniently missing.",
-      "value": 60
+      "value": 60,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 34,
       "name": "Gas Mask",
       "description": "Mandatory in Paradize",
-      "value": 700
+      "value": 700,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 35,
       "name": "Iron Cross",
       "description": "A symbol of the old world. And the closest I'll give you to throwing stars.",
-      "value": 300
+      "value": 300,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 36,
       "name": "Broad Sword",
       "description": "IT'S. A. SWOOOOOOORD!",
-      "value": 8000
+      "value": 8000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 37,
       "name": "Shield",
       "description": "Sword not included.",
-      "value": 4000
+      "value": 4000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 38,
       "name": "Gametoy",
       "description": "Oh so this is what the batteries are for!",
-      "value": 15000
+      "value": 15000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 39,
       "name": "Gametoy Cartridge Red",
       "description": "Completely different from the blue one.",
-      "value": 10000
+      "value": 10000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 40,
       "name": "Gametoy Cartridge Blue",
       "description": "Gotta play 'em all!",
-      "value": 15000
+      "value": 15000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 41,
       "name": "Used TV Set",
       "description": "In great condition. Just a little bit of blood.",
-      "value": 8000
+      "value": 8000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 42,
       "name": "Baseball Bat",
       "description": "No ball in sight, though.",
-      "value": 2000
-    },
-    {
-      "id": 58,
-      "name": "Marijuana",
-      "description": "Who are you gonna tell, narc?",
-      "value": 800
+      "value": 2000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 43,
       "name": "Shrooms",
-      "description": "Surprisingly terapeutic.",
-      "value": 200
+      "description": "Surprisingly therapeutic.",
+      "value": 200,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 44,
       "name": "LSD",
       "description": "I can taste the music of the apocalypse!",
-      "value": 600
+      "value": 600,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 45,
       "name": "Tank",
       "description": "All-terrain armored massacre-maker!",
-      "value": 600000
+      "value": 600000,
+      "image": "tool.png",
+      "slotSize": 3,
+      "effects": []
     },
     {
       "id": 46,
       "name": "Nuclear Warhead",
       "description": "And remember: No Proliferation!",
-      "value": 900000
+      "value": 900000,
+      "image": "tool.png",
+      "slotSize": 5,
+      "effects": []
     },
     {
       "id": 47,
       "name": "Cigarettes",
       "description": "The entry-level smoke stick for cancer fans.",
-      "value": 45
+      "value": 45,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 48,
       "name": "Cigar",
       "description": "The premium smoke product for the cancer *enjoyer*",
-      "value": 750
+      "value": 750,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 49,
       "name": "Electric Limo",
       "description": "Not very practical but you clearly don't care",
-      "value": 60000
+      "value": 60000,
+      "image": "tool.png",
+      "slotSize": 2,
+      "effects": []
     },
     {
       "id": 50,
       "name": "Energy Drink",
       "description": "The only thing keeping you awake in this godforsaken world.",
-      "value": 20
+      "value": 20,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 51,
       "name": "Hero Miniature",
       "description": "How did this survive?",
-      "value": 120
+      "value": 120,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 52,
       "name": "Cat",
       "description": "As in the opposite of a dog.",
-      "value": 1000
+      "value": 1000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 53,
       "name": "Dog",
       "description": "Who's a good mass market product?",
-      "value": 1200
+      "value": 1200,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 54,
       "name": "Human Skull",
       "description": "A tad dramatic.",
-      "value": 500
+      "value": 500,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 55,
       "name": "Goblin Trading Card",
       "description": "Mint-condition, first edition, one of a kind (of a print run of 9000000).",
-      "value": 50000
+      "value": 50000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 56,
       "name": "Motorbike",
       "description": "Like a better bicycle.",
-      "value": 50000
+      "value": 50000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 57,
       "name": "Bicycle",
       "description": "Like a worse motorbike.",
-      "value": 50000
+      "value": 50000,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
+    },
+    {
+      "id": 58,
+      "name": "Marijuana",
+      "description": "Who are you gonna tell, narc?",
+      "value": 800,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 59,
       "name": "Beer",
       "description": "Buffman Brewery est. 1989",
-      "value": 20
+      "value": 20,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     },
     {
       "id": 60,
       "name": "Water Bottle",
       "description": "Bottle cap doubles as money among idiots.",
-      "value": 20
+      "value": 20,
+      "image": "tool.png",
+      "slotSize": 1,
+      "effects": []
     }
   ]
 }

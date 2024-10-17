@@ -1,92 +1,118 @@
 <div class="flex grow flex-row w-full h-full justify-between view-container">
-  <img class="w-full h-full z-0 absolute" [src]="trader.background" style="transform:scaleX(-1);" alt="">
-  <aside class="flex flex-col w-1/4 nes-container is-dark p-2 !mb-auto trade-container">
-    <app-agent-stats [stats]="gameService.game.player!" [day]="gameService.game.getCurrentDay()" />
+  <img
+    class="w-full h-full z-0 absolute"
+    [src]="trader.background"
+    style="transform: scaleX(-1)"
+    alt=""
+  />
+  <aside
+    class="flex flex-col w-1/4 nes-container is-dark p-2 !mb-auto trade-container"
+  >
+    <app-agent-stats
+      [stats]="gameService.game.player!"
+      [day]="gameService.game.getCurrentDay()"
+    />
     <div class="overflow-y-scroll mb-2">
       @if (tradeMode || stealMode) {
-      <app-inventory [isPlayer]="true" [inventory]="playerInventory" (change)="handlePlayerSell($event)" mode="agent" class="pt-10" />
+      <app-inventory
+        [isPlayer]="true"
+        [inventory]="playerInventory"
+        (change)="handlePlayerSell($event)"
+        mode="agent"
+        class="pt-10"
+      />
       }
     </div>
   </aside>
   <section class="flex w-full h-full text-center">
-    <div class=" w-full">
+    <div class="w-full">
       <div class="flex flex-col h-full justify-between">
-        <div class="dialog flex flex-row p-1 justify-end nes-container is-dark !bg-black">
+        <div
+          class="dialog flex flex-row p-1 justify-end nes-container is-dark !bg-black"
+        >
           <div class="text-left content-end flex p-10">
             @if (notEnoughMoney) {
             <p class="is-waring">You don't have enough money.</p>
-            }
-            @else if (stealSuccess) {
+            } @else if (stealSuccess) {
             <p class="is-success">Uh? What was that?</p>
-            }
-            @else if (stealFailed) {
+            } @else if (stealFailed) {
             <p class="is-success">Hey give that back! I'll kill you!</p>
-            }
-            @else if (lackOfFunds) {
-            <p class="is-waring">We can trade but that's all I have. ({{trader.money! | currency: 'USD'}})</p>
-            <button class="nes-btn is-warning" (click)="enableTrade()">Ok</button>
+            } @else if (lackOfFunds) {
+            <p class="is-waring">
+              We can trade but that's all I have. ({{
+                trader.money! | currency : "USD"
+              }})
+            </p>
+            <button class="nes-btn is-warning" (click)="enableTrade()">
+              Ok
+            </button>
             } @else {
-            <p>{{bark || "I'm out of words today"}}</p>
+            <p>{{ bark || "I'm out of words today" }}</p>
             }
           </div>
-          <img class="trader-icon" [src]="trader.traderMugshot">
-
+          <img class="trader-icon" [src]="trader.traderMugshot" />
         </div>
 
         @if (stealMode) {
-        <div class="nes-container !bg-black is-dark flex flex-col justify-between h-1/2 !mb-auto">
-          <p class="text-white !mb-10">You wait until the trader looks away. You might have a chance to steal and get
-            away with it...</p>
-
-
-
+        <div
+          class="nes-container !bg-black is-dark flex flex-col justify-between h-1/2 !mb-auto"
+        >
+          <p class="text-white !mb-10">
+            You wait until the trader looks away. You might have a chance to
+            steal and get away with it...
+          </p>
 
           @if (stealSuccess) {
           <p class="text-white !mb-10">You stole:</p>
           <div class="my-5 w-full">
-            <p class="text-lg">{{stolenItem!.name}} x{{stolenItem!.quantity}}</p>
-            <p class="text-xs">{{stolenItem!.description}}</p>
-            <hr class="w-full">
+            <p class="text-lg">
+              {{ stolenItem!.item?.name }} x{{ stolenItem!.stack }}
+            </p>
+            <p class="text-xs">{{ stolenItem!.item?.description }}</p>
+            <hr class="w-full" />
           </div>
-          <button class="nes-btn is-warning w-1/3" (click)="cancelMode()">Ok</button>
-          }
-          @if (stealFailed) {
-          <p class="text-white !mb-10">You were caught stealing. The trader will attack you.</p>
-          <button class="nes-btn is-warning w-1/3" (click)="handleGoBack()">Ok</button>
-          }
-
-          @if(!stealSuccess && !stealFailed) {
-          @if (!checkingSteal) {
-          <button class="nes-btn is-warning w-1/3" (click)="checkSteal()">Check what I can steal</button>
-          } @else {
-          @for (item of stealableItems; track $index) {
+          <button class="nes-btn is-warning w-1/3" (click)="cancelMode()">
+            Ok
+          </button>
+          } @if (stealFailed) {
+          <p class="text-white !mb-10">
+            You were caught stealing. The trader will attack you.
+          </p>
+          <button class="nes-btn is-warning w-1/3" (click)="handleGoBack()">
+            Ok
+          </button>
+          } @if(!stealSuccess && !stealFailed) { @if (!checkingSteal) {
+          <button class="nes-btn is-warning w-1/3" (click)="checkSteal()">
+            Check what I can steal
+          </button>
+          } @else { @for (item of stealableItems; track $index) {
           <div class="nes-container">
-            <p class="text-lg">{{item.name}} x{{item.quantity}}</p>
-            <p class="text-xs">{{item.description}}</p>
-            <button class="nes-btn is-warning" (click)="handleStealing($index)">Steal</button>
+            <p class="text-lg">{{ item.item?.name }} x{{ item.stack }}</p>
+            <p class="text-xs">{{ item.item?.description }}</p>
+            <button class="nes-btn is-warning" (click)="handleStealing($index)">
+              Steal
+            </button>
           </div>
-          }
-          }
-          }
-
-
-
+          } } }
         </div>
-        }
-        @if (tradeMode) {
-        <div class="nes-container !bg-black is-dark flex flex-row justify-between h-1/2 !mb-auto">
+        } @if (tradeMode) {
+        <div
+          class="nes-container !bg-black is-dark flex flex-row justify-between h-1/2 !mb-auto"
+        >
           <div class="flex flex-col w-5/6">
             <p class="text-white !mb-10">Your offer</p>
             <div class="flex flex-row overflow-y-scroll !mb-10">
               <div class="text-left w-full">
                 <div *ngFor="let item of playerSells.items" class="my-5 w-full">
-                  <p class="text-lg">{{item.name}} x{{item.quantity}}</p>
-                  <p class="text-xs">{{item.description}}</p>
-                  <hr class="w-full">
+                  <p class="text-lg">{{ item.item?.name }} x{{ item.stack }}</p>
+                  <p class="text-xs">{{ item.item?.description }}</p>
+                  <hr class="w-full" />
                 </div>
               </div>
             </div>
-            <p class="text-xl text-left">{{playerSells.totalValue | currency: 'USD'}}</p>
+            <p class="text-xl text-left">
+              {{ playerSells.totalValue | currency : "USD" }}
+            </p>
           </div>
 
           <div class="left-1/2 mx-1 w-0.5 h-full bg-white"></div>
@@ -96,39 +122,70 @@
             <div class="flex flex-row overflow-y-scroll justify-end !mb-10">
               <div class="text-right w-full">
                 <div *ngFor="let item of traderSells.items" class="my-5 w-full">
-                  <p class="text-lg">{{item.name}} x{{item.quantity}}</p>
-                  <p class="text-xs">{{item.description}}</p>
-                  <hr class="w-full">
+                  <p class="text-lg">{{ item.item?.name }} x{{ item.stack }}</p>
+                  <p class="text-xs">{{ item.item?.description }}</p>
+                  <hr class="w-full" />
                 </div>
               </div>
             </div>
-            <p class="text-xl text-right">{{traderSells.totalValue | currency: 'USD'}}</p>
+            <p class="text-xl text-right">
+              {{ traderSells.totalValue | currency : "USD" }}
+            </p>
           </div>
         </div>
         }
         <div class="mx-auto mb-12 w-1/2 pb-0 flex flex-row flex-wrap">
-          <button type="button" (click)="tradeMode ? handleTrade() : startTrade()" [hidden]="stealMode"
-            class="nes-btn bg-blue-500 text-3xl m-auto mb-3" [disabled]="!tradeEnabled"
-            [ngClass]="{'is-disabled':!tradeEnabled}">Trade</button>
-          <button type="button" class="nes-btn bg-red-500 text-3xl m-auto mb-3" (click)="startStealing()"
-            [hidden]="tradeMode || stealSuccess || stealFailed">Steal</button>
-          <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mb-3" (click)="cancelMode()"
-            [hidden]="!tradeMode && !stealMode || stealSuccess || stealFailed">Cancel</button>
-          <button type="button" class="nes-btn bg-yellow-300 text-3xl m-auto mt-3" (click)="handleGoBack()"
-            [hidden]="tradeMode || stealMode">Leave</button>
+          <button
+            type="button"
+            (click)="tradeMode ? handleTrade() : startTrade()"
+            [hidden]="stealMode"
+            class="nes-btn bg-blue-500 text-3xl m-auto mb-3"
+            [disabled]="!tradeEnabled"
+            [ngClass]="{ 'is-disabled': !tradeEnabled }"
+          >
+            Trade
+          </button>
+          <button
+            type="button"
+            class="nes-btn bg-red-500 text-3xl m-auto mb-3"
+            (click)="startStealing()"
+            [hidden]="tradeMode || stealSuccess || stealFailed"
+          >
+            Steal
+          </button>
+          <button
+            type="button"
+            class="nes-btn bg-yellow-300 text-3xl m-auto mb-3"
+            (click)="cancelMode()"
+            [hidden]="(!tradeMode && !stealMode) || stealSuccess || stealFailed"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="nes-btn bg-yellow-300 text-3xl m-auto mt-3"
+            (click)="handleGoBack()"
+            [hidden]="tradeMode || stealMode"
+          >
+            Leave
+          </button>
         </div>
       </div>
     </div>
-
   </section>
-  <aside class="flex flex-col w-1/4 nes-container is-dark p-2 !mb-auto trade-container  h-max-60">
+  <aside
+    class="flex flex-col w-1/4 nes-container is-dark p-2 !mb-auto trade-container h-max-60"
+  >
     <div class="overflow-y-scroll mb-2">
       @if (tradeMode || stealMode) {
-      <app-inventory [inventory]="traderInventory" (change)="handleTraderSell($event)" mode="agent" class="pt-10" />
+      <app-inventory
+        [inventory]="traderInventory"
+        (change)="handleTraderSell($event)"
+        mode="agent"
+        class="pt-10"
+      />
       }
     </div>
     <app-agent-stats [stats]="trader" />
-
-
   </aside>
 </div>

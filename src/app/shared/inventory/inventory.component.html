@@ -1,28 +1,56 @@
-<div class="w-full" style="font-size: x-small;">
+<div class="w-full" style="font-size: x-small">
   <p>Inventory:</p>
   <form [formGroup]="inventoryForm!">
-    <div formArrayName="items" *ngFor="let itemForm of items.controls; let i = index" class="nes-container is-dark">
-
+    <div
+      formArrayName="items"
+      *ngFor="let itemForm of items.controls; let i = index"
+      class="nes-container is-dark"
+    >
       <div [formGroup]="itemForm" class="flex flex-col justify-between">
         <div class="flex flex-row">
           <div class="w-1/2">
-            <img width="64" height="64" src="assets/items/{{itemForm.value.img}}" alt="{{itemForm.value.description}}">
+            <img
+              width="64"
+              height="64"
+              src="assets/items/{{ itemForm.value.itemData.image }}"
+              alt="{{ itemForm.value.itemData.description }}"
+            />
           </div>
           <div class="w-1/2">
-            <div>{{itemForm.value.name!}}</div>
-            <div class="whitespace-nowrap text-right">{{itemForm.value.cost | currency:'USD'}} <span *ngIf="displayHandlers && isPlayer" [ngClass]="{ 'text-red-600': (itemForm.value.cost - itemForm.value.originalValue) < 0, 'text-green-500': (itemForm.value.cost - itemForm.value.originalValue) >= 0  }"   >({{ ((itemForm.value.cost - itemForm.value.originalValue)/itemForm.value.originalValue) | percent}})</span> </div>
+            <div>{{ itemForm.value.itemData.name! }}</div>
+            <div class="whitespace-nowrap text-right">
+              {{ itemForm.value.cost | currency : "USD" }}
+              <span
+                *ngIf="displayHandlers && isPlayer"
+                [ngClass]="{
+                  'text-red-600':
+                    itemForm.value.cost - itemForm.value.originalValue < 0,
+                  'text-green-500':
+                    itemForm.value.cost - itemForm.value.originalValue >= 0
+                }"
+                >({{
+                  (itemForm.value.cost - itemForm.value.originalValue) /
+                    itemForm.value.originalValue | percent
+                }})</span
+              >
+            </div>
           </div>
         </div>
-        <div class="text-right whitespace-nowrap flex justify-end content-center items-center">
+        <div
+          class="text-right whitespace-nowrap flex justify-end content-center items-center"
+        >
           @if (displayHandlers) {
-          <app-item-amount-input (change)="changedAmount($event,i)" [currentMax]="itemForm.value.currentMax!"
-            class="w-full" formControlName="quantity"></app-item-amount-input>
+          <app-item-amount-input
+            (change)="changedAmount($event, i)"
+            [currentMax]="itemForm.value.currentMax!"
+            class="w-full"
+            formControlName="quantity"
+          ></app-item-amount-input>
           } @else {
-          <p>{{itemForm.value.quantity!}}</p>
+          <p>{{ itemForm.value.stack! }}</p>
           }
         </div>
       </div>
     </div>
-
   </form>
 </div>
